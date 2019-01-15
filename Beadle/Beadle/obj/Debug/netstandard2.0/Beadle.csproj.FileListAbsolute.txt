@@ -1,0 +1,14 @@
+C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle\bin\Debug\netstandard2.0\Beadle.deps.json
+C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle\bin\Debug\netstandard2.0\Beadle.dll
+C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle\bin\Debug\netstandard2.0\Beadle.pdb
+C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle\obj\Debug\netstandard2.0\Beadle.csprojAssemblyReference.cache
+C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle\obj\Debug\netstandard2.0\Beadle.csproj.CoreCompileInputs.cache
+C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle\obj\Debug\netstandard2.0\Beadle.AssemblyInfoInputs.cache
+C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle\obj\Debug\netstandard2.0\Beadle.AssemblyInfo.cs
+C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle\obj\Debug\netstandard2.0\Beadle.dll
+C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle\obj\Debug\netstandard2.0\Beadle.pdb
+C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle\obj\Debug\netstandard2.0\Views\AbsentItemPage.xaml.g.cs
+C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle\obj\Debug\netstandard2.0\Views\AbsentListPage.xaml.g.cs
