@@ -1,40 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reactive;
+using System.Collections.ObjectModel;
 using System.Text;
-using ReactiveUI;
-using Splat;
+using System.Threading.Tasks;
+using Beadle.Models;
+using Beadle.Services;
+using GalaSoft.MvvmLight;
 
 namespace Beadle.ViewModels
 {
-    public class MainViewModel : ReactiveObject, IScreen
+    public class MainViewModel : ViewModelBase
     {
-        private MasterCellViewModel _selected;
+        private readonly IPeopleService _peopleService;
+        ObservableCollection<Person> People { get; set; }
 
-        public MainViewModel()
+        public MainViewModel(IPeopleService peopleService)
         {
-            Router = new RoutingState();
-            Locator.CurrentMutable.RegisterConstant(this, typeof(IScreen));
-
-        }
-        public RoutingState Router { get; } //needed for the interface IScreen
-        public ReactiveCommand<IRoutableViewModel, Unit> NavigateToMenuItem { get; }
-        public MasterCellViewModel Selected
-        {
-            get => _selected;
-            set => this.RaiseAndSetIfChanged(ref _selected, value);
+            if (peopleService == null) throw new ArgumentNullException("peopleService");
+            _peopleService = peopleService;
         }
 
-        public IEnumerable<MasterCellViewModel> MenuItems { get;  }
-
-
-        //DetailsPageFirst then this
-        private IEnumerable<MasterCellViewModel> GetMenuItems()
+        public async Task Init()
         {
-            return new[]
-            {
-                new MasterCellViewModel { Title = "Navigable Page", IconSource = "contacts.png", TargetType = typeof(NavigableViewModel) },
-            };
+            if (People != null) return;
+
+            People = new ObservableCollection<Person>(await _peopleService.GetPeople());
         }
     }
 }

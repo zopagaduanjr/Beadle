@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
     <PackageReference Include="ReactiveUI" Version="9.8.1" />
     <PackageReference Include="Splat" Version="6.1.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.2.0" />

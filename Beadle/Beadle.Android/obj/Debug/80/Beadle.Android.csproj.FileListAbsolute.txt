@@ -109,8 +109,3 @@ C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\and
 C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\android\assets\Xamarin.Forms.Core.pdb
 C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\android\assets\Xamarin.Forms.Xaml.pdb
 C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle\bin\Debug\netstandard2.0\Beadle.dll
-C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\bin\Debug\Beadle.dll.mdb
-C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\linksrc\Beadle.dll.mdb
-C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\linksrc\FormsViewGroup.dll.mdb
-C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\linksrc\SQLite-net.dll.mdb
-C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\linksrc\Xamarin.Forms.Platform.Android.dll.mdb
