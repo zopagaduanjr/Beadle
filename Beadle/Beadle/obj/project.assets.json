@@ -2950,11 +2950,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\zopagaduanjr\\source\\repos\\Beadle\\Beadle\\Beadle\\Beadle.csproj",
+      "projectUniqueName": "C:\\Users\\zopagaduanjr\\Documents\\GitHub\\Elective_Project\\Beadle\\Beadle\\Beadle.csproj",
       "projectName": "Beadle",
-      "projectPath": "C:\\Users\\zopagaduanjr\\source\\repos\\Beadle\\Beadle\\Beadle\\Beadle.csproj",
+      "projectPath": "C:\\Users\\zopagaduanjr\\Documents\\GitHub\\Elective_Project\\Beadle\\Beadle\\Beadle.csproj",
       "packagesPath": "C:\\Users\\zopagaduanjr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\zopagaduanjr\\source\\repos\\Beadle\\Beadle\\Beadle\\obj\\",
+      "outputPath": "C:\\Users\\zopagaduanjr\\Documents\\GitHub\\Elective_Project\\Beadle\\Beadle\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

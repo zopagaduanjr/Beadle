@@ -1944,11 +1944,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\zopagaduanjr\\source\\repos\\Beadle\\Beadle\\Beadle.iOS\\Beadle.iOS.csproj",
+      "projectUniqueName": "C:\\Users\\zopagaduanjr\\Documents\\GitHub\\Elective_Project\\Beadle\\Beadle.iOS\\Beadle.iOS.csproj",
       "projectName": "Beadle.iOS",
-      "projectPath": "C:\\Users\\zopagaduanjr\\source\\repos\\Beadle\\Beadle\\Beadle.iOS\\Beadle.iOS.csproj",
+      "projectPath": "C:\\Users\\zopagaduanjr\\Documents\\GitHub\\Elective_Project\\Beadle\\Beadle.iOS\\Beadle.iOS.csproj",
       "packagesPath": "C:\\Users\\zopagaduanjr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\zopagaduanjr\\source\\repos\\Beadle\\Beadle\\Beadle.iOS\\obj\\",
+      "outputPath": "C:\\Users\\zopagaduanjr\\Documents\\GitHub\\Elective_Project\\Beadle\\Beadle.iOS\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
@@ -1965,8 +1965,8 @@
       "frameworks": {
         "xamarinios10": {
           "projectReferences": {
-            "C:\\Users\\zopagaduanjr\\source\\repos\\Beadle\\Beadle\\Beadle\\Beadle.csproj": {
-              "projectPath": "C:\\Users\\zopagaduanjr\\source\\repos\\Beadle\\Beadle\\Beadle\\Beadle.csproj"
+            "C:\\Users\\zopagaduanjr\\Documents\\GitHub\\Elective_Project\\Beadle\\Beadle\\Beadle.csproj": {
+              "projectPath": "C:\\Users\\zopagaduanjr\\Documents\\GitHub\\Elective_Project\\Beadle\\Beadle\\Beadle.csproj"
             }
           }
         }

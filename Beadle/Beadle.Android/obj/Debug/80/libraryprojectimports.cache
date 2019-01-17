@@ -1,41 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Paths>
   <Jars>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\18\jl\arch-core-common.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\19\jl\arch-lifecycle-common.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\2\jl\formsviewgroup.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\20\jl\bin\classes.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\21\jl\bin\classes.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\22\jl\support-annotations.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\23\jl\bin\classes.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\24\jl\bin\classes.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\25\jl\bin\classes.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\26\jl\bin\classes.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\27\jl\bin\classes.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\28\jl\bin\classes.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\29\jl\bin\classes.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\30\jl\bin\classes.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\31\jl\bin\classes.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\32\jl\bin\classes.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\33\jl\bin\classes.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\34\jl\bin\classes.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\35\jl\bin\classes.jar</Jar>
-    <Jar>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\36\jl\bin\classes.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\18\jl\arch-core-common.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\19\jl\arch-lifecycle-common.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\2\jl\formsviewgroup.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\20\jl\bin\classes.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\21\jl\bin\classes.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\22\jl\support-annotations.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\23\jl\bin\classes.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\24\jl\bin\classes.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\25\jl\bin\classes.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\26\jl\bin\classes.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\27\jl\bin\classes.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\28\jl\bin\classes.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\29\jl\bin\classes.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\30\jl\bin\classes.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\31\jl\bin\classes.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\32\jl\bin\classes.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\33\jl\bin\classes.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\34\jl\bin\classes.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\35\jl\bin\classes.jar</Jar>
+    <Jar>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\36\jl\bin\classes.jar</Jar>
   </Jars>
   <ResolvedResourceDirectories>
-    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\6\jl\res</ResolvedResourceDirectory>
-    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\7\jl\res</ResolvedResourceDirectory>
-    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\8\jl\res</ResolvedResourceDirectory>
-    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\9\jl\res</ResolvedResourceDirectory>
-    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\23\jl\res</ResolvedResourceDirectory>
-    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\26\jl\res</ResolvedResourceDirectory>
-    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\28\jl\res</ResolvedResourceDirectory>
-    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\29\jl\res</ResolvedResourceDirectory>
-    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\30\jl\res</ResolvedResourceDirectory>
-    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\31\jl\res</ResolvedResourceDirectory>
-    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\32\jl\res</ResolvedResourceDirectory>
-    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\33\jl\res</ResolvedResourceDirectory>
-    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\35\jl\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\6\jl\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\7\jl\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\8\jl\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\9\jl\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\23\jl\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\26\jl\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\28\jl\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\29\jl\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\30\jl\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\31\jl\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\32\jl\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\33\jl\res</ResolvedResourceDirectory>
+    <ResolvedResourceDirectory>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\35\jl\res</ResolvedResourceDirectory>
   </ResolvedResourceDirectories>
   <ResolvedAssetDirectories>
     <ResolvedAssetDirectory>obj\Debug\80\lp\6\jl\assets</ResolvedAssetDirectory>
@@ -46,18 +46,18 @@
   </ResolvedAssetDirectories>
   <ResolvedEnvironmentFiles />
   <ResolvedResourceDirectoryStamps>
-    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\6.stamp</ResolvedResourceDirectoryStamp>
-    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\7.stamp</ResolvedResourceDirectoryStamp>
-    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\8.stamp</ResolvedResourceDirectoryStamp>
-    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\9.stamp</ResolvedResourceDirectoryStamp>
-    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\23.stamp</ResolvedResourceDirectoryStamp>
-    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\26.stamp</ResolvedResourceDirectoryStamp>
-    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\28.stamp</ResolvedResourceDirectoryStamp>
-    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\29.stamp</ResolvedResourceDirectoryStamp>
-    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\30.stamp</ResolvedResourceDirectoryStamp>
-    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\31.stamp</ResolvedResourceDirectoryStamp>
-    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\32.stamp</ResolvedResourceDirectoryStamp>
-    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\33.stamp</ResolvedResourceDirectoryStamp>
-    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\source\repos\Beadle\Beadle\Beadle.Android\obj\Debug\80\lp\35.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\6.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\7.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\8.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\9.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\23.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\26.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\28.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\29.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\30.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\31.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\32.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\33.stamp</ResolvedResourceDirectoryStamp>
+    <ResolvedResourceDirectoryStamp>C:\Users\zopagaduanjr\Documents\GitHub\Elective_Project\Beadle\Beadle.Android\obj\Debug\80\lp\35.stamp</ResolvedResourceDirectoryStamp>
   </ResolvedResourceDirectoryStamps>
 </Paths>
