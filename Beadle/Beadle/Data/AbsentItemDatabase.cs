@@ -29,6 +29,7 @@ namespace Beadle.Data
             return database.QueryAsync<AbsentItem>("SELECT * FROM [AbsentItem] WHERE [FailureDebarment] = 0");
         }
 
+
         public Task<AbsentItem> GetItemAsync(int id)
         {
             return database.Table<AbsentItem>().Where(i => i.ID == id).FirstOrDefaultAsync();
