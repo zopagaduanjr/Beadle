@@ -111,7 +111,7 @@
   },
   "libraries": {
     "CommonServiceLocator/2.0.4": {
-      "sha512": "PUYeC0w+gGG9+T1/sREZaKQAXErlakvhHwEmxMmtIVJeULBB7QdF80IXkVFeu8pz4Nzx81N2zfwk4WaVn3PeXg==",
+      "sha512": "YpXfV5l6kv1iQRDfhQnN4RxocbnNehU/rAAS62IlaQUTAKN3WoUbtx9MHwE98Pb09mBemSs4xhVqFhXq27rjxw==",
       "type": "package",
       "path": "commonservicelocator/2.0.4",
       "files": [
@@ -145,7 +145,7 @@
       ]
     },
     "MvvmLightLibs/5.4.1.1": {
-      "sha512": "3VCzGx0spwiuOIUR5vx0ysdnIPEKhAf3+j8tjoUVP1d69WiVWtTc7aBNt1DTsF4afGWjoSxSeq5Ulguk+PESgA==",
+      "sha512": "xYpVzOYnIz/M6T0pdc3w5t0vrt2ZKspSS+CZjQ+pZE+5yHv9qXSWkncHJXb6D7Egstalso4ivnIUkA1xEClViw==",
       "type": "package",
       "path": "mvvmlightlibs/5.4.1.1",
       "files": [
@@ -265,7 +265,7 @@
       ]
     },
     "NETStandard.Library/2.0.3": {
-      "sha512": "b8uIuk153I1YgqrQOrG7FcvChOgedv+hPsY9OM+siFh9gsyRCClKYWs+MMfJMrl6Z8bTRHC88IReolb0YnfKhg==",
+      "sha512": "d51oYQSi3NeFJCtOwXBm0+QVEIPO4BRIF6StEdFS1vyp7KetQutSN/igzo01x5lGK4+GfrbfRO3f/4XQWgb8eQ==",
       "type": "package",
       "path": "netstandard.library/2.0.3",
       "files": [
@@ -640,23 +640,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\zopagaduanjr\\.nuget\\packages\\": {},
+    "C:\\Users\\User\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\zopagaduanjr\\source\\repos\\BeadleSchool\\BeadleSchool\\BeadleSchool\\BeadleSchool.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\Elective_Project\\BeadleSchool\\BeadleSchool\\BeadleSchool.csproj",
       "projectName": "BeadleSchool",
-      "projectPath": "C:\\Users\\zopagaduanjr\\source\\repos\\BeadleSchool\\BeadleSchool\\BeadleSchool\\BeadleSchool.csproj",
-      "packagesPath": "C:\\Users\\zopagaduanjr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\zopagaduanjr\\source\\repos\\BeadleSchool\\BeadleSchool\\BeadleSchool\\obj\\",
+      "projectPath": "C:\\Users\\User\\Documents\\GitHub\\Elective_Project\\BeadleSchool\\BeadleSchool\\BeadleSchool.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\Documents\\GitHub\\Elective_Project\\BeadleSchool\\BeadleSchool\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\zopagaduanjr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

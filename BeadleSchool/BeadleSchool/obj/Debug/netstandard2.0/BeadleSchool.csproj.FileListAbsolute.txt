@@ -1,0 +1,13 @@
+C:\Users\User\Documents\GitHub\Elective_Project\BeadleSchool\BeadleSchool\bin\Debug\netstandard2.0\BeadleSchool.deps.json
+C:\Users\User\Documents\GitHub\Elective_Project\BeadleSchool\BeadleSchool\bin\Debug\netstandard2.0\BeadleSchool.dll
+C:\Users\User\Documents\GitHub\Elective_Project\BeadleSchool\BeadleSchool\bin\Debug\netstandard2.0\BeadleSchool.pdb
+C:\Users\User\Documents\GitHub\Elective_Project\BeadleSchool\BeadleSchool\obj\Debug\netstandard2.0\BeadleSchool.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\Elective_Project\BeadleSchool\BeadleSchool\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\User\Documents\GitHub\Elective_Project\BeadleSchool\BeadleSchool\obj\Debug\netstandard2.0\Views\AddEntityPage.xaml.g.cs
+C:\Users\User\Documents\GitHub\Elective_Project\BeadleSchool\BeadleSchool\obj\Debug\netstandard2.0\Views\MainPage.xaml.g.cs
+C:\Users\User\Documents\GitHub\Elective_Project\BeadleSchool\BeadleSchool\obj\Debug\netstandard2.0\BeadleSchool.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\Elective_Project\BeadleSchool\BeadleSchool\obj\Debug\netstandard2.0\BeadleSchool.AssemblyInfoInputs.cache
+C:\Users\User\Documents\GitHub\Elective_Project\BeadleSchool\BeadleSchool\obj\Debug\netstandard2.0\BeadleSchool.AssemblyInfo.cs
+C:\Users\User\Documents\GitHub\Elective_Project\BeadleSchool\BeadleSchool\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\User\Documents\GitHub\Elective_Project\BeadleSchool\BeadleSchool\obj\Debug\netstandard2.0\BeadleSchool.dll
+C:\Users\User\Documents\GitHub\Elective_Project\BeadleSchool\BeadleSchool\obj\Debug\netstandard2.0\BeadleSchool.pdb

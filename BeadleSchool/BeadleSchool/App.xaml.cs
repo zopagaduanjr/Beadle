@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using BeadleSchool.Models;
 using BeadleSchool.Repository.LocalRepository;
 using BeadleSchool.Services;
 using BeadleSchool.Views;
@@ -14,9 +15,9 @@ namespace BeadleSchool
         //fields
         private static readonly Locator _locator = new Locator();
         public static Locator Locator => _locator;
-        private static LocalDataService database = new LocalDataService(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TodoSQLite.db3"));
+        private static LocalDataService<Student> database = new LocalDataService<Student>(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TodoSQLite.db3"));
         public static INavigationService Navigation { get; } = new NavigationService();
-        public static LocalDataService Database
+        public static LocalDataService<Student> Database
         {
             get
             {

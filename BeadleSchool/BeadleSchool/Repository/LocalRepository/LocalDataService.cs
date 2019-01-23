@@ -7,55 +7,64 @@ using SQLite;
 
 namespace BeadleSchool.Repository.LocalRepository
 {
-    public class LocalDataService
+    public class LocalDataService<T> where T : new()
+
     {
-        readonly SQLiteAsyncConnection database;
+    readonly SQLiteAsyncConnection database;
 
 
-        //ctor
-        public LocalDataService(string dbPath)
-        {
-            database = new SQLiteAsyncConnection(dbPath);
-            database.CreateTableAsync<Student>().Wait();
-        }
+    //ctor
+    public LocalDataService(string dbPath)
+    {
+        database = new SQLiteAsyncConnection(dbPath);
+        database.CreateTableAsync<Student>().Wait();
+    }
 
-        public LocalDataService()
-        {
+    public LocalDataService()
+    {
 
-        }
+    }
 
-        //methods
-        public Task<List<Student>> GetItemsAsync()
-        {
-            return database.Table<Student>().ToListAsync();
-        }
+    //methods.
 
-        public Task<List<Student>> GetItemsNotDoneAsync()
-        {
-            return database.QueryAsync<Student>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
-        }
+    //ADD crud implementation
+    public async Task<T> SaveItemAsync(T item)
+    {
+        database.InsertAsync(item);
+        return item;
+    }
 
-        public Task<Student> GetItemAsync(int id)
-        {
-            return database.Table<Student>().Where(i => i.Id == id).FirstOrDefaultAsync();
-        }
 
-        public Task<int> SaveItemAsync(Student item)
-        {
-            if (item.Id != 0)
-            {
-                return database.UpdateAsync(item);
-            }
-            else
-            {
-                return database.InsertAsync(item);
-            }
-        }
+    //READ crud implementation
 
-        public Task<int> DeleteItemAsync(Student item)
-        {
-            return database.DeleteAsync(item);
-        }
+    //read all
+    public async Task<List<T>> GetItemsAsync()
+    {
+       return await database.Table<T>().ToListAsync();
+    }
+
+
+    //read specific item via its ID
+
+
+    //public async Task<T> GetItemAsync(Func<T, bool> finder)
+    //{
+        
+    //    return await database.Table<T>().Where(x => finder(x) ).FirstOrDefaultAsync();
+    //}
+
+    public Task<List<Student>> GetItemsNotDoneAsync()
+    {
+        return database.QueryAsync<Student>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
+    }
+
+
+    //DELETE crud implementation
+    public async Task<T> DeleteItemAsync(T item)
+    {
+        database.DeleteAsync(item);
+        return item; //still use as void, 
+    }
 
     }
 

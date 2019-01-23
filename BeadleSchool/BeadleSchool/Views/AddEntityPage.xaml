@@ -5,6 +5,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="{Binding Path=SelectedFullName}" />
+            <Label Text="{Binding Path=Id}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

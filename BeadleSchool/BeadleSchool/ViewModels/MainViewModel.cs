@@ -26,8 +26,8 @@ namespace BeadleSchool.ViewModels
             SelectedStudent = null;
             Task.Run(() => Init());
             AddRandomStudentCommand = new Command(async () => await AddRandomStudentProcAsync(), () => canShow);
-            ShowAddPageCommand = new Command(async () => await ShowAddPageProcAsync(), () => canShow1);
-            DeleteStudentCommand = new Command(async () => await DeleteStudentProcAsync(), () => canShow2);
+            ShowAddPageCommand = new Command(async () => await ShowAddPageProcAsync(), () => canShow);
+            DeleteStudentCommand = new Command(async () => await DeleteStudentProcAsync(), () => canShow);
         }
 
         //fields
@@ -36,6 +36,9 @@ namespace BeadleSchool.ViewModels
         private Student _selectedStudent;
         private RelayCommand _navigateCommand;
         private string _selectedFullName;
+        private ObservableCollection<Student> _classmates;
+        private ObservableCollection<Session> _sessions;
+
 
         public ObservableCollection<Student> Classmates
         {
@@ -52,10 +55,7 @@ namespace BeadleSchool.ViewModels
         public ICommand AddRandomStudentCommand { get; private set; }
         public ICommand DeleteStudentCommand { get; private set; }
         bool canShow = true;
-        bool canShow1 = true;
-        bool canShow2 = true;
-        private ObservableCollection<Student> _classmates;
-
+        private int _id;
 
         public string SelectedFullName
         {
@@ -66,6 +66,18 @@ namespace BeadleSchool.ViewModels
                 RaisePropertyChanged(nameof(SelectedFullName));
             }
         }
+
+        public int Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                RaisePropertyChanged(nameof(Id));
+
+            }
+        }
+
         public Student SelectedStudent
         {
             get => _selectedStudent;
@@ -75,12 +87,24 @@ namespace BeadleSchool.ViewModels
                 if (value != null)
                 {
                     _selectedFullName = value.FullName;
+                    _id = value.Id;
                 }
                 RaisePropertyChanged(nameof(SelectedStudent));
                 RaisePropertyChanged(nameof(Classmates));
                 RaisePropertyChanged(nameof(SelectedFullName));
             }
         }
+
+        public ObservableCollection<Session> Sessions
+        {
+            get => _sessions;
+            set
+            {
+                _sessions = value;
+                RaisePropertyChanged(() => Sessions);
+            }
+        }
+
 
         //methods
         public async Task Init()
