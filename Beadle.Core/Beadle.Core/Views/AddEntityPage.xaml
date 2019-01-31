@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Beadle.Core.Views.AddEntityPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <TableView>
+                <TableRoot>
+                    <TableSection Title="Add Entity ">
+                        <EntryCell Label="First Name" Placeholder="Zaldy" Text="{Binding Path=FirstName}"/>
+                        <EntryCell Label="Last Name" Placeholder="Pagaduan" Keyboard="Chat" />
+                        <EntryCell Label="Email" Placeholder="sales@xamarin.com" Keyboard="Email" />
+                        <EntryCell Label="Numberic" Placeholder="55" Keyboard="Numeric" />
+                        <EntryCell Label="Telephone" Placeholder="+1 012 345 6789" Keyboard="Telephone" />
+                        <EntryCell Label="Text" Placeholder="text" Keyboard="Text" />
+                        <EntryCell Label="Url" Placeholder="http://developer.xamarin.com" Keyboard="Url" />
+                    </TableSection>
+                    <TableSection Title="States &amp; Colors">
+                        <EntryCell Label="Disabled" Placeholder="text" IsEnabled="false" />
+                        <EntryCell Label="Colorful + Disabled" Placeholder="text" IsEnabled="false" LabelColor="Red" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            <Button Text="Add Entity" Command="{Binding AddEntityCommand}" HorizontalOptions="Center" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
