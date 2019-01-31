@@ -13,6 +13,7 @@ namespace Beadle.Core.Models
             public string Name { get; set; }
             public int PersonId { get; set; }
 
+
         
     }
 }

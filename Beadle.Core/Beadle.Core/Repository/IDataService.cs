@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +15,7 @@ namespace Beadle.Core.Repository
 
         //Read
         Task<List<T>> GetItemsAsync();
+
 
         //Delete
         Task<T> DeleteItemAsync(T item);

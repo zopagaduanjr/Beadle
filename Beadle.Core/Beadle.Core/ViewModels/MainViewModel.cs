@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Beadle.Core.Models;
+using Beadle.Core.Repository;
+using Beadle.Core.Repository.LocalRepository;
 using Beadle.Core.Services;
 using Beadle.Core.Views;
 using GalaSoft.MvvmLight;
@@ -17,16 +19,19 @@ namespace Beadle.Core.ViewModels
     {
         private static Random rand = new Random(DateTime.Now.Second);
         //ctor
-        public MainViewModel(IBeadleService beadleService)
+        public MainViewModel(IBeadleService beadleService, IRepository repository)
         {
             if (beadleService == null) throw new ArgumentNullException("beadleService");
             _beadleService = beadleService;
             _navigationService = App.Navigation;
+            _repository = repository;
+
             SelectedStudent = null;
             Task.Run(() => Init());
             AddRandomStudentCommand = new Command(async () => await AddRandomStudentProcAsync(), () => canShow);
-            ShowAddPageCommand = new Command(async () => await ShowAddPageProcAsync(), () => canShow);
-            DeleteStudentCommand = new Command(async () => await DeleteStudentProcAsync(), () => canShow);
+            //AddRandomSessionCommand = new Command(async () => await AddRandomSessionProcAsync(), () => canShow);
+            //ShowAddPageCommand = new Command(async () => await ShowAddPageProcAsync(), () => canShow);
+            //DeleteStudentCommand = new Command(async () => await DeleteStudentProcAsync(), () => canShow);
         }
 
         //fields
@@ -39,6 +44,7 @@ namespace Beadle.Core.ViewModels
         private ObservableCollection<Session> _sessions;
         bool canShow = true;
         private int _id;
+        private IRepository _repository;
 
 
         public ObservableCollection<Student> Classmates
@@ -54,6 +60,7 @@ namespace Beadle.Core.ViewModels
         public ICommand ShowAddPageCommand { get; private set; }
         public ICommand AddRandomStudentCommand { get; private set; }
         public ICommand DeleteStudentCommand { get; private set; }
+        public ICommand AddRandomSessionCommand { get; private set; }
         public string SelectedFullName
         {
             get => _selectedFullName;
@@ -100,64 +107,96 @@ namespace Beadle.Core.ViewModels
         }
 
 
+        public IRepository Repository
+        {
+            get => _repository;
+            set => _repository = value;
+        }
+
         //methods
         public async Task Init()
         {
-            if (Classmates != null) return;
-            var list = await App.Database.GetItemsAsync();
+
+            var list = await Repository.Student.GetItemsAsync();
             Classmates = new ObservableCollection<Student>(list);
+
+            //if (Classmates != null) return;
+            //var list = await App.Database.GetItemsAsync();
+            //Classmates = new ObservableCollection<Student>(list);
+
             //Classmates = new ObservableCollection<Student>(await _beadleService.GetStudent());
             RaisePropertyChanged(() => Classmates);
             RaisePropertyChanged(() => SelectedStudent);
 
 
 
-        }
-        public async Task ShowAddPageProcAsync()
-        {
-            await _navigationService.NavigateAsync(nameof(AddEntityPage));
-            //var stoods = new Student();
-            //stoods.FirstName = "zal";
-            //await App.Database.SaveItemAsync(stoods);
-            ////await App.Database.DeleteItemAsync(SelectedStudent);
-            ////RaisePropertyChanged(() => Classmates);
-            //var list = await App.Database.GetItemsAsync();
-            //Classmates = new ObservableCollection<Student>(list);
-            //RaisePropertyChanged(() => Classmates);
-
 
         }
+        //public async Task ShowAddPageProcAsync()
+        //{
+        //    await _navigationService.NavigateAsync(nameof(TestFrontEndHere));
+        //    //var stoods = new Student();
+        //    //stoods.FirstName = "zal";
+        //    //await App.Database.SaveItemAsync(stoods);
+        //    ////await App.Database.DeleteItemAsync(SelectedStudent);
+        //    ////RaisePropertyChanged(() => Classmates);
+        //    var list = await App.Database.GetItemsAsync();
+        //    Classmates = new ObservableCollection<Student>(list);
+        //    RaisePropertyChanged(() => Classmates);
+
+
+        //}
         public async Task AddRandomStudentProcAsync()
         {
             var stoods = new Student();
             stoods.FirstName = FirstNameGenerator();
             stoods.LastName = LastNameGenerator();
-            await App.Database.SaveItemAsync(stoods);
+            await Repository.Student.SaveItemAsync(stoods);
             //autorefresh list
+            var list = await Repository.Student.GetItemsAsync();
+            Classmates = new ObservableCollection<Student>(list);
+            //Classmates = new ObservableCollection<Student>(await _beadleService.GetStudent());
             //var list = await App.Database.GetItemsAsync();
             //Classmates = new ObservableCollection<Student>(list);
-            //Classmates = new ObservableCollection<Student>(await _beadleService.GetStudent());
-            var list = await App.Database.GetItemsAsync();
-            Classmates = new ObservableCollection<Student>(list);
             RaisePropertyChanged(() => Classmates);
         }
+        //public async Task DeleteStudentProcAsync()
+        //{
+        //    await App.Database.DeleteItemAsync(SelectedStudent);
+        //    //autorefresh list
+        //    var list = await App.Database.GetItemsAsync();
+        //    Classmates = new ObservableCollection<Student>(list);
+        //    //Classmates = new ObservableCollection<Student>(await _beadleService.GetStudent());
+        //    //var list = await App.Database.GetItemsAsync();
+        //    //Classmates = new ObservableCollection<Student>(list);
+        //    RaisePropertyChanged(() => Classmates);
+        //    RaisePropertyChanged(() => SelectedStudent);
+        //    Task.Run(() => Init());
 
-        public async Task DeleteStudentProcAsync()
+
+        //}
+
+        //public async Task AddRandomSessionProcAsync()
+        //{
+        //    var sesh = new Session();
+        //    sesh.Name = SessionGenerator();
+        //    //await App.Database.SaveItemAsync(,);
+        //    //autorefresh list
+        //    //var list = await App.Database.GetItemsAsync();
+        //    //Classmates = new ObservableCollection<Student>(list);
+        //    //Classmates = new ObservableCollection<Student>(await _beadleService.GetStudent());
+        //    //var list = await App.Database.GetItemsAsync();
+        //    //Classmates = new ObservableCollection<Student>(list);
+        //    RaisePropertyChanged(() => Classmates);
+        //}
+
+
+        void Test()
         {
-            await App.Database.DeleteItemAsync(SelectedStudent);
-            //autorefresh list
-            //var list = await App.Database.GetItemsAsync();
-            //Classmates = new ObservableCollection<Student>(list);
-            //Classmates = new ObservableCollection<Student>(await _beadleService.GetStudent());
-            var list = await App.Database.GetItemsAsync();
-            Classmates = new ObservableCollection<Student>(list);
-            RaisePropertyChanged(() => Classmates);
-            RaisePropertyChanged(() => SelectedStudent);
-
-
+            //var repo = new LocalRepository();
+            //repo.Student.SaveItemAsync(new Student());
+            //repo.SaveItemAsync()
         }
-
-
 
 
         //dirtyworks
@@ -172,6 +211,13 @@ namespace Beadle.Core.ViewModels
         {
             string[] maleNames = { "Dimitri", "Cousins", "Humera", "Workman","Pooja", "Wainwright",
                 "Will", "Regan"};
+            var random = rand.Next(0, 8);
+            return maleNames[random];
+        }
+        public string SessionGenerator()
+        {
+            string[] maleNames = { "Math", "History", "Filipino", "MAPEH","HEKASI", "Work Education",
+                "Chinese", "Nihongo"};
             var random = rand.Next(0, 8);
             return maleNames[random];
         }

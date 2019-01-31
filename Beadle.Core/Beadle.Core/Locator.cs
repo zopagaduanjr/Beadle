@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Beadle.Core.Repository;
+using Beadle.Core.Repository.LocalRepository;
 using Beadle.Core.Services;
 using Beadle.Core.ViewModels;
 using CommonServiceLocator;
@@ -15,11 +17,16 @@ namespace Beadle.Core
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             // ViewModels
+            
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AddEntityViewModel>();
 
             // Services
             SimpleIoc.Default.Register<IBeadleService, BeadleService>();
+
+
+
+            SimpleIoc.Default.Register<IRepository, LocalRepository>();
 
         }
 

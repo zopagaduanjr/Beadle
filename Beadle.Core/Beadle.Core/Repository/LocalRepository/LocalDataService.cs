@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Beadle.Core.Models;
@@ -10,14 +12,16 @@ namespace Beadle.Core.Repository.LocalRepository
     public class LocalDataService<T> : IDataService<T> where T : class, new()
 
     {
+        private  string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TodoSQLite.db3");
         readonly SQLiteAsyncConnection database;
 
-
+        
         //ctor
         public LocalDataService(string dbPath)
         {
             database = new SQLiteAsyncConnection(dbPath);
             database.CreateTableAsync<Student>().Wait();
+            database.CreateTableAsync<Session>().Wait();
         }
 
         public LocalDataService()
@@ -36,10 +40,12 @@ namespace Beadle.Core.Repository.LocalRepository
         }
         //READ crud implementation
         //read all
-        public async Task<List<T>> GetItemsAsync()
+        public  Task<List<T>> GetItemsAsync()
         {
-            return await database.Table<T>().ToListAsync();
+            return  database.Table<T>().ToListAsync();
+
         }
+
         //UPDATE crud implementation
 
 
