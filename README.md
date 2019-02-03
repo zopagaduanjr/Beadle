@@ -1,2 +1,3 @@
 # Elective_Project
-Hi guys subscribe
+Xamarin Forms App
+Using MVVM architecture
