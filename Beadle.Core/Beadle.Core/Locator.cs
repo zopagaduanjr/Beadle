@@ -16,17 +16,13 @@ namespace Beadle.Core
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            // ViewModels
-            
+            // ViewModels           
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AddEntityViewModel>();
 
             // Services
-            SimpleIoc.Default.Register<IBeadleService, BeadleService>();
-
-
-
             SimpleIoc.Default.Register<IRepository, LocalRepository>();
+            //SimpleIoc.Default.Register<INavigationService, NavigationService>();
 
         }
 

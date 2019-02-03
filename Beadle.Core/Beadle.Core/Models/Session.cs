@@ -7,13 +7,13 @@ namespace Beadle.Core.Models
 {
     public class Session
     {
-       
-            [PrimaryKey, AutoIncrement]
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public int PersonId { get; set; }
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+        public string Name { get; set; }
 
-
-        
+        public Session()
+        {
+            
+        }
     }
 }

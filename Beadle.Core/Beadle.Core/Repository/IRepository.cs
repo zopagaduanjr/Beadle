@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Beadle.Core.Models;
+using Beadle.Core.Services;
+using SQLite;
 
 namespace Beadle.Core.Repository
 {
@@ -9,6 +11,7 @@ namespace Beadle.Core.Repository
     {
         IDataService<Student> Student { get; }
         IDataService<Session> Session { get; }
+        IDataService<Person> Person { get; }
 
     }
 }

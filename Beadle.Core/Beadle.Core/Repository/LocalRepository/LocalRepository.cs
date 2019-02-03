@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Beadle.Core.Models;
+using Beadle.Core.Services;
+using SQLite;
 
 namespace Beadle.Core.Repository.LocalRepository
 {
@@ -9,6 +11,6 @@ namespace Beadle.Core.Repository.LocalRepository
     {
         public IDataService<Student> Student { get; } = new LocalDataService<Student>();
         public IDataService<Session> Session { get; } = new LocalDataService<Session>();
-
+        public IDataService<Person> Person { get; } = new LocalDataService<Person>();
     }
 }

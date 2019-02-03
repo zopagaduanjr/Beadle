@@ -19,24 +19,22 @@ namespace Beadle.Core.ViewModels
     {
         private static Random rand = new Random(DateTime.Now.Second);
         //ctor
-        public MainViewModel(IBeadleService beadleService, IRepository repository)
+        public MainViewModel(IRepository repository, INavigationService navigationService)
         {
-            if (beadleService == null) throw new ArgumentNullException("beadleService");
-            _beadleService = beadleService;
-            _navigationService = App.Navigation;
+            if (navigationService == null) throw new ArgumentNullException("navigationService");
+            _navigationService = navigationService;
             _repository = repository;
-
+            SelectedSession = null;
             SelectedStudent = null;
             Task.Run(() => Init());
             AddRandomStudentCommand = new Command(async () => await AddRandomStudentProcAsync(), () => canShow);
-            //AddRandomSessionCommand = new Command(async () => await AddRandomSessionProcAsync(), () => canShow);
-            //ShowAddPageCommand = new Command(async () => await ShowAddPageProcAsync(), () => canShow);
+            AddRandomSessionCommand = new Command(async () => await AddRandomSessionProcAsync(), () => canShow);
+            ShowAddPageCommand = new Command(async () => await ShowAddPageProcAsync(), () => canShow);
             //DeleteStudentCommand = new Command(async () => await DeleteStudentProcAsync(), () => canShow);
         }
 
         //fields
-        private IBeadleService _beadleService;
-        private INavigationService _navigationService;
+        private readonly INavigationService _navigationService;
         private Student _selectedStudent;
         private RelayCommand _navigateCommand;
         private string _selectedFullName;
@@ -44,7 +42,8 @@ namespace Beadle.Core.ViewModels
         private ObservableCollection<Session> _sessions;
         bool canShow = true;
         private int _id;
-        private IRepository _repository;
+        private readonly IRepository _repository;
+        private Session _selectedSession;
 
 
         public ObservableCollection<Student> Classmates
@@ -96,6 +95,18 @@ namespace Beadle.Core.ViewModels
                 RaisePropertyChanged(nameof(SelectedFullName));
             }
         }
+
+        public Session SelectedSession
+        {
+            get => _selectedSession;
+            set
+            {
+                _selectedSession = value;
+                RaisePropertyChanged(() => SelectedSession);
+
+            }
+        }
+
         public ObservableCollection<Session> Sessions
         {
             get => _sessions;
@@ -107,53 +118,55 @@ namespace Beadle.Core.ViewModels
         }
 
 
-        public IRepository Repository
-        {
-            get => _repository;
-            set => _repository = value;
-        }
 
         //methods
         public async Task Init()
         {
 
-            var list = await Repository.Student.GetItemsAsync();
-            Classmates = new ObservableCollection<Student>(list);
+            var list = await _repository.Session.GetItemsAsync();
+            Sessions = new ObservableCollection<Session>(list);
+
+            var list2 = await _repository.Student.GetItemsAsync();
+            Classmates = new ObservableCollection<Student>(list2);
+
 
             //if (Classmates != null) return;
             //var list = await App.Database.GetItemsAsync();
             //Classmates = new ObservableCollection<Student>(list);
 
             //Classmates = new ObservableCollection<Student>(await _beadleService.GetStudent());
+            RaisePropertyChanged(() => Sessions);
             RaisePropertyChanged(() => Classmates);
             RaisePropertyChanged(() => SelectedStudent);
+            RaisePropertyChanged(() => SelectedSession);
 
 
 
 
         }
-        //public async Task ShowAddPageProcAsync()
-        //{
-        //    await _navigationService.NavigateAsync(nameof(TestFrontEndHere));
-        //    //var stoods = new Student();
-        //    //stoods.FirstName = "zal";
-        //    //await App.Database.SaveItemAsync(stoods);
-        //    ////await App.Database.DeleteItemAsync(SelectedStudent);
-        //    ////RaisePropertyChanged(() => Classmates);
-        //    var list = await App.Database.GetItemsAsync();
-        //    Classmates = new ObservableCollection<Student>(list);
-        //    RaisePropertyChanged(() => Classmates);
+        public async Task ShowAddPageProcAsync()
+        {
+            _navigationService.Configure("TestFrontEndHere", typeof(TestFrontEndHere));
+            await _navigationService.NavigateAsync(nameof(TestFrontEndHere));
+            //var stoods = new Student();
+            //stoods.FirstName = "zal";
+            //await App.Database.SaveItemAsync(stoods);
+            ////await App.Database.DeleteItemAsync(SelectedStudent);
+            ////RaisePropertyChanged(() => Classmates);
+            //var list = await App.Database.GetItemsAsync();
+            //Classmates = new ObservableCollection<Student>(list);
+            RaisePropertyChanged(() => Classmates);
 
 
-        //}
+        }
         public async Task AddRandomStudentProcAsync()
         {
             var stoods = new Student();
             stoods.FirstName = FirstNameGenerator();
             stoods.LastName = LastNameGenerator();
-            await Repository.Student.SaveItemAsync(stoods);
+            await _repository.Student.SaveItemAsync(stoods);
             //autorefresh list
-            var list = await Repository.Student.GetItemsAsync();
+            var list = await _repository.Student.GetItemsAsync();
             Classmates = new ObservableCollection<Student>(list);
             //Classmates = new ObservableCollection<Student>(await _beadleService.GetStudent());
             //var list = await App.Database.GetItemsAsync();
@@ -176,19 +189,20 @@ namespace Beadle.Core.ViewModels
 
         //}
 
-        //public async Task AddRandomSessionProcAsync()
-        //{
-        //    var sesh = new Session();
-        //    sesh.Name = SessionGenerator();
-        //    //await App.Database.SaveItemAsync(,);
-        //    //autorefresh list
-        //    //var list = await App.Database.GetItemsAsync();
-        //    //Classmates = new ObservableCollection<Student>(list);
-        //    //Classmates = new ObservableCollection<Student>(await _beadleService.GetStudent());
-        //    //var list = await App.Database.GetItemsAsync();
-        //    //Classmates = new ObservableCollection<Student>(list);
-        //    RaisePropertyChanged(() => Classmates);
-        //}
+        public async Task AddRandomSessionProcAsync()
+        {
+            var fuck = new Session();
+            fuck.Name = SessionGenerator();
+            await _repository.Session.SaveItemAsync(fuck);
+            //await App.Database.SaveItemAsync(,);
+            //autorefresh list
+            var lis2t = await _repository.Session.GetItemsAsync();
+            Sessions = new ObservableCollection<Session>(lis2t);
+            //Classmates = new ObservableCollection<Student>(await _beadleService.GetStudent());
+            //var list = await App.Database.GetItemsAsync();
+            //Classmates = new ObservableCollection<Student>(list);
+            RaisePropertyChanged(() => Sessions);
+        }
 
 
         void Test()

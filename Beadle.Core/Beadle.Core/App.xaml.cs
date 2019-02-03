@@ -4,6 +4,7 @@ using Beadle.Core.Models;
 using Beadle.Core.Repository.LocalRepository;
 using Beadle.Core.Services;
 using Beadle.Core.Views;
+using GalaSoft.MvvmLight.Ioc;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -41,10 +42,18 @@ namespace Beadle.Core
         public App()
         {
             // The root page of your application
-            Navigation.Configure("MainPage", typeof(MainPage));
-            Navigation.Configure("AddEntityPage", typeof(AddEntityPage));
-            Navigation.Configure("TestFrontEndHere", typeof(TestFrontEndHere));
-            var mainPage = ((NavigationService)Navigation).SetRootPage("MainPage");
+            //Navigation.Configure("MainPage", typeof(MainPage));
+            //Navigation.Configure("AddEntityPage", typeof(AddEntityPage));
+            //Navigation.Configure("TestFrontEndHere", typeof(TestFrontEndHere));
+            //var mainPage = ((NavigationService)Navigation).SetRootPage("MainPage");
+
+            var nav = new NavigationService();
+            nav.Configure("MainPage", typeof(MainPage));
+            nav.Configure("AddEntityPage", typeof(AddEntityPage));
+            nav.Configure("TestFrontEndHere", typeof(TestFrontEndHere));
+            SimpleIoc.Default.Register<INavigationService>(() => nav);
+
+            var mainPage = ((NavigationService)nav).SetRootPage("MainPage");
 
             MainPage = mainPage;
         }

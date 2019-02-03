@@ -5,17 +5,17 @@
     <ContentPage.Content>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
             <StackLayout Grid.Column="0">
                 <Label Text="Subjects" HorizontalOptions="Center"  />
-                <ListView x:Name="SessionName" ItemsSource="{Binding Classmates, Mode=TwoWay}" RowHeight="30" 
-                          SelectedItem="{Binding SelectedStudent}">
+                <ListView x:Name="SessionName" ItemsSource="{Binding Sessions, Mode=TwoWay}" RowHeight="30" 
+                          SelectedItem="{Binding SelectedSession}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text = "{Binding FullName}" FontSize="24" AbsoluteLayout.LayoutBounds="0.25, 0.25, 400, 40" />
+                                    <Label Text = "{Binding Name}" FontSize="24" AbsoluteLayout.LayoutBounds="0.25, 0.25, 400, 40" />
                                     <Label Text = "|" AbsoluteLayout.LayoutBounds="50, 35, 200, 25" />
                                     <Label Text = "{Binding Id}" AbsoluteLayout.LayoutBounds="50, 35, 200, 25" />
                                 </StackLayout>
@@ -24,7 +24,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
                 <StackLayout Orientation="Horizontal">
-                    <Button Text="Add Session" Command="{Binding AddRandomStudentCommand}" HorizontalOptions="Center" />
+                    <Button Text="Add Session" Command="{Binding AddRandomSessionCommand}" HorizontalOptions="Center" />
                 </StackLayout>
 
             </StackLayout>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Beadle.Core.Views;
 using Xamarin.Forms;
 
 namespace Beadle.Core.Services
