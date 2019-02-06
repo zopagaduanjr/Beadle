@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Beadle.Core.Views.MasterPage"
+             xmlns:pages="clr-namespace:Beadle.Core.Views"
+             xmlns:behaviors="clr-namespace:Beadle.Core.Behaviors;assembly=Beadle.Core"
+             xmlns:converters="clr-namespace:Beadle.Core.Converters;assembly=Beadle.Core">
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu" BackgroundColor="#e8e8e8">
+            <StackLayout Orientation="Vertical">
+                <StackLayout 
+                    BackgroundColor="DeepSkyBlue"
+                    HeightRequest="75" >
+                    <Label Text="Sessions"
+                           FontSize="20"
+                           VerticalOptions="CenterAndExpand"
+                           TextColor="White"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+                <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None" 
+                          ItemsSource="{Binding Sessions, Mode=TwoWay}" RowHeight="30" >
+                    <ListView.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="ItemSelected" Command="{Binding ShowSelectedSessionCommand}" Converter="{converters:SelectedItemEventArgsToSelectedItemConverter}" />
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text = "{Binding Name}" FontSize="24" AbsoluteLayout.LayoutBounds="0.25, 0.25, 400, 40" />
+                                    <Label Text = "|" AbsoluteLayout.LayoutBounds="50, 35, 200, 25" />
+                                    <Label Text = "{Binding Id}" AbsoluteLayout.LayoutBounds="50, 35, 200, 25" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <NavigationPage>
+
+            
+        </NavigationPage>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>

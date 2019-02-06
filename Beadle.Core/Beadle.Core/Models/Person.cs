@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using SQLite;
+using SQLiteNetExtensions.Attributes;
 
 namespace Beadle.Core.Models
 {
@@ -17,5 +18,8 @@ namespace Beadle.Core.Models
         public string FullName { get { return FirstName + " " + LastName; } }
         public string Type { get; set; }
         public bool Late { get; set; }
+
+        [OneToMany]
+        public List<Session> Sessions { get; set; }
     }
 }

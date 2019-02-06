@@ -10,13 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace Beadle.Core.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MainPage : ContentPage
+	public partial class DashboardPage : ContentPage
 	{
-		public MainPage ()
+		public DashboardPage ()
 		{
-			//InitializeComponent ();
-		 //   BindingContext = App.Locator.Main;
-
-        }
-    }
+			InitializeComponent ();
+		}
+	}
 }

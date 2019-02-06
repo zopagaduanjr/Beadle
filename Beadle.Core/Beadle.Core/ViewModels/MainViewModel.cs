@@ -21,7 +21,8 @@ namespace Beadle.Core.ViewModels
         //ctor
         public MainViewModel(IRepository repository, INavigationService navigationService)
         {
-            if (navigationService == null) throw new ArgumentNullException("navigationService");
+
+            //if (navigationService == null) throw new ArgumentNullException("navigationService");
             _navigationService = navigationService;
             _repository = repository;
             SelectedSession = null;
@@ -29,8 +30,8 @@ namespace Beadle.Core.ViewModels
             Task.Run(() => Init());
             AddRandomStudentCommand = new Command(async () => await AddRandomStudentProcAsync(), () => canShow);
             AddRandomSessionCommand = new Command(async () => await AddRandomSessionProcAsync(), () => canShow);
-            ShowAddPageCommand = new Command(async () => await ShowAddPageProcAsync(), () => canShow);
-            //DeleteStudentCommand = new Command(async () => await DeleteStudentProcAsync(), () => canShow);
+            ShowSelectedSessionCommand = new Command(async () =>  await ShowSelectedSessionProcAsync(), () => canShow);
+            //ShowAddPageCommand = new Command(async () => await ShowAddPageProcAsync(), () => canShow);
         }
 
         //fields
@@ -57,6 +58,7 @@ namespace Beadle.Core.ViewModels
             }
         }
         public ICommand ShowAddPageCommand { get; private set; }
+        public ICommand ShowSelectedSessionCommand { get; private set; }
         public ICommand AddRandomStudentCommand { get; private set; }
         public ICommand DeleteStudentCommand { get; private set; }
         public ICommand AddRandomSessionCommand { get; private set; }
@@ -144,21 +146,21 @@ namespace Beadle.Core.ViewModels
 
 
         }
-        public async Task ShowAddPageProcAsync()
-        {
-            _navigationService.Configure("TestFrontEndHere", typeof(TestFrontEndHere));
-            await _navigationService.NavigateAsync(nameof(TestFrontEndHere));
-            //var stoods = new Student();
-            //stoods.FirstName = "zal";
-            //await App.Database.SaveItemAsync(stoods);
-            ////await App.Database.DeleteItemAsync(SelectedStudent);
-            ////RaisePropertyChanged(() => Classmates);
-            //var list = await App.Database.GetItemsAsync();
-            //Classmates = new ObservableCollection<Student>(list);
-            RaisePropertyChanged(() => Classmates);
+        //public async Task ShowAddPageProcAsync()
+        //{
+        //    _navigationService.Configure("TestFrontEndHere", typeof(TestFrontEndHere));
+        //    await _navigationService.NavigateAsync(nameof(TestFrontEndHere));
+        //    //var stoods = new Student();
+        //    //stoods.FirstName = "zal";
+        //    //await App.Database.SaveItemAsync(stoods);
+        //    ////await App.Database.DeleteItemAsync(SelectedStudent);
+        //    ////RaisePropertyChanged(() => Classmates);
+        //    //var list = await App.Database.GetItemsAsync();
+        //    //Classmates = new ObservableCollection<Student>(list);
+        //    RaisePropertyChanged(() => Classmates);
 
 
-        }
+        //}
         public async Task AddRandomStudentProcAsync()
         {
             var stoods = new Student();
@@ -188,7 +190,6 @@ namespace Beadle.Core.ViewModels
 
 
         //}
-
         public async Task AddRandomSessionProcAsync()
         {
             var fuck = new Session();
@@ -204,15 +205,11 @@ namespace Beadle.Core.ViewModels
             RaisePropertyChanged(() => Sessions);
         }
 
-
-        void Test()
+        public async Task ShowSelectedSessionProcAsync()
         {
-            //var repo = new LocalRepository();
-            //repo.Student.SaveItemAsync(new Student());
-            //repo.SaveItemAsync()
+             await _navigationService.NavigateAsync(nameof(TestFrontEndHere));
+
         }
-
-
         //dirtyworks
 
         public string FirstNameGenerator()
