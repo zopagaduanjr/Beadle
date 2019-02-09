@@ -57,7 +57,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <BoxView HeightRequest="1" Color="#b2bec3"></BoxView>
+                <BoxView HeightRequest="1" Color="#b2bec3"/>
                     <!--<Button Text="Add Random Student" Command="{Binding AddRandomSessionCommand}" HorizontalOptions="Center" Grid.Column="0" CornerRadius="10" />-->
                 <Frame CornerRadius="10" BackgroundColor="#636e72" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,10,0,10" Grid.Column="0"
                        HeightRequest="50" WidthRequest="200"  HasShadow="True" Padding="0">

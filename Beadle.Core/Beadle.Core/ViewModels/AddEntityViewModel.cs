@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Beadle.Core.Models;
+using Beadle.Core.Repository;
 using GalaSoft.MvvmLight;
 using Xamarin.Forms;
 
@@ -14,23 +15,23 @@ namespace Beadle.Core.ViewModels
     {
 
         //constructor
-
-
-        private string _firstName;
-        private MainViewModel _mainViewModel;
-
-        public AddEntityViewModel(MainViewModel mainViewModel)
+        public AddEntityViewModel(IRepository repository, MainViewModel mainViewModel)
         {
-            //AddEntityCommand = new Command(async () => await AddEntityProcAsync(), () => true);
-            _mainViewModel = mainViewModel;
+            AddEntityCommand = new Command(async () => await AddEntityProcAsync(), () => true);
+            MainViewModel = mainViewModel;
+            Repository = repository;
         }
 
         //fields
+        private string _firstName;
+        private MainViewModel _mainViewModel;
+        private readonly IRepository Repository;
         public MainViewModel MainViewModel
         {
             get => _mainViewModel;
             set => _mainViewModel = value;
         }
+
 
         public ICommand AddEntityCommand { get; private set; }
         public string FirstName
@@ -45,19 +46,45 @@ namespace Beadle.Core.ViewModels
         }
 
         //methods
-        //public async Task AddEntityProcAsync()
-        //{
-        //    var stoods = new Student();
-        //    stoods.FirstName = FirstName;
-        //    await App.Database.SaveItemAsync(stoods);
-        //    //autorefresh list
-        //    var list = await App.Database.GetItemsAsync();
-        //    MainViewModel.Classmates = new ObservableCollection<Student>(list);
-        //    //Classmates = new ObservableCollection<Student>(await _beadleService.GetStudent());
-        //    ////var list = await App.Database.GetItemsAsync();
-        //    ////Classmates = new ObservableCollection<Student>(list);
-        //    //RaisePropertyChanged(() => Classmates);
-        //}
+        public async Task AddEntityProcAsync()
+        {
+            var stoods = new Student();
+            stoods.FirstName = FirstName;
+            MainViewModel.SelectedSession.Students.Add(stoods);
+            await Repository.Student.SaveItemAsync(stoods);
+            await Repository.Session.UpdateWithChildrenAsync(MainViewModel.SelectedSession);
+            Task.Run(() => Init());
+        }
+        public async Task Init()
+        {
+            //updaters
+            MainViewModel.Sessions = await Repository.Session.GetItemsAsync();
+            RaisePropertyChanged(() => MainViewModel.Sessions);
+            var holdsession = MainViewModel.SelectedSession;
+            var holdstudent = MainViewModel.SelectedStudent;
+            //highlighters
+            if (holdsession != null)
+            {
+                foreach (var session in MainViewModel.Sessions)
+                {
+                    if (session.Id == holdsession.Id)
+                        MainViewModel.SelectedSession = session;
+                }
+            }
+            //highlighters
+            if (holdstudent != null)
+            {
+                var a = MainViewModel.SelectedSession.Students;
+                foreach (var item in a)
+                {
+                    if (item.Id == holdstudent.Id)
+                        MainViewModel.SelectedStudent = item;
+                }
+            }
+            RaisePropertyChanged(() => MainViewModel.SelectedSession);
+            RaisePropertyChanged(() => MainViewModel.SelectedStudent);
+        }
+
 
     }
 }

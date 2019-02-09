@@ -29,9 +29,10 @@ namespace Beadle.Core.ViewModels
             Task.Run(() => Init());
             AddRandomStudentCommand = new Command(async () => await AddRandomStudentProcAsync(), () => true);
             AddRandomSessionCommand = new Command(async () => await AddRandomSessionProcAsync(), () => true);
-            ShowSelectedSessionCommand = new Command(async () => await ShowSelectedSessionProcAsync(), () => true);
             AddLateCommand = new Command(async () => await AddLateProcAsync(), () => SelectedStudentIsTrue);
             AddAbsenceCommand = new Command(async () => await AddAbsenceProcAsync(), () => SelectedStudentIsTrue);
+            ShowAddStudentWindowCommand = new Command(async () => await ShowAddStudentWindowProcAsync(), () => true);
+
             //ShowAddPageCommand = new Command(async () => await ShowAddPageProcAsync(), () => canShow);
         }
 
@@ -64,6 +65,7 @@ namespace Beadle.Core.ViewModels
         public ICommand AddRandomSessionCommand { get; private set; }
         public ICommand AddLateCommand { get; private set; }
         public ICommand AddAbsenceCommand { get; private set; }
+        public ICommand ShowAddStudentWindowCommand { get; set; }
         public Session SelectedSession
         {
             get => _selectedSession;
@@ -197,6 +199,11 @@ namespace Beadle.Core.ViewModels
         public async Task ShowSelectedSessionProcAsync()
         {
             await NavigationService.NavigateAsync(nameof(TestFrontEndHere));
+
+        }
+        public async Task ShowAddStudentWindowProcAsync()
+        {
+            await NavigationService.NavigateAsync(nameof(AddPersonPage));
 
         }
 

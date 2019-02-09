@@ -23,10 +23,10 @@ namespace Beadle.Core
             //MainPage = new MasterPage();
             ////WORKING MVVM NAVIGATION USING IOC, BUT LIMITED TO PUSH PAGES, NOT YET MASTER DETAIL
             var nav = new NavigationService();
-            nav.Configure("AddEntityPage", typeof(AddEntityPage));
             nav.Configure("MasterPage", typeof(MasterPage));
-            nav.Configure("TestFrontEndHere", typeof(TestFrontEndHere));
             nav.Configure("DashboardPage", typeof(DashboardPage));
+            nav.Configure("AddPersonPage", typeof(AddPersonPage));
+            nav.Configure("TestFrontEndHere", typeof(TestFrontEndHere));
             SimpleIoc.Default.Register<INavigationService>(() => nav);
             var mainPage = ((NavigationService)nav).SetRootPage("MasterPage");
             MainPage = mainPage;
