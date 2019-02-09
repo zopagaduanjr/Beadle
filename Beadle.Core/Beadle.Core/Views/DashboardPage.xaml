@@ -78,9 +78,9 @@
         </Grid>
     </ContentPage.Content>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Text" Order="Primary" Priority="0" Icon="search.png"   />
-        <ToolbarItem Text="uy" Order="Primary" Priority="1" Icon="addstudent.png"   />
-        <ToolbarItem Text="uy" Order="Primary" Priority="1" Icon="menu.png"   />
+        <ToolbarItem  Order="Primary" Priority="1" Icon="search.png"   />
+        <ToolbarItem  Order="Primary" Priority="1" Icon="addstudent.png"   />
+        <ToolbarItem  Order="Primary" Priority="1" Icon="menu.png"   />
     </ContentPage.ToolbarItems>
 
 </ContentPage>

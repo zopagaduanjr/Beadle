@@ -92,7 +92,6 @@ namespace Beadle.Core.ViewModels
             }
         }
 
-
         //methods
         public async Task Init()
         {

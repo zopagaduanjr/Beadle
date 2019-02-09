@@ -6,20 +6,34 @@
              xmlns:behaviors="clr-namespace:Beadle.Core.Behaviors;assembly=Beadle.Core"
              xmlns:converters="clr-namespace:Beadle.Core.Converters;assembly=Beadle.Core">
     <MasterDetailPage.Master>
-        <ContentPage Title="Menu" BackgroundColor="#e8e8e8">
-            <StackLayout Orientation="Vertical">
-                <StackLayout BackgroundColor="DeepSkyBlue"
+        <ContentPage Title="Menu" BackgroundColor="#e8e8e8" >
+            <StackLayout Orientation="Vertical" >
+                <StackLayout BackgroundColor="DeepSkyBlue" Orientation="Horizontal" Padding="5,0,0,0"
                     HeightRequest="63" >
+                    <Label Text="&#xf0c0;" 
+                           FontSize="Large"
+                           TextColor="White"
+                           VerticalOptions="Center" 
+                           HorizontalOptions="Center" >
+                        <Label.FontFamily>
+                            <OnPlatform 
+                                x:TypeArguments="x:String"
+                                Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" 
+                                iOS="Font Awesome 5 Free" />
+                        </Label.FontFamily>
+                    </Label>
                     <Label Text="Sessions" FontSize="Large" VerticalOptions="CenterAndExpand"
                            TextColor="White"
                            HorizontalOptions="Center"/>
+
+
                 </StackLayout>
-                <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None"  SelectedItem="{Binding SelectedSession, Mode=TwoWay}"
+                <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None"  SelectedItem="{Binding SelectedSession, Mode=TwoWay}" 
                           ItemsSource="{Binding Sessions, Mode=TwoWay}" RowHeight="60" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Grid VerticalOptions="CenterAndExpand" >
+                                <Grid VerticalOptions="CenterAndExpand" Padding="5,0,0,0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="2*"/>
                                         <RowDefinition Height="*"/>
@@ -30,11 +44,11 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="2"/>
-                                            <ColumnDefinition Width="6*"/>
+                                            <ColumnDefinition Width="4*"/>
                                         </Grid.ColumnDefinitions>
                                         <Label Text = "{Binding Day}"  Grid.Column="0" FontSize="Small"  Margin="5,0,0,0"
                                                HorizontalTextAlignment="Start" TextColor="#747d8c" />
-                                        <BoxView  Grid.Column="1" Color="#2f3640" />
+                                        <BoxView  Grid.Column="1" Color="#b2bec3" />
                                         <Label Text = "{Binding Time}" Grid.Column="2" FontSize="Small" HorizontalTextAlignment="Start" TextColor="#747d8c"/>
 
                                     </Grid>
@@ -43,7 +57,32 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Button Text="Add Random Student" Command="{Binding AddRandomSessionCommand}" HorizontalOptions="Center" Grid.Column="0" />
+                <BoxView HeightRequest="1" Color="#b2bec3"></BoxView>
+                    <!--<Button Text="Add Random Student" Command="{Binding AddRandomSessionCommand}" HorizontalOptions="Center" Grid.Column="0" CornerRadius="10" />-->
+                <Frame CornerRadius="10" BackgroundColor="#636e72" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,10,0,10" Grid.Column="0"
+                       HeightRequest="50" WidthRequest="200"  HasShadow="True" Padding="0">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="&#xf0e8;"  
+                               FontSize="Large"
+                               TextColor="White"
+                               VerticalOptions="Center" 
+                               Margin="5,0,0,0"
+                               HorizontalOptions="Center" >
+                            <Label.FontFamily>
+                                <OnPlatform 
+                                    x:TypeArguments="x:String"
+                                    Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" 
+                                    iOS="Font Awesome 5 Free" />
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="Add Random Session" FontSize="Large"  TextColor="White"  HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="Center" />
+                        
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddRandomSessionCommand}"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>
