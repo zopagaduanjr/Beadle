@@ -30,8 +30,8 @@ namespace Beadle.Core.ViewModels
             AddRandomStudentCommand = new Command(async () => await AddRandomStudentProcAsync(), () => true);
             AddRandomSessionCommand = new Command(async () => await AddRandomSessionProcAsync(), () => true);
             ShowSelectedSessionCommand = new Command(async () => await ShowSelectedSessionProcAsync(), () => true);
-            AddLateCommand = new Command(async () => await AddLateProcAsync(), () => true);
-            AddAbsenceCommand = new Command(async () => await AddAbsenceProcAsync(), () => true);
+            AddLateCommand = new Command(async () => await AddLateProcAsync(), () => SelectedStudentIsTrue);
+            AddAbsenceCommand = new Command(async () => await AddAbsenceProcAsync(), () => SelectedStudentIsTrue);
             //ShowAddPageCommand = new Command(async () => await ShowAddPageProcAsync(), () => canShow);
         }
 
@@ -43,6 +43,8 @@ namespace Beadle.Core.ViewModels
         private List<Session> _sessions;
         private Session _selectedSession;
         private Student _selectedStudent;
+        private bool _selectedStudentIsTrue;
+        private bool _selectedSessionIsTrue;
 
 
         public ObservableCollection<Student> Classmates
@@ -68,8 +70,10 @@ namespace Beadle.Core.ViewModels
             set
             {
                 _selectedSession = value;
+                if (value != null)
+                    SelectedSessionIsTrue = true;
                 RaisePropertyChanged(() => SelectedSession);
-
+                RaisePropertyChanged(() => SelectedSessionIsTrue);
             }
         }
         public Student SelectedStudent
@@ -78,7 +82,11 @@ namespace Beadle.Core.ViewModels
             set
             {
                 _selectedStudent = value;
+                if (value != null)
+                    SelectedStudentIsTrue = true;
+
                 RaisePropertyChanged(() => SelectedStudent);
+                RaisePropertyChanged(() => SelectedStudentIsTrue);
 
             }
         }
@@ -186,12 +194,33 @@ namespace Beadle.Core.ViewModels
             await Repository.Student.UpdateItemAsync(SelectedStudent);
             Task.Run(() => Init());
         }
-
         public async Task ShowSelectedSessionProcAsync()
         {
             await NavigationService.NavigateAsync(nameof(TestFrontEndHere));
 
         }
+
+
+        //canclicks
+        public bool SelectedStudentIsTrue
+        {
+            get => _selectedStudentIsTrue;
+            set
+            {
+                _selectedStudentIsTrue = value;
+                RaisePropertyChanged(() => SelectedStudentIsTrue);
+            }
+        }
+        public bool SelectedSessionIsTrue
+        {
+            get => _selectedSessionIsTrue;
+            set
+            {
+                _selectedSessionIsTrue = value;
+                RaisePropertyChanged(() => SelectedSessionIsTrue);
+            }
+        }
+
         //dirtyworks
 
         public string FirstNameGenerator()

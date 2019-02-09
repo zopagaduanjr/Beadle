@@ -94,7 +94,7 @@
 
                     </StackLayout>
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding AddAbsenceCommand}"/>
+                        <TapGestureRecognizer Command="{Binding AddAbsenceCommand, Mode=TwoWay}"/>
                     </Frame.GestureRecognizers>
                 </Frame>
                 <Frame CornerRadius="10" BackgroundColor="#2196F3" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,10,0,10" Grid.Column="1"
@@ -118,7 +118,7 @@
 
                     </StackLayout>
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding AddLateCommand}"/>
+                        <TapGestureRecognizer Command="{Binding AddLateCommand, Mode=TwoWay}"/>
                     </Frame.GestureRecognizers>
                 </Frame>
 
@@ -127,6 +127,7 @@
         </Grid>
     </ContentPage.Content>
     <ContentPage.ToolbarItems>
+        <ToolbarItem  Order="Primary" Priority="1" Icon="randomuser.png" Command="{Binding AddRandomStudentCommand}" IsEnabled="{Binding SelectedSessionIsTrue}"  />
         <ToolbarItem  Order="Primary" Priority="1" Icon="search.png"   />
         <ToolbarItem  Order="Primary" Priority="1" Icon="addstudent.png"   />
         <ToolbarItem  Order="Primary" Priority="1" Icon="menu.png"   />
