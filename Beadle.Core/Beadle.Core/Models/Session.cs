@@ -11,7 +11,10 @@ namespace Beadle.Core.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public string Name { get; set; }
-        [ForeignKey(typeof(Person))]
-        public int PersonId { get; set; }
+        public string Day { get; set; }
+        public string Time { get; set; }
+
+        [OneToMany]
+        public List<Student> Students { get; set; }
     }
 }

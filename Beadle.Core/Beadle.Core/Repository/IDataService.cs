@@ -20,6 +20,11 @@ namespace Beadle.Core.Repository
         //Delete
         Task<T> DeleteItemAsync(T item);
 
+        //UpdateOneToMany
+        Task<T> UpdateWithChildrenAsync(T item);
+
+        Task<T> UpdateItemAsync(T item);
+
         //Get Specific Contact data  
         //T GetTData(int contactID);
 

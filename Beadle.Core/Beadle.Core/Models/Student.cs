@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using SQLite;
+using SQLiteNetExtensions.Attributes;
 
 namespace Beadle.Core.Models
 {
@@ -15,11 +16,11 @@ namespace Beadle.Core.Models
         public string Gender { get; set; }
         public string FullName { get { return FirstName + " " + LastName; } }
         public string MobileNumber { get; set; }
-        public bool Late { get; set; }
-        public Student()
-        {
+        public int Late { get; set; }
+        public int Absence { get; set; }
+        public bool FailureDebarment { get; set; }
+        [ForeignKey(typeof(Session))]
+        public int SessionId { get; set; }
 
-        }
     }
-
 }

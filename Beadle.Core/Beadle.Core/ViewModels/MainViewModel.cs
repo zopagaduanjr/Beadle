@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -17,34 +19,30 @@ namespace Beadle.Core.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private static Random rand = new Random(DateTime.Now.Second);
         //ctor
         public MainViewModel(IRepository repository, INavigationService navigationService)
         {
-
-            //if (navigationService == null) throw new ArgumentNullException("navigationService");
-            _navigationService = navigationService;
-            _repository = repository;
+            NavigationService = navigationService;
+            Repository = repository;
             SelectedSession = null;
             SelectedStudent = null;
             Task.Run(() => Init());
-            AddRandomStudentCommand = new Command(async () => await AddRandomStudentProcAsync(), () => canShow);
-            AddRandomSessionCommand = new Command(async () => await AddRandomSessionProcAsync(), () => canShow);
-            ShowSelectedSessionCommand = new Command(async () =>  await ShowSelectedSessionProcAsync(), () => canShow);
+            AddRandomStudentCommand = new Command(async () => await AddRandomStudentProcAsync(), () => true);
+            AddRandomSessionCommand = new Command(async () => await AddRandomSessionProcAsync(), () => true);
+            ShowSelectedSessionCommand = new Command(async () => await ShowSelectedSessionProcAsync(), () => true);
+            AddLateCommand = new Command(async () => await AddLateProcAsync(), () => true);
+            AddAbsenceCommand = new Command(async () => await AddAbsenceProcAsync(), () => true);
             //ShowAddPageCommand = new Command(async () => await ShowAddPageProcAsync(), () => canShow);
         }
 
         //fields
-        private readonly INavigationService _navigationService;
-        private Student _selectedStudent;
-        private RelayCommand _navigateCommand;
-        private string _selectedFullName;
+        private static Random rand = new Random(DateTime.Now.Second);
+        private readonly INavigationService NavigationService;
+        private readonly IRepository Repository;
         private ObservableCollection<Student> _classmates;
-        private ObservableCollection<Session> _sessions;
-        bool canShow = true;
-        private int _id;
-        private readonly IRepository _repository;
+        private List<Session> _sessions;
         private Session _selectedSession;
+        private Student _selectedStudent;
 
 
         public ObservableCollection<Student> Classmates
@@ -62,42 +60,8 @@ namespace Beadle.Core.ViewModels
         public ICommand AddRandomStudentCommand { get; private set; }
         public ICommand DeleteStudentCommand { get; private set; }
         public ICommand AddRandomSessionCommand { get; private set; }
-        public string SelectedFullName
-        {
-            get => _selectedFullName;
-            set
-            {
-                _selectedFullName = value;
-                RaisePropertyChanged(nameof(SelectedFullName));
-            }
-        }
-        public int Id
-        {
-            get => _id;
-            set
-            {
-                _id = value;
-                RaisePropertyChanged(nameof(Id));
-
-            }
-        }
-        public Student SelectedStudent
-        {
-            get => _selectedStudent;
-            set
-            {
-                _selectedStudent = value;
-                if (value != null)
-                {
-                    _selectedFullName = value.FullName;
-                    _id = value.Id;
-                }
-                RaisePropertyChanged(nameof(SelectedStudent));
-                RaisePropertyChanged(nameof(Classmates));
-                RaisePropertyChanged(nameof(SelectedFullName));
-            }
-        }
-
+        public ICommand AddLateCommand { get; private set; }
+        public ICommand AddAbsenceCommand { get; private set; }
         public Session SelectedSession
         {
             get => _selectedSession;
@@ -108,8 +72,17 @@ namespace Beadle.Core.ViewModels
 
             }
         }
+        public Student SelectedStudent
+        {
+            get => _selectedStudent;
+            set
+            {
+                _selectedStudent = value;
+                RaisePropertyChanged(() => SelectedStudent);
 
-        public ObservableCollection<Session> Sessions
+            }
+        }
+        public List<Session> Sessions
         {
             get => _sessions;
             set
@@ -120,31 +93,35 @@ namespace Beadle.Core.ViewModels
         }
 
 
-
         //methods
         public async Task Init()
         {
-
-            var list = await _repository.Session.GetItemsAsync();
-            Sessions = new ObservableCollection<Session>(list);
-
-            var list2 = await _repository.Student.GetItemsAsync();
-            Classmates = new ObservableCollection<Student>(list2);
-
-
-            //if (Classmates != null) return;
-            //var list = await App.Database.GetItemsAsync();
-            //Classmates = new ObservableCollection<Student>(list);
-
-            //Classmates = new ObservableCollection<Student>(await _beadleService.GetStudent());
+            //updaters
+            Sessions = await Repository.Session.GetItemsAsync();
             RaisePropertyChanged(() => Sessions);
-            RaisePropertyChanged(() => Classmates);
-            RaisePropertyChanged(() => SelectedStudent);
+            var holdsession = SelectedSession;
+            var holdstudent = SelectedStudent;
+            //highlighters
+            if (holdsession != null)
+            {
+                foreach (var session in Sessions)
+                {
+                    if (session.Id == holdsession.Id)
+                        SelectedSession = session;                        
+                }
+            }
+            //highlighters
+            if (holdstudent != null)
+            {
+                var a = SelectedSession.Students;
+                foreach (var item in a)
+                {
+                    if (item.Id == holdstudent.Id)
+                        SelectedStudent = item;
+                }
+            }
             RaisePropertyChanged(() => SelectedSession);
-
-
-
-
+            RaisePropertyChanged(() => SelectedStudent);
         }
         //public async Task ShowAddPageProcAsync()
         //{
@@ -166,14 +143,10 @@ namespace Beadle.Core.ViewModels
             var stoods = new Student();
             stoods.FirstName = FirstNameGenerator();
             stoods.LastName = LastNameGenerator();
-            await _repository.Student.SaveItemAsync(stoods);
-            //autorefresh list
-            var list = await _repository.Student.GetItemsAsync();
-            Classmates = new ObservableCollection<Student>(list);
-            //Classmates = new ObservableCollection<Student>(await _beadleService.GetStudent());
-            //var list = await App.Database.GetItemsAsync();
-            //Classmates = new ObservableCollection<Student>(list);
-            RaisePropertyChanged(() => Classmates);
+            SelectedSession.Students.Add(stoods);
+            await Repository.Student.SaveItemAsync(stoods);
+            await Repository.Session.UpdateWithChildrenAsync(SelectedSession);
+            Task.Run(() => Init());
         }
         //public async Task DeleteStudentProcAsync()
         //{
@@ -187,27 +160,37 @@ namespace Beadle.Core.ViewModels
         //    RaisePropertyChanged(() => Classmates);
         //    RaisePropertyChanged(() => SelectedStudent);
         //    Task.Run(() => Init());
-
-
         //}
+
         public async Task AddRandomSessionProcAsync()
         {
-            var fuck = new Session();
-            fuck.Name = SessionGenerator();
-            await _repository.Session.SaveItemAsync(fuck);
-            //await App.Database.SaveItemAsync(,);
-            //autorefresh list
-            var lis2t = await _repository.Session.GetItemsAsync();
-            Sessions = new ObservableCollection<Session>(lis2t);
-            //Classmates = new ObservableCollection<Student>(await _beadleService.GetStudent());
-            //var list = await App.Database.GetItemsAsync();
-            //Classmates = new ObservableCollection<Student>(list);
-            RaisePropertyChanged(() => Sessions);
+            var sesh = new Session();
+            sesh.Name = SessionGenerator();
+            sesh.Day = DayGenerator();
+            sesh.Time = TimeGenerator();
+            sesh.Students = new List<Student>();
+            await Repository.Session.SaveItemAsync(sesh);
+            Task.Run(() => Init());
+            RaisePropertyChanged(() => SelectedSession);
+
+        }
+        public async Task AddLateProcAsync()
+        {
+            var holdselestude = SelectedStudent;
+            SelectedStudent.Late++;
+            await Repository.Student.UpdateItemAsync(SelectedStudent);    
+            Task.Run(() => Init());
+        }
+        public async Task AddAbsenceProcAsync()
+        {
+            SelectedStudent.Absence++;
+            await Repository.Student.UpdateItemAsync(SelectedStudent);
+            Task.Run(() => Init());
         }
 
         public async Task ShowSelectedSessionProcAsync()
         {
-             await _navigationService.NavigateAsync(nameof(TestFrontEndHere));
+            await NavigationService.NavigateAsync(nameof(TestFrontEndHere));
 
         }
         //dirtyworks
@@ -230,6 +213,20 @@ namespace Beadle.Core.ViewModels
             string[] maleNames = { "Math", "History", "Filipino", "MAPEH","HEKASI", "Work Education",
                 "Chinese", "Nihongo"};
             var random = rand.Next(0, 8);
+            return maleNames[random];
+        }
+        public string DayGenerator()
+        {
+            string[] maleNames = { "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday",
+                "Sunday"};
+            var random = rand.Next(0, 7);
+            return maleNames[random];
+        }
+        public string TimeGenerator()
+        {
+            string[] maleNames = { "7:00 am - 8:00 am", "8:00 am - 9:00 am", "9:00 am - 10:00 am", "11:00 am - 12:00 pm","1:00 pm - 2:00 pm", "2:00 pm - 3:00 pm",
+                "3:00 pm - 4:00 pm"};
+            var random = rand.Next(0, 7);
             return maleNames[random];
         }
 

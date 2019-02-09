@@ -15,6 +15,8 @@ namespace Beadle.Core.Views
 		public DashboardPage ()
 		{
 			InitializeComponent ();
-		}
-	}
+            BindingContext = App.Locator.Main;
+
+        }
+    }
 }

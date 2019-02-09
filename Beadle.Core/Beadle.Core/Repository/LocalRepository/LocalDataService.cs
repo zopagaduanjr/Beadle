@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Beadle.Core.Models;
 using Beadle.Core.Services;
 using SQLite;
+using SQLiteNetExtensionsAsync.Extensions;
 
 namespace Beadle.Core.Repository.LocalRepository
 {
@@ -30,14 +31,16 @@ namespace Beadle.Core.Repository.LocalRepository
         //CREATE crud implementation
         public async Task<T> SaveItemAsync(T item)
         {
-            await database.InsertAsync(item);
+            await database.InsertWithChildrenAsync(item, true);
             return item;
         }
         //READ crud implementation
         //read all
-        public  Task<List<T>> GetItemsAsync()
+        public async Task<List<T>> GetItemsAsync()
         {
-            return  database.Table<T>().ToListAsync();
+            return  await database.GetAllWithChildrenAsync<T>();
+            //return new ObservableCollection<T>(b);
+            //return database.Table<T>().ToListAsync();
 
         }
         //UPDATE crud implementation
@@ -58,10 +61,21 @@ namespace Beadle.Core.Repository.LocalRepository
 
         //    return await database.Table<T>().Where(x => finder(x) ).FirstOrDefaultAsync();
         //}
-        public Task<List<Student>> GetItemsNotDoneAsync()
+
+        //one to many functions
+        public async Task<T> UpdateWithChildrenAsync(T item)
         {
-            return database.QueryAsync<Student>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
+            await database.UpdateWithChildrenAsync(item);
+            await database.UpdateAsync(item);
+            return item;
         }
+
+        public async Task<T> UpdateItemAsync(T item)
+        {
+             await database.UpdateAsync(item);
+             return item;
+        }
+
 
 
 

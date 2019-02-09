@@ -3,10 +3,84 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Beadle.Core.Views.DashboardPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="My first hamburger menu"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0"  BindingContext="{Binding SelectedSession}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Text = "{Binding Name}"  HorizontalTextAlignment="Start" TextColor="Black" Margin="5,0,0,0" VerticalOptions="End" 
+                       FontSize="30"  Grid.Row="0" HorizontalOptions="CenterAndExpand"/>
+                <Grid Grid.Row="1" HorizontalOptions="CenterAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+
+                    </Grid.ColumnDefinitions>
+                    <Label Text = "{Binding Day}"   TextColor="Black" Margin="5,0,0,0" 
+                           FontSize="Medium"  HorizontalOptions="CenterAndExpand"/>
+                    <Label Text = "{Binding Time}"   TextColor="Black" Margin="5,0,0,0" Grid.Column="1"
+                           FontSize="Medium"  HorizontalOptions="CenterAndExpand"/>
+
+
+                </Grid>
+                <Label Text = "{Binding Id}"  HorizontalTextAlignment="Start" TextColor="Black" Margin="5,0,0,0" VerticalOptions="End"
+                       FontSize="Large" Grid.Row="2" HorizontalOptions="CenterAndExpand"/>
+
+            </Grid>
+            <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None"   Grid.Row="1"  
+                       HorizontalOptions="CenterAndExpand" SelectedItem="{Binding SelectedStudent, Mode=TwoWay}"
+                      ItemsSource="{Binding SelectedSession.Students, Mode=TwoWay}" RowHeight="45" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid VerticalOptions="CenterAndExpand" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Label Text = "{Binding FullName}"  HorizontalTextAlignment="Center" TextColor="Black" Margin="5,0,0,0" VerticalOptions="End"
+                                       FontSize="Medium" Grid.Row="0" HorizontalOptions="CenterAndExpand"/>
+                                <Grid HorizontalOptions="CenterAndExpand" Grid.Row="1" VerticalOptions="StartAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="4*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <BoxView  Grid.Column="0" Color="DeepSkyBlue" />
+                                    <Label Text = "{Binding SessionId}"  Grid.Column="1" FontSize="Small"  Margin="5,0,0,0"
+                                           HorizontalTextAlignment="Center" TextColor="#747d8c" />
+                                    <Label Text = "{Binding Late}"  Grid.Column="2" FontSize="Small"  Margin="5,0,0,0"
+                                           HorizontalTextAlignment="Center" TextColor="#747d8c" />
+
+                                </Grid>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Text="Add Random Student" Command="{Binding AddRandomStudentCommand}" HorizontalOptions="Center" Grid.Column="0" />
+                <Button Text="Late" Command="{Binding AddLateCommand}" HorizontalOptions="Center" Grid.Column="1" />
+
+            </Grid>
+
+        </Grid>
     </ContentPage.Content>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Text" Order="Primary" Priority="0" Icon="search.png"   />
+        <ToolbarItem Text="uy" Order="Primary" Priority="1" Icon="addstudent.png"   />
+        <ToolbarItem Text="uy" Order="Primary" Priority="1" Icon="menu.png"   />
+    </ContentPage.ToolbarItems>
+
 </ContentPage>

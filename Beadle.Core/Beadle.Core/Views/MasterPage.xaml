@@ -8,39 +8,49 @@
     <MasterDetailPage.Master>
         <ContentPage Title="Menu" BackgroundColor="#e8e8e8">
             <StackLayout Orientation="Vertical">
-                <StackLayout 
-                    BackgroundColor="DeepSkyBlue"
-                    HeightRequest="75" >
-                    <Label Text="Sessions"
-                           FontSize="20"
-                           VerticalOptions="CenterAndExpand"
+                <StackLayout BackgroundColor="DeepSkyBlue"
+                    HeightRequest="63" >
+                    <Label Text="Sessions" FontSize="Large" VerticalOptions="CenterAndExpand"
                            TextColor="White"
                            HorizontalOptions="Center"/>
                 </StackLayout>
-                <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None" 
-                          ItemsSource="{Binding Sessions, Mode=TwoWay}" RowHeight="30" >
-                    <ListView.Behaviors>
-                        <behaviors:EventToCommandBehavior EventName="ItemSelected" Command="{Binding ShowSelectedSessionCommand}" Converter="{converters:SelectedItemEventArgsToSelectedItemConverter}" />
-                    </ListView.Behaviors>
+                <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None"  SelectedItem="{Binding SelectedSession, Mode=TwoWay}"
+                          ItemsSource="{Binding Sessions, Mode=TwoWay}" RowHeight="60" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text = "{Binding Name}" FontSize="24" AbsoluteLayout.LayoutBounds="0.25, 0.25, 400, 40" />
-                                    <Label Text = "|" AbsoluteLayout.LayoutBounds="50, 35, 200, 25" />
-                                    <Label Text = "{Binding Id}" AbsoluteLayout.LayoutBounds="50, 35, 200, 25" />
-                                </StackLayout>
+                                <Grid VerticalOptions="CenterAndExpand" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="2*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Text = "{Binding Name}"  HorizontalTextAlignment="Start" TextColor="Black" Margin="5,0,0,0" VerticalOptions="End"
+                                           FontSize="Large" Grid.Row="0" HorizontalOptions="FillAndExpand"/>
+                                    <Grid HorizontalOptions="FillAndExpand" Grid.Row="1" VerticalOptions="StartAndExpand">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2"/>
+                                            <ColumnDefinition Width="6*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text = "{Binding Day}"  Grid.Column="0" FontSize="Small"  Margin="5,0,0,0"
+                                               HorizontalTextAlignment="Start" TextColor="#747d8c" />
+                                        <BoxView  Grid.Column="1" Color="#2f3640" />
+                                        <Label Text = "{Binding Time}" Grid.Column="2" FontSize="Small" HorizontalTextAlignment="Start" TextColor="#747d8c"/>
+
+                                    </Grid>
+                                </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <Button Text="Add Random Student" Command="{Binding AddRandomSessionCommand}" HorizontalOptions="Center" Grid.Column="0" />
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>
     <MasterDetailPage.Detail>
         <NavigationPage>
 
-            
+
         </NavigationPage>
     </MasterDetailPage.Detail>
 </MasterDetailPage>
