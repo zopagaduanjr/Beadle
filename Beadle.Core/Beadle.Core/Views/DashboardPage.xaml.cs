@@ -16,7 +16,7 @@ namespace Beadle.Core.Views
 		{
 			InitializeComponent ();
             BindingContext = App.Locator.Main;
-
+            
         }
     }
 }

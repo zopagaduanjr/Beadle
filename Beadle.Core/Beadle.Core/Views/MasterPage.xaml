@@ -8,7 +8,7 @@
     <MasterDetailPage.Master>
         <ContentPage Title="Menu" BackgroundColor="#e8e8e8" >
             <StackLayout Orientation="Vertical" >
-                <StackLayout BackgroundColor="DeepSkyBlue" Orientation="Horizontal" Padding="5,0,0,0"
+                <StackLayout BackgroundColor="#2196F3" Orientation="Horizontal" Padding="5,0,0,0"
                     HeightRequest="63" >
                     <Label Text="&#xf0c0;" 
                            FontSize="Large"

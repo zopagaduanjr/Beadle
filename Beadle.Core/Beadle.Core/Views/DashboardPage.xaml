@@ -52,11 +52,14 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="4*"/>
                                         <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="4*"/>
                                     </Grid.ColumnDefinitions>
                                     <BoxView  Grid.Column="0" Color="DeepSkyBlue" />
                                     <Label Text = "{Binding SessionId}"  Grid.Column="1" FontSize="Small"  Margin="5,0,0,0"
                                            HorizontalTextAlignment="Center" TextColor="#747d8c" />
                                     <Label Text = "{Binding Late}"  Grid.Column="2" FontSize="Small"  Margin="5,0,0,0"
+                                           HorizontalTextAlignment="Center" TextColor="#747d8c" />
+                                    <Label Text = "{Binding Absence}"  Grid.Column="2" FontSize="Small"  Margin="5,0,0,0"
                                            HorizontalTextAlignment="Center" TextColor="#747d8c" />
 
                                 </Grid>
@@ -70,8 +73,54 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Text="Add Random Student" Command="{Binding AddRandomStudentCommand}" HorizontalOptions="Center" Grid.Column="0" />
-                <Button Text="Late" Command="{Binding AddLateCommand}" HorizontalOptions="Center" Grid.Column="1" />
+                <Frame CornerRadius="10" BackgroundColor="#2196F3" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,10,0,10" Grid.Column="0"
+                       HeightRequest="50" WidthRequest="200"  HasShadow="True" Padding="0">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="&#xf21b;"  
+                               FontSize="Large"
+                               TextColor="White"
+                               VerticalOptions="Center" 
+                               Margin="5,0,0,0"
+                               HorizontalOptions="EndAndExpand" >
+                            <Label.FontFamily>
+                                <OnPlatform 
+                                    x:TypeArguments="x:String"
+                                    Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" 
+                                    iOS="Font Awesome 5 Free" />
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="Absent" FontSize="Large"  TextColor="White"  HorizontalOptions="StartAndExpand"
+                               VerticalOptions="Center" />
+
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddAbsenceCommand}"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <Frame CornerRadius="10" BackgroundColor="#2196F3" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,10,0,10" Grid.Column="1"
+                       HeightRequest="50" WidthRequest="200"  HasShadow="True" Padding="0">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="&#xf4fd;"  
+                               FontSize="Large"
+                               TextColor="White"
+                               VerticalOptions="CenterAndExpand" 
+                               Margin="5,0,0,0"
+                               HorizontalOptions="EndAndExpand" >
+                            <Label.FontFamily>
+                                <OnPlatform 
+                                    x:TypeArguments="x:String"
+                                    Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" 
+                                    iOS="Font Awesome 5 Free" />
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="Late" FontSize="Large"  TextColor="White"  HorizontalOptions="StartAndExpand"
+                               VerticalOptions="Center" />
+
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddLateCommand}"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
 
             </Grid>
 
