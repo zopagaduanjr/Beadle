@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
+  <!-- Colors -->
+  <color name="CustomHighlight">#30e3ca</color>
+  <color name="DarkOverride">@android:color/black</color>
+  <color name="Brand">#BE1003</color>
+  <style name="MainTheme" parent="MainTheme.Base"> </style>
 
   <style name="MainTheme" parent="MainTheme.Base">
   </style>
@@ -16,15 +21,28 @@
     <item name="colorPrimaryDark">#1976D2</item>
     <!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
-    <item name="colorAccent">#FF4081</item>
+    <item name="colorAccent">#1B9CFC</item>
     <!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
     <item name="windowActionModeOverlay">true</item>
-
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+
+
+    <!-- Override -->
+    <item name="android:colorPressedHighlight">@color/CustomHighlight</item>
+    <item name="android:colorLongPressedHighlight">@color/CustomHighlight</item>
+    <item name="android:colorFocusedHighlight">@color/CustomHighlight</item>
+    <item name="android:colorActivatedHighlight">@color/CustomHighlight</item>
+    <item name="android:activatedBackgroundIndicator">@color/CustomHighlight</item>
+
+    <!--<item name="android:textColorHint">#C14242</item>-->
+  </style>
+  <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+    <item name="colorAccent">@color/Brand</item>
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#FF4081</item>
   </style>
+
 </resources>

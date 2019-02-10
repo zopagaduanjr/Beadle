@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -25,6 +26,7 @@ namespace Beadle.Core.ViewModels
             //IOC getters
             NavigationService = navigationService;
             Repository = repository;
+
             //initializers
             SelectedSession = null;
             SelectedPerson = null;
@@ -38,7 +40,12 @@ namespace Beadle.Core.ViewModels
             AddAbsenceCommand = new Command(async () => await AddAbsenceProcAsync(), () => SelectedPersonIsTrue);
             ShowAddPersonWindowCommand = new Command(async () => await ShowAddPersonWindowProcAsync(), () => true);
             ShowAddSessionWindowCommand = new Command(async () => await ShowAddSessionWindowProcAsync(), () => true);
+            ShowSettingsCommand = new Command(async () => await ShowSettingsProcAsync(), () => true);
             GoBackCommand = new Command(async () => await GoBackProcAsync(), () => true);
+
+
+            //codebehind transfer here
+
         }
 
         //backing fields
@@ -73,6 +80,7 @@ namespace Beadle.Core.ViewModels
         public ICommand AddAbsenceCommand { get; private set; }
         public ICommand ShowAddPersonWindowCommand { get; set; }
         public ICommand ShowAddSessionWindowCommand { get; set; }
+        public ICommand ShowSettingsCommand { get; set; }
         public Session SelectedSession
         {
             get => _selectedSession;
@@ -232,7 +240,10 @@ namespace Beadle.Core.ViewModels
             await NavigationService.NavigateAsync(nameof(AddSessionPage), true);
         }
 
-
+        public async Task ShowSettingsProcAsync()
+        {
+            await Application.Current.MainPage.DisplayActionSheet("Sort Options", "Cancel", null, "By Approval Due Date", "Meeting Date", "Meeting Type");
+        }
 
         //canclicks
         public bool SelectedSessionIsTrue
