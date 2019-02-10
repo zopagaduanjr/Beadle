@@ -50,7 +50,7 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Grid.Column="4" Grid.Row="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
                     <Label Text="Population: "  TextColor="#718093" FontSize="14" />
-                    <Label Text="{Binding Population}"  TextColor="#40514e" FontSize="14" />
+                    <Label Text="{Binding MainViewModel.Population}"  TextColor="#40514e" FontSize="14" />
                 </StackLayout>
 
 
@@ -69,57 +69,59 @@
             </ListView>
             <BoxView HeightRequest="1" Color="#b2bec3" Grid.Row="3" Grid.ColumnSpan="3"/>
             <BoxView WidthRequest="1" Color="#b2bec3" Grid.RowSpan="3" Grid.Row="1"  Grid.Column="1"/>
-            <StackLayout Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" BindingContext="{Binding SelectedPerson, Mode=TwoWay}">
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="First Name: "  TextColor="#718093" FontSize="20" />
-                    <Label Text="{Binding FirstName}"  TextColor="#40514e" FontSize="20" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Last Name: "  TextColor="#718093" FontSize="20" />
-                    <Label Text="{Binding LastName}"  TextColor="#40514e" FontSize="20" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Late: "  TextColor="#718093" FontSize="20" />
-                    <Label Text="{Binding Late}"  TextColor="#40514e" FontSize="20" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Absence: "  TextColor="#718093" FontSize="20" />
-                    <Label Text="{Binding Absence}"  TextColor="#40514e" FontSize="20" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Failure Debarment: "  TextColor="#718093" FontSize="20" />
-                    <Label Text="{Binding FailureDebarment}"  TextColor="#40514e" FontSize="20" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Gender: "  TextColor="#718093" FontSize="20" />
-                    <Label Text="{Binding Gender}"  TextColor="#40514e" FontSize="20" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Middle Name: "  TextColor="#718093" FontSize="20" />
-                    <Label Text="{Binding MiddleName}"  TextColor="#40514e" FontSize="20" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Age: "  TextColor="#718093" FontSize="20" />
-                    <Label Text="{Binding Age}"  TextColor="#40514e" FontSize="20" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Mobile Number: "  TextColor="#718093" FontSize="20" />
-                    <Label Text="{Binding MobileNumber}"  TextColor="#40514e" FontSize="20" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Person Id: "  TextColor="#718093" FontSize="20" />
-                    <Label Text="{Binding Id}"  TextColor="#40514e" FontSize="20" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Session Id: "  TextColor="#718093" FontSize="20" />
-                    <Label Text="{Binding SessionId}"  TextColor="#40514e" FontSize="20" />
-                </StackLayout>
+            <StackLayout  Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" IsVisible="{Binding IsSelectedPersonTrue, Mode=TwoWay}">
+                <StackLayout  BindingContext="{Binding SelectedPerson, Mode=TwoWay}">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="First Name: "  TextColor="#718093" FontSize="20" />
+                        <Label Text="{Binding FirstName}"  TextColor="#40514e" FontSize="20" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Last Name: "  TextColor="#718093" FontSize="20" />
+                        <Label Text="{Binding LastName}"  TextColor="#40514e" FontSize="20" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Late: "  TextColor="#718093" FontSize="20" />
+                        <Label Text="{Binding Late}"  TextColor="#40514e" FontSize="20" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Absence: "  TextColor="#718093" FontSize="20" />
+                        <Label Text="{Binding Absence}"  TextColor="#40514e" FontSize="20" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Failure Debarment: "  TextColor="#718093" FontSize="20" />
+                        <Label Text="{Binding FailureDebarment}"  TextColor="#40514e" FontSize="20" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Gender: "  TextColor="#718093" FontSize="20" />
+                        <Label Text="{Binding Gender}"  TextColor="#40514e" FontSize="20" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Middle Name: "  TextColor="#718093" FontSize="20" />
+                        <Label Text="{Binding MiddleName}"  TextColor="#40514e" FontSize="20" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Age: "  TextColor="#718093" FontSize="20" />
+                        <Label Text="{Binding Age}"  TextColor="#40514e" FontSize="20" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Mobile Number: "  TextColor="#718093" FontSize="20" />
+                        <Label Text="{Binding MobileNumber}"  TextColor="#40514e" FontSize="20" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Person Id: "  TextColor="#718093" FontSize="20" />
+                        <Label Text="{Binding Id}"  TextColor="#40514e" FontSize="20" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Session Id: "  TextColor="#718093" FontSize="20" />
+                        <Label Text="{Binding SessionId}"  TextColor="#40514e" FontSize="20" />
+                    </StackLayout>
 
+                </StackLayout>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
     <ContentPage.ToolbarItems>
-        <ToolbarItem  Order="Primary" Priority="1" Icon="delete.png"/>
+        <ToolbarItem  Order="Primary" Priority="1" Icon="delete.png" Command="{Binding DeleteSessionCommand, Mode=TwoWay}"/>
 
     </ContentPage.ToolbarItems>
 </ContentPage>

@@ -19,10 +19,16 @@ namespace Beadle.Core.ViewModels
         //constructor
         public SessionInfoViewModel(IRepository repository, MainViewModel mainViewModel, INavigationService navigationService)
         {
+            mainViewModel.SessionInfoViewModel = this;
             MainViewModel = mainViewModel;
             Repository = repository;
             NavigationService = navigationService;
-            Population = MainViewModel.SelectedSession.Persons.Count;
+            SelectedPerson = null;
+            IsSelectedPersonTrue = false;
+            //commands
+            DeleteSessionCommand = new Command(async () => await DeleteSessionProcAsync(), () => true);
+
+
         }
 
         //private fields
@@ -30,31 +36,22 @@ namespace Beadle.Core.ViewModels
         private MainViewModel _mainViewModel;
         private readonly IRepository Repository;
         private Person _selectedPerson;
-        private int _population;
+        private bool _isSelectedPersonTrue;
 
         //properties
+        public ICommand DeleteSessionCommand { get; private set; }
         public Person SelectedPerson
         {
             get => _selectedPerson;
             set
             {
                 _selectedPerson = value;
+                if (value != null)
+                    IsSelectedPersonTrue = true;
                 RaisePropertyChanged(nameof(SelectedPerson));
 
             }
         }
-
-        public int Population
-        {
-            get => _population;
-            set
-            {
-                _population = value;
-                RaisePropertyChanged(nameof(Population));
-
-            }
-        }
-
         public MainViewModel MainViewModel
         {
             get => _mainViewModel;
@@ -64,8 +61,45 @@ namespace Beadle.Core.ViewModels
                 RaisePropertyChanged(nameof(MainViewModel));
             }
         }
+
+        public bool IsSelectedPersonTrue
+        {
+            get => _isSelectedPersonTrue;
+            set
+            {
+                _isSelectedPersonTrue = value;
+                RaisePropertyChanged(nameof(IsSelectedPersonTrue));
+
+            }
+        }
+
         //methods
+        public async Task DeleteSessionProcAsync()
+        {
+            var persons = MainViewModel.SelectedSession.Persons;
+            var personinTable = await Repository.Person.GetItemsAsync();
+            foreach (var person in persons)
+            {
+                foreach (var item in personinTable)
+                {
+                    if (person.Id == item.Id)
+                    {
+                        await Repository.Person.DeleteItemAsync(item);
+                    }
+                }
+            }
+            await Repository.Session.DeleteItemAsync(MainViewModel.SelectedSession);
+            MainViewModel.SelectedSession = null;
+
+            await Task.Run(() => MainViewModel.DeleteRefresher());
+
+            await NavigationService.GoBack();
+
+        }
+
         //canclick
+
+
     }
 
 }

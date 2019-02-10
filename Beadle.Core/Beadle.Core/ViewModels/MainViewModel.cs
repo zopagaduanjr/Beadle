@@ -60,6 +60,8 @@ namespace Beadle.Core.ViewModels
         private bool _selectedPersonIsTrue;
         private AddPersonViewModel _addPersonViewModel;
         private AddSessionViewModel _addSessionViewModel;
+        private SessionInfoViewModel _sessionInfoViewModel;
+        private int _population;
 
         //properties
         public ObservableCollection<Student> Classmates
@@ -88,7 +90,10 @@ namespace Beadle.Core.ViewModels
             {
                 _selectedSession = value;
                 if (value != null)
+                {
                     SelectedSessionIsTrue = true;
+                    Population = value.Persons.Count;
+                }
                 RaisePropertyChanged(() => SelectedSession);
                 RaisePropertyChanged(() => SelectedSessionIsTrue);
             }
@@ -118,6 +123,17 @@ namespace Beadle.Core.ViewModels
             }
         }
 
+        public int Population
+        {
+            get => _population;
+            set
+            {
+                _population = value;
+                RaisePropertyChanged(() => Population);
+
+            }
+        }
+
         public AddPersonViewModel AddPersonViewModel
         {
             get => _addPersonViewModel;
@@ -134,7 +150,17 @@ namespace Beadle.Core.ViewModels
             set
             {
                 _addSessionViewModel = value;
-                RaisePropertyChanged(() => AddPersonViewModel);
+                RaisePropertyChanged(() => AddSessionViewModel);
+            }
+        }
+
+        public SessionInfoViewModel SessionInfoViewModel
+        {
+            get => _sessionInfoViewModel;
+            set
+            {
+                _sessionInfoViewModel = value;
+                RaisePropertyChanged(() => SessionInfoViewModel);
             }
         }
 
@@ -150,10 +176,11 @@ namespace Beadle.Core.ViewModels
             //highlighters
             if (holdsession != null)
             {
+
                 foreach (var session in Sessions)
                 {
                     if (session.Id == holdsession.Id)
-                        SelectedSession = session;                        
+                        SelectedSession = session;
                 }
             }
             //highlighters
@@ -168,6 +195,14 @@ namespace Beadle.Core.ViewModels
             }
             RaisePropertyChanged(() => SelectedSession);
             RaisePropertyChanged(() => SelectedPerson);
+        }
+
+        public async Task DeleteRefresher()
+        {
+            Sessions = await Repository.Session.GetItemsAsync();
+            RaisePropertyChanged(() => Sessions);
+            SelectedSession = null;
+            SelectedPerson = null;
         }
         //public async Task DeleteStudentProcAsync()
         //{
@@ -243,6 +278,11 @@ namespace Beadle.Core.ViewModels
 
         public async Task ShowSessionInfoProcAsync()
         {
+            if (SessionInfoViewModel != null)
+            {
+                SessionInfoViewModel.IsSelectedPersonTrue = false;
+                SessionInfoViewModel.SelectedPerson = null;
+            }
             //await Application.Current.MainPage.DisplayActionSheet("Sort Options", "Cancel", null, "By Approval Due Date", "Meeting Date", "Meeting Type");
             await NavigationService.NavigateAsync(nameof(SessionInfoPage), true);
 
