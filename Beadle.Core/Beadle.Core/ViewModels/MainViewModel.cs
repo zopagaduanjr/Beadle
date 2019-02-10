@@ -31,6 +31,7 @@ namespace Beadle.Core.ViewModels
             SelectedSession = null;
             SelectedPerson = null;
             Task.Run(() => Init());
+            ShowNoobPage = true;
 
 
             //Command Initializers
@@ -41,6 +42,7 @@ namespace Beadle.Core.ViewModels
             ShowAddPersonWindowCommand = new Command(async () => await ShowAddPersonWindowProcAsync(), () => true);
             ShowAddSessionWindowCommand = new Command(async () => await ShowAddSessionWindowProcAsync(), () => true);
             ShowSessionInfoCommand = new Command(async () => await ShowSessionInfoProcAsync(), () => true);
+            ShowDbPopulationCommand = new Command(async () => await ShowDbPopulationProcAsync(), () => true);
             GoBackCommand = new Command(async () => await GoBackProcAsync(), () => true);
 
 
@@ -62,6 +64,7 @@ namespace Beadle.Core.ViewModels
         private AddSessionViewModel _addSessionViewModel;
         private SessionInfoViewModel _sessionInfoViewModel;
         private int _population;
+        private bool _showNoobPage;
 
         //properties
         public ObservableCollection<Student> Classmates
@@ -83,6 +86,7 @@ namespace Beadle.Core.ViewModels
         public ICommand ShowAddPersonWindowCommand { get; set; }
         public ICommand ShowAddSessionWindowCommand { get; set; }
         public ICommand ShowSessionInfoCommand { get; set; }
+        public ICommand ShowDbPopulationCommand { get; set; }
         public Session SelectedSession
         {
             get => _selectedSession;
@@ -93,8 +97,16 @@ namespace Beadle.Core.ViewModels
                 {
                     SelectedSessionIsTrue = true;
                     Population = value.Persons.Count;
+                    ShowNoobPage = false;
+
+                }
+                else
+                {
+                    SelectedSessionIsTrue = false;
+                    ShowNoobPage = true;
                 }
                 RaisePropertyChanged(() => SelectedSession);
+                RaisePropertyChanged(() => ShowNoobPage);
                 RaisePropertyChanged(() => SelectedSessionIsTrue);
             }
         }
@@ -228,6 +240,7 @@ namespace Beadle.Core.ViewModels
             await Repository.Session.SaveItemAsync(session);
             await Task.Run(() => Init());
             RaisePropertyChanged(() => SelectedSession);
+            await Task.Delay(1000);
         }
         public async Task AddRandomPersonProcAsync()
         {
@@ -238,6 +251,8 @@ namespace Beadle.Core.ViewModels
             await Repository.Person.SaveItemAsync(person);
             await Repository.Session.UpdateWithChildrenAsync(SelectedSession);
             await Task.Run(() => Init());
+            await Task.Delay(1000);
+
         }
         public async Task AddLateProcAsync()
         {
@@ -283,8 +298,33 @@ namespace Beadle.Core.ViewModels
                 SessionInfoViewModel.IsSelectedPersonTrue = false;
                 SessionInfoViewModel.SelectedPerson = null;
             }
-            //await Application.Current.MainPage.DisplayActionSheet("Sort Options", "Cancel", null, "By Approval Due Date", "Meeting Date", "Meeting Type");
             await NavigationService.NavigateAsync(nameof(SessionInfoPage), true);
+
+        }
+
+        public async Task ShowDbPopulationProcAsync()
+        {
+            var persontable = await Repository.Person.GetItemsAsync();
+            var sessiontable = await Repository.Session.GetItemsAsync();
+            var personpopulation = "Person Table Population: " + persontable.Count.ToString();
+            var sessionpopulation = "Session Table Population: " + sessiontable.Count.ToString();
+            var lastperson = 0;
+            var lastsession = 0;
+            if (persontable.LastOrDefault() != null)
+            {
+                lastperson = persontable.LastOrDefault().Id;
+            }
+
+            if (sessiontable.LastOrDefault() != null)
+            {
+                lastsession = sessiontable.LastOrDefault().Id;
+
+            }
+            var personlastkey = "Person Table Last Id: " + lastperson;
+            var sessionlastkey = "Session Table Last Id: " + lastsession;
+
+
+            await Application.Current.MainPage.DisplayActionSheet("Database Info", "Cancel", null, personpopulation, personlastkey, sessionpopulation, sessionlastkey);
 
         }
 
@@ -305,10 +345,17 @@ namespace Beadle.Core.ViewModels
             {
                 _selectedPersonIsTrue = value;
                 RaisePropertyChanged(() => SelectedPersonIsTrue);
-
             }
         }
-
+        public bool ShowNoobPage
+        {
+            get => _showNoobPage;
+            set
+            {
+                _showNoobPage = value;
+                RaisePropertyChanged(() => ShowNoobPage);
+            }
+        }
 
 
         //dirtyworks
