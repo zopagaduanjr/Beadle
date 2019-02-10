@@ -10,10 +10,12 @@ using Xamarin.Forms.Xaml;
 namespace Beadle.Core.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AddEntityPage : ContentPage
+	public partial class AddSessionPage : ContentPage
 	{
-		public AddEntityPage ()
+		public AddSessionPage ()
 		{
+			InitializeComponent ();
+            BindingContext = App.Locator.AddSession;
 
         }
     }

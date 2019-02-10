@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Beadle.Core.Views.AddPersonPage">
+             x:Class="Beadle.Core.Views.AddSessionPage">
     <ContentPage.Content>
         <StackLayout VerticalOptions="StartAndExpand">
-            <TableView HeightRequest="200">
+            <TableView HeightRequest="350">
                 <TableRoot>
-                    <TableSection  Title="Add Person">
-                        <EntryCell Label="First Name" Placeholder="Zaldy" Text="{Binding Path=FirstName, Mode=TwoWay}" HorizontalTextAlignment="Start"  />
-                        <EntryCell Label="Last Name" Placeholder="Pagaduan" Text="{Binding Path=LastName, Mode=TwoWay}" HorizontalTextAlignment="Start"/>
+                    <TableSection  Title="Add Session">
+                        <EntryCell Label="Session Name" Placeholder="ECE 410" Text="{Binding Path=Name, Mode=TwoWay}" HorizontalTextAlignment="Start"  />
+                    </TableSection>
+                    <TableSection Title="Schedule">
+                        <EntryCell Label="Session Day" Placeholder="Tuesday" Text="{Binding Path=Day, Mode=TwoWay}" HorizontalTextAlignment="Start"  />
+                        <EntryCell Label="Session Time" Placeholder="1:00 - 2:30" Text="{Binding Path=Time, Mode=TwoWay}" HorizontalTextAlignment="Start"  />
                     </TableSection>
                 </TableRoot>
             </TableView>
@@ -28,12 +31,12 @@
                                 iOS="Font Awesome 5 Free" />
                         </Label.FontFamily>
                     </Label>
-                    <Label Text="Add Person" FontSize="Large"  TextColor="White"  HorizontalOptions="StartAndExpand"
+                    <Label Text="Add Session" FontSize="Large"  TextColor="White"  HorizontalOptions="StartAndExpand"
                            VerticalOptions="Center" />
 
                 </StackLayout>
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding AddPersonCommand, Mode=TwoWay}"/>
+                    <TapGestureRecognizer Command="{Binding AddSessionCommand, Mode=TwoWay}"/>
                 </Frame.GestureRecognizers>
             </Frame>
         </StackLayout>

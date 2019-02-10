@@ -7,7 +7,7 @@
              xmlns:converters="clr-namespace:Beadle.Core.Converters;assembly=Beadle.Core">
     <MasterDetailPage.Master>
         <ContentPage Title="Menu" BackgroundColor="#e8e8e8" >
-            <StackLayout  >
+            <StackLayout>
                 <StackLayout BackgroundColor="#2196F3" Orientation="Horizontal" Padding="5,0,0,0"
                     HeightRequest="63" >
                     <Label Text="&#xf0c0;" 
@@ -25,6 +25,23 @@
                     <Label Text="Sessions" FontSize="Large" VerticalOptions="CenterAndExpand"
                            TextColor="White"
                            HorizontalOptions="Center"/>
+                    <Frame  BackgroundColor="#2196F3"  HorizontalOptions="EndAndExpand" VerticalOptions="Center"  HasShadow="False" Padding="0,0,20,0">
+                            <Label Text="&#xf067;"  
+                                   FontSize="Large"
+                                   TextColor="White"
+                                   VerticalOptions="Center" 
+                                   HorizontalOptions="Center" >
+                                <Label.FontFamily>
+                                    <OnPlatform 
+                                        x:TypeArguments="x:String"
+                                        Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" 
+                                        iOS="Font Awesome 5 Free" />
+                                </Label.FontFamily>
+                            </Label>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowAddSessionWindowCommand, Mode=TwoWay}"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
                 </StackLayout>
                 <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None"  SelectedItem="{Binding SelectedSession, Mode=TwoWay}" 
                           ItemsSource="{Binding Sessions, Mode=TwoWay}" RowHeight="60" >

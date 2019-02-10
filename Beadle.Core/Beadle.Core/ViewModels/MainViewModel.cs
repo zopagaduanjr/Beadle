@@ -37,6 +37,7 @@ namespace Beadle.Core.ViewModels
             AddLateCommand = new Command(async () => await AddLateProcAsync(), () => SelectedPersonIsTrue);
             AddAbsenceCommand = new Command(async () => await AddAbsenceProcAsync(), () => SelectedPersonIsTrue);
             ShowAddPersonWindowCommand = new Command(async () => await ShowAddPersonWindowProcAsync(), () => true);
+            ShowAddSessionWindowCommand = new Command(async () => await ShowAddSessionWindowProcAsync(), () => true);
             GoBackCommand = new Command(async () => await GoBackProcAsync(), () => true);
         }
 
@@ -51,6 +52,7 @@ namespace Beadle.Core.ViewModels
         private Person _selectedPerson;
         private bool _selectedPersonIsTrue;
         private AddPersonViewModel _addPersonViewModel;
+        private AddSessionViewModel _addSessionViewModel;
 
         //properties
         public ObservableCollection<Student> Classmates
@@ -70,6 +72,7 @@ namespace Beadle.Core.ViewModels
         public ICommand GoBackCommand { get; private set; }
         public ICommand AddAbsenceCommand { get; private set; }
         public ICommand ShowAddPersonWindowCommand { get; set; }
+        public ICommand ShowAddSessionWindowCommand { get; set; }
         public Session SelectedSession
         {
             get => _selectedSession;
@@ -113,6 +116,16 @@ namespace Beadle.Core.ViewModels
             set
             {
                 _addPersonViewModel = value;
+                RaisePropertyChanged(() => AddPersonViewModel);
+            }
+        }
+
+        public AddSessionViewModel AddSessionViewModel
+        {
+            get => _addSessionViewModel;
+            set
+            {
+                _addSessionViewModel = value;
                 RaisePropertyChanged(() => AddPersonViewModel);
             }
         }
@@ -206,6 +219,17 @@ namespace Beadle.Core.ViewModels
         public async Task GoBackProcAsync()
         {
             await NavigationService.NavigateAsync(nameof(MasterPage));
+        }
+
+        public async Task ShowAddSessionWindowProcAsync()
+        {
+            if (AddSessionViewModel != null)
+            {
+                AddSessionViewModel.Name = null;
+                AddSessionViewModel.Day = null;
+                AddSessionViewModel.Time = null;
+            }
+            await NavigationService.NavigateAsync(nameof(AddSessionPage), true);
         }
 
 
