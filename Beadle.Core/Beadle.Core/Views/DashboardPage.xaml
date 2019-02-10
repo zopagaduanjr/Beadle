@@ -114,7 +114,7 @@
         <ToolbarItem  Order="Primary" Priority="1" Icon="randomuser.png" Command="{Binding AddRandomPersonCommand}" IsEnabled="{Binding SelectedSessionIsTrue}"  />
         <ToolbarItem  Order="Primary" Priority="1" Icon="search.png"   />
         <ToolbarItem  Order="Primary" Priority="1" Icon="addstudent.png" Command="{Binding ShowAddPersonWindowCommand}" IsEnabled="{Binding SelectedSessionIsTrue}"  />
-        <ToolbarItem  Order="Secondary" Priority="1" Text="Class Info"   Command="{Binding ShowSettingsCommand}" Icon="menu.png" />
+        <ToolbarItem  Order="Secondary" Priority="1" Text="Class Info"   Command="{Binding ShowSessionInfoCommand}" IsEnabled="{Binding SelectedSessionIsTrue}" />
     </ContentPage.ToolbarItems>
 
 </ContentPage>

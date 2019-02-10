@@ -40,7 +40,7 @@ namespace Beadle.Core.ViewModels
             AddAbsenceCommand = new Command(async () => await AddAbsenceProcAsync(), () => SelectedPersonIsTrue);
             ShowAddPersonWindowCommand = new Command(async () => await ShowAddPersonWindowProcAsync(), () => true);
             ShowAddSessionWindowCommand = new Command(async () => await ShowAddSessionWindowProcAsync(), () => true);
-            ShowSettingsCommand = new Command(async () => await ShowSettingsProcAsync(), () => true);
+            ShowSessionInfoCommand = new Command(async () => await ShowSessionInfoProcAsync(), () => true);
             GoBackCommand = new Command(async () => await GoBackProcAsync(), () => true);
 
 
@@ -80,7 +80,7 @@ namespace Beadle.Core.ViewModels
         public ICommand AddAbsenceCommand { get; private set; }
         public ICommand ShowAddPersonWindowCommand { get; set; }
         public ICommand ShowAddSessionWindowCommand { get; set; }
-        public ICommand ShowSettingsCommand { get; set; }
+        public ICommand ShowSessionInfoCommand { get; set; }
         public Session SelectedSession
         {
             get => _selectedSession;
@@ -137,6 +137,7 @@ namespace Beadle.Core.ViewModels
                 RaisePropertyChanged(() => AddPersonViewModel);
             }
         }
+
 
         //methods
         public async Task Init()
@@ -240,9 +241,11 @@ namespace Beadle.Core.ViewModels
             await NavigationService.NavigateAsync(nameof(AddSessionPage), true);
         }
 
-        public async Task ShowSettingsProcAsync()
+        public async Task ShowSessionInfoProcAsync()
         {
-            await Application.Current.MainPage.DisplayActionSheet("Sort Options", "Cancel", null, "By Approval Due Date", "Meeting Date", "Meeting Type");
+            //await Application.Current.MainPage.DisplayActionSheet("Sort Options", "Cancel", null, "By Approval Due Date", "Meeting Date", "Meeting Type");
+            await NavigationService.NavigateAsync(nameof(SessionInfoPage), true);
+
         }
 
         //canclicks

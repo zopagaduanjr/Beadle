@@ -27,6 +27,7 @@ namespace Beadle.Core
             nav.Configure("DashboardPage", typeof(DashboardPage));
             nav.Configure("AddPersonPage", typeof(AddPersonPage));
             nav.Configure("AddSessionPage", typeof(AddSessionPage));
+            nav.Configure("SessionInfoPage", typeof(SessionInfoPage));
             SimpleIoc.Default.Register<INavigationService>(() => nav);
             var mainPage = ((NavigationService)nav).SetRootPage("MasterPage");
             MainPage = mainPage;

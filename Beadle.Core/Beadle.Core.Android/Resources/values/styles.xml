@@ -34,8 +34,7 @@
     <item name="android:colorFocusedHighlight">@color/CustomHighlight</item>
     <item name="android:colorActivatedHighlight">@color/CustomHighlight</item>
     <item name="android:activatedBackgroundIndicator">@color/CustomHighlight</item>
-
-    <!--<item name="android:textColorHint">#C14242</item>-->
+        <!--<item name="android:textColorHint">#C14242</item>-->
   </style>
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">@color/Brand</item>
@@ -44,5 +43,7 @@
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#FF4081</item>
   </style>
+
+
 
 </resources>

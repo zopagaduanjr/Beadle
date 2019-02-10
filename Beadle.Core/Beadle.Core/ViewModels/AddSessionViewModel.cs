@@ -114,9 +114,18 @@ namespace Beadle.Core.ViewModels
             await NavigationService.GoBack();
             var session = new Session();
             Regex rgx = new Regex("[^a-zA-Z]");
-            session.Name = rgx.Replace(Name, "");
-            session.Day = rgx.Replace(Day, "");
-            session.Time = Time;
+            session.Name = Name;
+            //only adding Session Name, tbd sched
+            if (Day == null || Time == null)
+            {
+                session.Day = "tbd";
+                session.Time = "tbd";
+            }
+            else
+            {
+                session.Day = rgx.Replace(Day, "");
+                session.Time = Time;
+            }
             await Repository.Session.SaveItemAsync(session);
             await Task.Run(() => Init());
             RaisePropertyChanged(() => MainViewModel.SelectedSession);

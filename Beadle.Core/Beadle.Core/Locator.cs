@@ -20,6 +20,7 @@ namespace Beadle.Core
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AddPersonViewModel>();
             SimpleIoc.Default.Register<AddSessionViewModel>();
+            SimpleIoc.Default.Register<SessionInfoViewModel>();
 
             // Services
             SimpleIoc.Default.Register<IRepository, LocalRepository>();
@@ -53,6 +54,13 @@ namespace Beadle.Core
             get
             {
                 return ServiceLocator.Current.GetInstance<AddSessionViewModel>();
+            }
+        }
+        public SessionInfoViewModel SessionInfo
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SessionInfoViewModel>();
             }
         }
     }
