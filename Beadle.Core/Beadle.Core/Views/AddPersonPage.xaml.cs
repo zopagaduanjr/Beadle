@@ -15,7 +15,7 @@ namespace Beadle.Core.Views
 		public AddPersonPage ()
 		{
 			InitializeComponent ();
-            BindingContext = App.Locator.AddEntity;
+            BindingContext = App.Locator.AddPerson;
 
         }
     }

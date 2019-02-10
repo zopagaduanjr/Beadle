@@ -26,13 +26,11 @@ namespace Beadle.Core
             nav.Configure("MasterPage", typeof(MasterPage));
             nav.Configure("DashboardPage", typeof(DashboardPage));
             nav.Configure("AddPersonPage", typeof(AddPersonPage));
-            nav.Configure("TestFrontEndHere", typeof(TestFrontEndHere));
             SimpleIoc.Default.Register<INavigationService>(() => nav);
             var mainPage = ((NavigationService)nav).SetRootPage("MasterPage");
             MainPage = mainPage;
 
         }
-
         //methods
         protected override void OnStart()
         {

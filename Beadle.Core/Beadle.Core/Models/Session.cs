@@ -15,6 +15,6 @@ namespace Beadle.Core.Models
         public string Time { get; set; }
 
         [OneToMany]
-        public List<Student> Students { get; set; }
+        public List<Person> Persons { get; set; }
     }
 }

@@ -22,32 +22,37 @@ namespace Beadle.Core.ViewModels
         //ctor
         public MainViewModel(IRepository repository, INavigationService navigationService)
         {
+            //IOC getters
             NavigationService = navigationService;
             Repository = repository;
+            //initializers
             SelectedSession = null;
-            SelectedStudent = null;
+            SelectedPerson = null;
             Task.Run(() => Init());
-            AddRandomStudentCommand = new Command(async () => await AddRandomStudentProcAsync(), () => true);
-            AddRandomSessionCommand = new Command(async () => await AddRandomSessionProcAsync(), () => true);
-            AddLateCommand = new Command(async () => await AddLateProcAsync(), () => SelectedStudentIsTrue);
-            AddAbsenceCommand = new Command(async () => await AddAbsenceProcAsync(), () => SelectedStudentIsTrue);
-            ShowAddStudentWindowCommand = new Command(async () => await ShowAddStudentWindowProcAsync(), () => true);
 
-            //ShowAddPageCommand = new Command(async () => await ShowAddPageProcAsync(), () => canShow);
+
+            //Command Initializers
+            AddRandomPersonCommand = new Command(async () => await AddRandomPersonProcAsync(), () => true);
+            AddRandomSessionCommand = new Command(async () => await AddRandomSessionProcAsync(), () => true);
+            AddLateCommand = new Command(async () => await AddLateProcAsync(), () => SelectedPersonIsTrue);
+            AddAbsenceCommand = new Command(async () => await AddAbsenceProcAsync(), () => SelectedPersonIsTrue);
+            ShowAddPersonWindowCommand = new Command(async () => await ShowAddPersonWindowProcAsync(), () => true);
+            GoBackCommand = new Command(async () => await GoBackProcAsync(), () => true);
         }
 
-        //fields
+        //backing fields
         private static Random rand = new Random(DateTime.Now.Second);
         private readonly INavigationService NavigationService;
         private readonly IRepository Repository;
         private ObservableCollection<Student> _classmates;
         private List<Session> _sessions;
         private Session _selectedSession;
-        private Student _selectedStudent;
-        private bool _selectedStudentIsTrue;
         private bool _selectedSessionIsTrue;
+        private Person _selectedPerson;
+        private bool _selectedPersonIsTrue;
+        private AddPersonViewModel _addPersonViewModel;
 
-
+        //properties
         public ObservableCollection<Student> Classmates
         {
             get => _classmates;
@@ -58,14 +63,13 @@ namespace Beadle.Core.ViewModels
 
             }
         }
-        public ICommand ShowAddPageCommand { get; private set; }
-        public ICommand ShowSelectedSessionCommand { get; private set; }
-        public ICommand AddRandomStudentCommand { get; private set; }
+        public ICommand AddRandomPersonCommand { get; private set; }
         public ICommand DeleteStudentCommand { get; private set; }
         public ICommand AddRandomSessionCommand { get; private set; }
         public ICommand AddLateCommand { get; private set; }
+        public ICommand GoBackCommand { get; private set; }
         public ICommand AddAbsenceCommand { get; private set; }
-        public ICommand ShowAddStudentWindowCommand { get; set; }
+        public ICommand ShowAddPersonWindowCommand { get; set; }
         public Session SelectedSession
         {
             get => _selectedSession;
@@ -78,20 +82,6 @@ namespace Beadle.Core.ViewModels
                 RaisePropertyChanged(() => SelectedSessionIsTrue);
             }
         }
-        public Student SelectedStudent
-        {
-            get => _selectedStudent;
-            set
-            {
-                _selectedStudent = value;
-                if (value != null)
-                    SelectedStudentIsTrue = true;
-
-                RaisePropertyChanged(() => SelectedStudent);
-                RaisePropertyChanged(() => SelectedStudentIsTrue);
-
-            }
-        }
         public List<Session> Sessions
         {
             get => _sessions;
@@ -99,6 +89,31 @@ namespace Beadle.Core.ViewModels
             {
                 _sessions = value;
                 RaisePropertyChanged(() => Sessions);
+            }
+        }
+        public Person SelectedPerson
+        {
+            get => _selectedPerson;
+            set
+            {
+                _selectedPerson = value;
+                if (value != null)
+                    SelectedPersonIsTrue = true;
+
+                RaisePropertyChanged(() => SelectedPerson);
+                RaisePropertyChanged(() => SelectedPersonIsTrue);
+
+
+            }
+        }
+
+        public AddPersonViewModel AddPersonViewModel
+        {
+            get => _addPersonViewModel;
+            set
+            {
+                _addPersonViewModel = value;
+                RaisePropertyChanged(() => AddPersonViewModel);
             }
         }
 
@@ -109,7 +124,7 @@ namespace Beadle.Core.ViewModels
             Sessions = await Repository.Session.GetItemsAsync();
             RaisePropertyChanged(() => Sessions);
             var holdsession = SelectedSession;
-            var holdstudent = SelectedStudent;
+            var holdperson = SelectedPerson;
             //highlighters
             if (holdsession != null)
             {
@@ -120,42 +135,17 @@ namespace Beadle.Core.ViewModels
                 }
             }
             //highlighters
-            if (holdstudent != null)
+            if (holdperson != null)
             {
-                var a = SelectedSession.Students;
+                var a = SelectedSession.Persons;
                 foreach (var item in a)
                 {
-                    if (item.Id == holdstudent.Id)
-                        SelectedStudent = item;
+                    if (item.Id == holdperson.Id)
+                        SelectedPerson = item;
                 }
             }
             RaisePropertyChanged(() => SelectedSession);
-            RaisePropertyChanged(() => SelectedStudent);
-        }
-        //public async Task ShowAddPageProcAsync()
-        //{
-        //    _navigationService.Configure("TestFrontEndHere", typeof(TestFrontEndHere));
-        //    await _navigationService.NavigateAsync(nameof(TestFrontEndHere));
-        //    //var stoods = new Student();
-        //    //stoods.FirstName = "zal";
-        //    //await App.Database.SaveItemAsync(stoods);
-        //    ////await App.Database.DeleteItemAsync(SelectedStudent);
-        //    ////RaisePropertyChanged(() => Classmates);
-        //    //var list = await App.Database.GetItemsAsync();
-        //    //Classmates = new ObservableCollection<Student>(list);
-        //    RaisePropertyChanged(() => Classmates);
-
-
-        //}
-        public async Task AddRandomStudentProcAsync()
-        {
-            var stoods = new Student();
-            stoods.FirstName = FirstNameGenerator();
-            stoods.LastName = LastNameGenerator();
-            SelectedSession.Students.Add(stoods);
-            await Repository.Student.SaveItemAsync(stoods);
-            await Repository.Session.UpdateWithChildrenAsync(SelectedSession);
-            Task.Run(() => Init());
+            RaisePropertyChanged(() => SelectedPerson);
         }
         //public async Task DeleteStudentProcAsync()
         //{
@@ -173,51 +163,54 @@ namespace Beadle.Core.ViewModels
 
         public async Task AddRandomSessionProcAsync()
         {
-            var sesh = new Session();
-            sesh.Name = SessionGenerator();
-            sesh.Day = DayGenerator();
-            sesh.Time = TimeGenerator();
-            sesh.Students = new List<Student>();
-            await Repository.Session.SaveItemAsync(sesh);
-            Task.Run(() => Init());
+            var session = new Session();
+            session.Name = SessionGenerator();
+            session.Day = DayGenerator();
+            session.Time = TimeGenerator();
+            session.Persons = new List<Person>();
+            await Repository.Session.SaveItemAsync(session);
+            await Task.Run(() => Init());
             RaisePropertyChanged(() => SelectedSession);
-
+        }
+        public async Task AddRandomPersonProcAsync()
+        {
+            var person = new Person();
+            person.FirstName = FirstNameGenerator();
+            person.LastName = LastNameGenerator();
+            SelectedSession.Persons.Add(person);
+            await Repository.Person.SaveItemAsync(person);
+            await Repository.Session.UpdateWithChildrenAsync(SelectedSession);
+            await Task.Run(() => Init());
         }
         public async Task AddLateProcAsync()
         {
-            var holdselestude = SelectedStudent;
-            SelectedStudent.Late++;
-            await Repository.Student.UpdateItemAsync(SelectedStudent);    
-            Task.Run(() => Init());
+            SelectedPerson.Late++;
+            await Repository.Person.UpdateItemAsync(SelectedPerson);
+            await Task.Run(() => Init());
         }
         public async Task AddAbsenceProcAsync()
         {
-            SelectedStudent.Absence++;
-            await Repository.Student.UpdateItemAsync(SelectedStudent);
-            Task.Run(() => Init());
+            SelectedPerson.Absence++;
+            await Repository.Person.UpdateItemAsync(SelectedPerson);
+            await Task.Run(() => Init());
         }
-        public async Task ShowSelectedSessionProcAsync()
+        public async Task ShowAddPersonWindowProcAsync()
         {
-            await NavigationService.NavigateAsync(nameof(TestFrontEndHere));
-
+            if (AddPersonViewModel != null)
+            {
+                AddPersonViewModel.LastName = null;
+                AddPersonViewModel.FirstName = null;
+            }
+            await NavigationService.NavigateAsync(nameof(AddPersonPage),true);
         }
-        public async Task ShowAddStudentWindowProcAsync()
+        public async Task GoBackProcAsync()
         {
-            await NavigationService.NavigateAsync(nameof(AddPersonPage));
-
+            await NavigationService.NavigateAsync(nameof(MasterPage));
         }
+
 
 
         //canclicks
-        public bool SelectedStudentIsTrue
-        {
-            get => _selectedStudentIsTrue;
-            set
-            {
-                _selectedStudentIsTrue = value;
-                RaisePropertyChanged(() => SelectedStudentIsTrue);
-            }
-        }
         public bool SelectedSessionIsTrue
         {
             get => _selectedSessionIsTrue;
@@ -227,9 +220,20 @@ namespace Beadle.Core.ViewModels
                 RaisePropertyChanged(() => SelectedSessionIsTrue);
             }
         }
+        public bool SelectedPersonIsTrue
+        {
+            get => _selectedPersonIsTrue;
+            set
+            {
+                _selectedPersonIsTrue = value;
+                RaisePropertyChanged(() => SelectedPersonIsTrue);
+
+            }
+        }
+
+
 
         //dirtyworks
-
         public string FirstNameGenerator()
         {
             string[] maleNames = { "aaron", "abdul", "abe", "abel", "abraham", "adam", "adan", "adolfo", "adolph", "adrian" };

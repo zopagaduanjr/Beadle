@@ -3,28 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Beadle.Core.Views.AddPersonPage">
     <ContentPage.Content>
-        <StackLayout>
-            <TableView>
+        <StackLayout VerticalOptions="StartAndExpand">
+            <TableView HeightRequest="200" >
                 <TableRoot>
-                    <TableSection Title="Add Person ">
-                        <EntryCell Label="First Name" Placeholder="Zaldy" Text="{Binding Path=FirstName}"/>
-                        <EntryCell Label="Last Name" Placeholder="Pagaduan" Keyboard="Chat" />
-                        <EntryCell Label="Email" Placeholder="sales@xamarin.com" Keyboard="Email" />
-                        <EntryCell Label="Numberic" Placeholder="55" Keyboard="Numeric" />
-                        <EntryCell Label="Telephone" Placeholder="+1 012 345 6789" Keyboard="Telephone" />
-                        <EntryCell Label="Text" Placeholder="text" Keyboard="Text" />
-                        <EntryCell Label="Url" Placeholder="http://developer.xamarin.com" Keyboard="Url" />
-                    </TableSection>
-                    <TableSection Title="States &amp; Colors">
-                        <EntryCell Label="Disabled" Placeholder="text" IsEnabled="false" />
-                        <EntryCell Label="Colorful + Disabled" Placeholder="text" IsEnabled="false" LabelColor="Red" />
+                    <TableSection Title="Add Person " >
+                        <EntryCell Label="First Name" Placeholder="Zaldy" Text="{Binding Path=FirstName, Mode=TwoWay}" HorizontalTextAlignment="Start"  />
+                        <EntryCell Label="Last Name" Placeholder="Pagaduan" Text="{Binding Path=LastName, Mode=TwoWay}" HorizontalTextAlignment="Start"/>
                     </TableSection>
                 </TableRoot>
             </TableView>
-            <Frame CornerRadius="10" BackgroundColor="#2196F3" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="0,10,0,10" Grid.Column="0"
+            <Frame CornerRadius="10" BackgroundColor="#2196F3" Margin="0,10,0,10" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" 
                    HeightRequest="50" WidthRequest="200"  HasShadow="True" Padding="0">
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="&#xf234;"  
+                    <Label Text="&#xf2bb;"  
                            FontSize="Large"
                            TextColor="White"
                            VerticalOptions="Center" 
@@ -37,16 +28,14 @@
                                 iOS="Font Awesome 5 Free" />
                         </Label.FontFamily>
                     </Label>
-                    <Label Text="Absent" FontSize="Large"  TextColor="White"  HorizontalOptions="StartAndExpand"
+                    <Label Text="Add Person" FontSize="Large"  TextColor="White"  HorizontalOptions="StartAndExpand"
                            VerticalOptions="Center" />
 
                 </StackLayout>
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding AddEntityCommand, Mode=TwoWay}"/>
+                    <TapGestureRecognizer Command="{Binding AddPersonCommand, Mode=TwoWay}"/>
                 </Frame.GestureRecognizers>
             </Frame>
-
         </StackLayout>
-
     </ContentPage.Content>
 </ContentPage>

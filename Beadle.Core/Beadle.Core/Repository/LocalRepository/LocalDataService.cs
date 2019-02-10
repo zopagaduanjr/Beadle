@@ -23,7 +23,7 @@ namespace Beadle.Core.Repository.LocalRepository
         {
             database = new SQLiteAsyncConnection(dbPath);
             database.CreateTableAsync<Session>().Wait();
-            database.CreateTableAsync<Student>().Wait();
+            database.CreateTableAsync<Person>().Wait();
         }
         //methods.
 

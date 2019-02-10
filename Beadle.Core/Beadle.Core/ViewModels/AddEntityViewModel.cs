@@ -48,12 +48,12 @@ namespace Beadle.Core.ViewModels
         //methods
         public async Task AddEntityProcAsync()
         {
-            var stoods = new Student();
-            stoods.FirstName = FirstName;
-            MainViewModel.SelectedSession.Students.Add(stoods);
-            await Repository.Student.SaveItemAsync(stoods);
+            var person = new Person();
+            person.FirstName = FirstName;
+            MainViewModel.SelectedSession.Persons.Add(person);
+            await Repository.Person.SaveItemAsync(person);
             await Repository.Session.UpdateWithChildrenAsync(MainViewModel.SelectedSession);
-            Task.Run(() => Init());
+            await Task.Run(() => Init());
         }
         public async Task Init()
         {
@@ -61,7 +61,7 @@ namespace Beadle.Core.ViewModels
             MainViewModel.Sessions = await Repository.Session.GetItemsAsync();
             RaisePropertyChanged(() => MainViewModel.Sessions);
             var holdsession = MainViewModel.SelectedSession;
-            var holdstudent = MainViewModel.SelectedStudent;
+            var holdperson = MainViewModel.SelectedPerson;
             //highlighters
             if (holdsession != null)
             {
@@ -72,17 +72,17 @@ namespace Beadle.Core.ViewModels
                 }
             }
             //highlighters
-            if (holdstudent != null)
+            if (holdperson != null)
             {
-                var a = MainViewModel.SelectedSession.Students;
+                var a = MainViewModel.SelectedSession.Persons;
                 foreach (var item in a)
                 {
-                    if (item.Id == holdstudent.Id)
-                        MainViewModel.SelectedStudent = item;
+                    if (item.Id == holdperson.Id)
+                        MainViewModel.SelectedPerson = item;
                 }
             }
             RaisePropertyChanged(() => MainViewModel.SelectedSession);
-            RaisePropertyChanged(() => MainViewModel.SelectedStudent);
+            RaisePropertyChanged(() => MainViewModel.SelectedPerson);
         }
 
 

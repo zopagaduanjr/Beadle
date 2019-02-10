@@ -18,8 +18,7 @@ namespace Beadle.Core
 
             // ViewModels           
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<AddEntityViewModel>();
-
+            SimpleIoc.Default.Register<AddPersonViewModel>();
             // Services
             SimpleIoc.Default.Register<IRepository, LocalRepository>();
             //SimpleIoc.Default.Register<INavigationService, NavigationService>();
@@ -39,11 +38,11 @@ namespace Beadle.Core
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        public AddEntityViewModel AddEntity
+        public AddPersonViewModel AddPerson
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<AddEntityViewModel>();
+                return ServiceLocator.Current.GetInstance<AddPersonViewModel>();
             }
         }
     }

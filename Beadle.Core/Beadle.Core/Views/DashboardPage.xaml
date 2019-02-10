@@ -18,14 +18,12 @@
                            FontSize="15"  HorizontalOptions="Center"/>
                 <Label Text = "{Binding Day}"   TextColor="#485460"  HorizontalTextAlignment="Center"   
                            FontSize="10"  HorizontalOptions="Center"/>
-
                 <Label Text = "{Binding Id}"  HorizontalTextAlignment="Start" TextColor="Black" Margin="5,0,0,0" 
                        FontSize="10" HorizontalOptions="CenterAndExpand"/>
-
             </StackLayout>
             <BoxView HeightRequest="1" Color="#b2bec3" Grid.Row="1" IsVisible="{Binding SelectedSessionIsTrue}"/>
-            <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None"  SelectedItem="{Binding SelectedStudent, Mode=TwoWay}" Grid.Row="2"
-                          ItemsSource="{Binding SelectedSession.Students, Mode=TwoWay}" RowHeight="60" >
+            <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None"  SelectedItem="{Binding SelectedPerson, Mode=TwoWay}" Grid.Row="2"
+                          ItemsSource="{Binding SelectedSession.Persons, Mode=TwoWay}" RowHeight="60" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -64,30 +62,6 @@
                 <Frame CornerRadius="10" BackgroundColor="#4bcffa" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  Grid.Column="0"
                        HeightRequest="50" WidthRequest="200"  HasShadow="True" Padding="0">
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="&#xf21b;"  
-                               FontSize="Large"
-                               TextColor="White"
-                               VerticalOptions="Center" 
-                               Margin="5,0,0,0"
-                               HorizontalOptions="EndAndExpand" >
-                            <Label.FontFamily>
-                                <OnPlatform 
-                                    x:TypeArguments="x:String"
-                                    Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" 
-                                    iOS="Font Awesome 5 Free" />
-                            </Label.FontFamily>
-                        </Label>
-                        <Label Text="Absent" FontSize="Large"  TextColor="White"  HorizontalOptions="StartAndExpand"
-                               VerticalOptions="Center" />
-
-                    </StackLayout>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding AddAbsenceCommand, Mode=TwoWay}"/>
-                    </Frame.GestureRecognizers>
-                </Frame>
-                <Frame CornerRadius="10" BackgroundColor="#4bcffa" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  Grid.Column="1"
-                       HeightRequest="50" WidthRequest="200"  HasShadow="True" Padding="0">
-                    <StackLayout Orientation="Horizontal">
                         <Label Text="&#xf4fd;"  
                                FontSize="Large"
                                TextColor="White"
@@ -109,15 +83,37 @@
                         <TapGestureRecognizer Command="{Binding AddLateCommand, Mode=TwoWay}"/>
                     </Frame.GestureRecognizers>
                 </Frame>
+                <Frame CornerRadius="10" BackgroundColor="#4bcffa" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  Grid.Column="1"
+                       HeightRequest="50" WidthRequest="200"  HasShadow="True" Padding="0">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="&#xf21b;"  
+                               FontSize="Large"
+                               TextColor="White"
+                               VerticalOptions="Center" 
+                               Margin="5,0,0,0"
+                               HorizontalOptions="EndAndExpand" >
+                            <Label.FontFamily>
+                                <OnPlatform 
+                                    x:TypeArguments="x:String"
+                                    Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" 
+                                    iOS="Font Awesome 5 Free" />
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="Absent" FontSize="Large"  TextColor="White"  HorizontalOptions="StartAndExpand"
+                               VerticalOptions="Center" />
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddAbsenceCommand, Mode=TwoWay}"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
 
             </Grid>
-
         </Grid>
     </ContentPage.Content>
     <ContentPage.ToolbarItems>
-        <ToolbarItem  Order="Primary" Priority="1" Icon="randomuser.png" Command="{Binding AddRandomStudentCommand}" IsEnabled="{Binding SelectedSessionIsTrue}"  />
+        <ToolbarItem  Order="Primary" Priority="1" Icon="randomuser.png" Command="{Binding AddRandomPersonCommand}" IsEnabled="{Binding SelectedSessionIsTrue}"  />
         <ToolbarItem  Order="Primary" Priority="1" Icon="search.png"   />
-        <ToolbarItem  Order="Primary" Priority="1" Icon="addstudent.png" Command="{Binding ShowAddStudentWindowCommand}" IsEnabled="{Binding SelectedSessionIsTrue}"  />
+        <ToolbarItem  Order="Primary" Priority="1" Icon="addstudent.png" Command="{Binding ShowAddPersonWindowCommand}" IsEnabled="{Binding SelectedSessionIsTrue}"  />
         <ToolbarItem  Order="Primary" Priority="1" Icon="menu.png"   />
     </ContentPage.ToolbarItems>
 
