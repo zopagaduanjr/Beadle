@@ -121,7 +121,7 @@
         </Grid>
     </ContentPage.Content>
     <ContentPage.ToolbarItems>
-        <ToolbarItem  Order="Primary" Priority="1" Icon="delete.png" Command="{Binding DeleteSessionCommand, Mode=TwoWay}"/>
+        <ToolbarItem  Order="Primary" Priority="1" Icon="delete.png" Command="{Binding ShowDeletePopUpCommand, Mode=TwoWay}"/>
 
     </ContentPage.ToolbarItems>
 </ContentPage>

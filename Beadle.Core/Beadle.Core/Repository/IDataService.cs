@@ -16,7 +16,6 @@ namespace Beadle.Core.Repository
         //Read
         Task<List<T>> GetItemsAsync();
 
-
         //Delete
         Task<T> DeleteItemAsync(T item);
 
@@ -24,6 +23,8 @@ namespace Beadle.Core.Repository
         Task<T> UpdateWithChildrenAsync(T item);
 
         Task<T> UpdateItemAsync(T item);
+
+        //Get
 
         //Get Specific Contact data  
         //T GetTData(int contactID);

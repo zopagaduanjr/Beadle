@@ -26,7 +26,7 @@ namespace Beadle.Core.ViewModels
             SelectedPerson = null;
             IsSelectedPersonTrue = false;
             //commands
-            DeleteSessionCommand = new Command(async () => await DeleteSessionProcAsync(), () => true);
+            ShowDeletePopUpCommand = new Command(async () => await ShowDeletePopUpAsync(), () => true);
 
 
         }
@@ -39,7 +39,7 @@ namespace Beadle.Core.ViewModels
         private bool _isSelectedPersonTrue;
 
         //properties
-        public ICommand DeleteSessionCommand { get; private set; }
+        public ICommand ShowDeletePopUpCommand { get; private set; }
         public Person SelectedPerson
         {
             get => _selectedPerson;
@@ -74,27 +74,32 @@ namespace Beadle.Core.ViewModels
         }
 
         //methods
-        public async Task DeleteSessionProcAsync()
+
+        public async Task ShowDeletePopUpAsync()
         {
-            var persons = MainViewModel.SelectedSession.Persons;
-            var personinTable = await Repository.Person.GetItemsAsync();
-            foreach (var person in persons)
+            var displaytitle = "Delete " + MainViewModel.SelectedSession.Name +"?";
+            var answer = await Application.Current.MainPage.DisplayAlert(displaytitle, "Would you like to delete this session?","Yes","No");
+            if (answer)
             {
-                foreach (var item in personinTable)
+                var persons = MainViewModel.SelectedSession.Persons;
+                var personinTable = await Repository.Person.GetItemsAsync();
+                foreach (var person in persons)
                 {
-                    if (person.Id == item.Id)
+                    foreach (var item in personinTable)
                     {
-                        await Repository.Person.DeleteItemAsync(item);
+                        if (person.Id == item.Id)
+                        {
+                            await Repository.Person.DeleteItemAsync(item);
+                        }
                     }
                 }
+                await Repository.Session.DeleteItemAsync(MainViewModel.SelectedSession);
+                MainViewModel.SelectedSession = null;
+
+                await Task.Run(() => MainViewModel.DeleteRefresher());
+
+                await NavigationService.GoBack();
             }
-            await Repository.Session.DeleteItemAsync(MainViewModel.SelectedSession);
-            MainViewModel.SelectedSession = null;
-
-            await Task.Run(() => MainViewModel.DeleteRefresher());
-
-            await NavigationService.GoBack();
-
         }
 
         //canclick

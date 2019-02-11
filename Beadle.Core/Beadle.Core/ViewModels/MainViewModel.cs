@@ -274,6 +274,7 @@ namespace Beadle.Core.ViewModels
                 AddPersonViewModel.FirstName = null;
             }
             await NavigationService.NavigateAsync(nameof(AddPersonPage),true);
+
         }
         public async Task GoBackProcAsync()
         {
@@ -290,7 +291,6 @@ namespace Beadle.Core.ViewModels
             }
             await NavigationService.NavigateAsync(nameof(AddSessionPage), true);
         }
-
         public async Task ShowSessionInfoProcAsync()
         {
             if (SessionInfoViewModel != null)
@@ -301,7 +301,6 @@ namespace Beadle.Core.ViewModels
             await NavigationService.NavigateAsync(nameof(SessionInfoPage), true);
 
         }
-
         public async Task ShowDbPopulationProcAsync()
         {
             var persontable = await Repository.Person.GetItemsAsync();
@@ -361,16 +360,139 @@ namespace Beadle.Core.ViewModels
         //dirtyworks
         public string FirstNameGenerator()
         {
-            string[] maleNames = { "aaron", "abdul", "abe", "abel", "abraham", "adam", "adan", "adolfo", "adolph", "adrian" };
-            var random = rand.Next(0, 10);
-            return maleNames[random];
+            string[] FirstNames = {
+                "Adam",
+                "Chase",
+                "Jace",
+                "Ian",
+                "Cooper",
+                "Easton",
+                "Kevin",
+                "Jose",
+                "Tyler",
+                "Brandon",
+                "Asher",
+                "Jaxson",
+                "Mateo",
+                "Jason",
+                "Ayden",
+                "Zachary",
+                "Carson",
+                "Xavier",
+                "Leo",
+                "Ezra",
+                "Bentley",
+                "Sawyer",
+                "Kayden",
+                "Blake",
+                "Nathaniel",
+                "Ryder",
+                "Theodore",
+                "Elias",
+                "Tristan",
+                "Roman",
+                "Leonardo",
+                "Emma",
+                "Olivia",
+                "Sophia",
+                "Ava",
+                "Isabella",
+                "Mia",
+                "Abigail",
+                "Emily",
+                "Charlotte",
+                "Harper",
+                "Madison",
+                "Amelia",
+                "Elizabeth",
+                "Sofia",
+                "Evelyn",
+                "Avery",
+                "Chloe",
+                "Ella",
+                "Grace",
+                "Victoria",
+                "Aubrey",
+                "Scarlett",
+                "Zoey",
+                "Addison",
+                "Lily",
+                "Lillian",
+                "Natalie",
+                "Hannah",
+                "Aria",
+                "Layla",
+                "Brooklyn",
+            };
+            var random = rand.Next(0, 60);
+            return FirstNames[random];
         }
         public string LastNameGenerator()
         {
-            string[] maleNames = { "Dimitri", "Cousins", "Humera", "Workman","Pooja", "Wainwright",
-                "Will", "Regan"};
-            var random = rand.Next(0, 8);
-            return maleNames[random];
+            string[] lastNames = {
+                "Smith",
+                "Johnson",
+                "Williams",
+                "Brown",
+                "Jones",
+                "Miller",
+                "Davis",
+                "Garcia",
+                "Rodriguez",
+                "Wilson",
+                "Martinez",
+                "Anderson",
+                "Taylor",
+                "Thomas",
+                "Hernandez",
+                "Moore",
+                "Martin",
+                "Jackson",
+                "Thompson",
+                "White",
+                "Lopez",
+                "Lee",
+                "Gonzalez",
+                "Harris",
+                "Clark",
+                "Lewis",
+                "Robinson",
+                "Walker",
+                "Perez",
+                "Hall",
+                "Young",
+                "Allen",
+                "Sanchez",
+                "Wright",
+                "King",
+                "Scott",
+                "Green",
+                "Baker",
+                "Adams",
+                "Nelson",
+                "Hill",
+                "Ramirez",
+                "Campbell",
+                "Mitchell",
+                "Roberts",
+                "Carter",
+                "Phillips",
+                "Evans",
+                "Turner",
+                "Torres",
+                "Parker",
+                "Collins",
+                "Edwards",
+                "Stewart",
+                "Flores",
+                "Morris",
+                "Nguyen",
+                "Murphy",
+                "Rivera",
+                "Cook",
+                "Rogers"};
+            var random = rand.Next(0, 60);
+            return lastNames[random];
         }
         public string SessionGenerator()
         {

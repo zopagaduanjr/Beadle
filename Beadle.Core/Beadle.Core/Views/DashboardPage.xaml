@@ -6,8 +6,8 @@
         <Grid>
             <Grid  IsVisible="{Binding ShowNoobPage, Mode=TwoWay}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -16,32 +16,6 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0"
-                       Text="&#xf101;" 
-                       FontSize="140"
-                       TextColor="#19b5fe"
-                       VerticalOptions="CenterAndExpand" 
-                       HorizontalOptions="StartAndExpand" >
-                    <Label.FontFamily>
-                        <OnPlatform 
-                            x:TypeArguments="x:String"
-                            Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" 
-                            iOS="Font Awesome 5 Free" />
-                    </Label.FontFamily>
-                </Label>
-                <Label Grid.Row="1"
-                       Text="&#xf101;" 
-                       FontSize="140"
-                       TextColor="#22a7f0"
-                       VerticalOptions="CenterAndExpand" 
-                       HorizontalOptions="StartAndExpand" >
-                    <Label.FontFamily>
-                        <OnPlatform 
-                            x:TypeArguments="x:String"
-                            Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" 
-                            iOS="Font Awesome 5 Free" />
-                    </Label.FontFamily>
-                </Label>
                 <Label Grid.Row="2"
                        Text="&#xf101;" 
                        FontSize="140"
@@ -55,36 +29,7 @@
                             iOS="Font Awesome 5 Free" />
                     </Label.FontFamily>
                 </Label>
-                <Label Grid.Row="3"
-                       Text="&#xf101;" 
-                       FontSize="140"
-                       TextColor="#2c82c9"
-                       VerticalOptions="CenterAndExpand" 
-                       HorizontalOptions="StartAndExpand" >
-                    <Label.FontFamily>
-                        <OnPlatform 
-                            x:TypeArguments="x:String"
-                            Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" 
-                            iOS="Font Awesome 5 Free" />
-                    </Label.FontFamily>
-                </Label>
-                <Label Grid.Row="4"
-                       Text="&#xf101;" 
-                       FontSize="140"
-                       TextColor="#2574a9"
-                       VerticalOptions="CenterAndExpand" 
-                       HorizontalOptions="StartAndExpand" >
-                    <Label.FontFamily>
-                        <OnPlatform 
-                            x:TypeArguments="x:String"
-                            Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" 
-                            iOS="Font Awesome 5 Free" />
-                    </Label.FontFamily>
-                </Label>
-                <Label Text="Swipe" Grid.Row="1" Grid.Column="1" FontSize="45" TextColor="#2e3131" VerticalOptions="End"/>
-                <Label Text="To" Grid.Row="2" Grid.Column="1" FontSize="45" TextColor="#67809f" VerticalOptions="Center"/>
-                <Label Text="Start" Grid.Row="3" Grid.Column="1" FontSize="45" TextColor="#6c7a89" VerticalOptions="Start"/>
-
+                <Label Text="Swipe To Start" Grid.Row="2" Grid.Column="1" FontSize="25" TextColor="#2e3131" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
             </Grid>
             <Grid IsVisible="{Binding SelectedSessionIsTrue, Mode=TwoWay}">
                 <Grid.RowDefinitions>
