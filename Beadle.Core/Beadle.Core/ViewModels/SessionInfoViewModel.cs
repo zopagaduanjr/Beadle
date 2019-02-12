@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -23,8 +24,8 @@ namespace Beadle.Core.ViewModels
             MainViewModel = mainViewModel;
             Repository = repository;
             NavigationService = navigationService;
-            SelectedPerson = null;
-            IsSelectedPersonTrue = false;
+            SelectedPerson = mainViewModel.SelectedSession.Persons.FirstOrDefault();
+            //SelectedPerson = null;
             //commands
             ShowDeletePopUpCommand = new Command(async () => await ShowDeletePopUpAsync(), () => true);
 
@@ -48,6 +49,10 @@ namespace Beadle.Core.ViewModels
                 _selectedPerson = value;
                 if (value != null)
                     IsSelectedPersonTrue = true;
+                else
+                {
+                    IsSelectedPersonTrue = false;
+                }
                 RaisePropertyChanged(nameof(SelectedPerson));
 
             }
@@ -82,7 +87,7 @@ namespace Beadle.Core.ViewModels
             if (answer)
             {
                 var persons = MainViewModel.SelectedSession.Persons;
-                var personinTable = await Repository.Person.GetItemsAsync();
+                var personinTable = await Repository.Person.GetAllItemsAsync();
                 foreach (var person in persons)
                 {
                     foreach (var item in personinTable)

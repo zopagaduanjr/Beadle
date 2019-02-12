@@ -28,11 +28,10 @@ namespace Beadle.Core.ViewModels
             Repository = repository;
 
             //initializers
+            Task.Run(() => Init());
             SelectedSession = null;
             SelectedPerson = null;
-            Task.Run(() => Init());
             ShowNoobPage = true;
-
 
             //Command Initializers
             AddRandomPersonCommand = new Command(async () => await AddRandomPersonProcAsync(), () => true);
@@ -134,7 +133,6 @@ namespace Beadle.Core.ViewModels
 
             }
         }
-
         public int Population
         {
             get => _population;
@@ -145,7 +143,6 @@ namespace Beadle.Core.ViewModels
 
             }
         }
-
         public AddPersonViewModel AddPersonViewModel
         {
             get => _addPersonViewModel;
@@ -155,7 +152,6 @@ namespace Beadle.Core.ViewModels
                 RaisePropertyChanged(() => AddPersonViewModel);
             }
         }
-
         public AddSessionViewModel AddSessionViewModel
         {
             get => _addSessionViewModel;
@@ -165,7 +161,6 @@ namespace Beadle.Core.ViewModels
                 RaisePropertyChanged(() => AddSessionViewModel);
             }
         }
-
         public SessionInfoViewModel SessionInfoViewModel
         {
             get => _sessionInfoViewModel;
@@ -181,7 +176,7 @@ namespace Beadle.Core.ViewModels
         public async Task Init()
         {
             //updaters
-            Sessions = await Repository.Session.GetItemsAsync();
+            Sessions = await Repository.Session.GetAllItemsAsync();
             RaisePropertyChanged(() => Sessions);
             var holdsession = SelectedSession;
             var holdperson = SelectedPerson;
@@ -211,7 +206,7 @@ namespace Beadle.Core.ViewModels
 
         public async Task DeleteRefresher()
         {
-            Sessions = await Repository.Session.GetItemsAsync();
+            Sessions = await Repository.Session.GetAllItemsAsync();
             RaisePropertyChanged(() => Sessions);
             SelectedSession = null;
             SelectedPerson = null;
@@ -295,16 +290,17 @@ namespace Beadle.Core.ViewModels
         {
             if (SessionInfoViewModel != null)
             {
-                SessionInfoViewModel.IsSelectedPersonTrue = false;
-                SessionInfoViewModel.SelectedPerson = null;
+
+                //SessionInfoViewModel.IsSelectedPersonTrue = false;
+                SessionInfoViewModel.SelectedPerson = SelectedSession.Persons.FirstOrDefault();
             }
             await NavigationService.NavigateAsync(nameof(SessionInfoPage), true);
 
         }
         public async Task ShowDbPopulationProcAsync()
         {
-            var persontable = await Repository.Person.GetItemsAsync();
-            var sessiontable = await Repository.Session.GetItemsAsync();
+            var persontable = await Repository.Person.GetAllItemsAsync();
+            var sessiontable = await Repository.Session.GetAllItemsAsync();
             var personpopulation = "Person Table Population: " + persontable.Count.ToString();
             var sessionpopulation = "Session Table Population: " + sessiontable.Count.ToString();
             var lastperson = 0;

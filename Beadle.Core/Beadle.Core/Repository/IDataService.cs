@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,7 +15,7 @@ namespace Beadle.Core.Repository
         Task<T> SaveItemAsync(T item);
 
         //Read
-        Task<List<T>> GetItemsAsync();
+        Task<List<T>> GetAllItemsAsync();
 
         //Delete
         Task<T> DeleteItemAsync(T item);
@@ -24,6 +25,7 @@ namespace Beadle.Core.Repository
 
         Task<T> UpdateItemAsync(T item);
 
+        Task<T> GetItemAsync(Expression<Func<T, bool>> item);
         //Get
 
         //Get Specific Contact data  

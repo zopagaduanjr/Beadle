@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Beadle.Core.Models;
@@ -36,7 +37,7 @@ namespace Beadle.Core.Repository.LocalRepository
         }
         //READ crud implementation
         //read all
-        public async Task<List<T>> GetItemsAsync()
+        public async Task<List<T>> GetAllItemsAsync()
         {
             return  await database.GetAllWithChildrenAsync<T>();
             //return new ObservableCollection<T>(b);
@@ -77,7 +78,10 @@ namespace Beadle.Core.Repository.LocalRepository
         }
 
         //GetItem via Id
-
+        public async Task<T> GetItemAsync(Expression<Func<T, bool>> item)
+        {
+            return await database.GetAsync<T>(item);
+        }
 
     }
 }

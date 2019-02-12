@@ -69,7 +69,7 @@ namespace Beadle.Core.ViewModels
         public async Task Init()
         {
             //updaters
-            MainViewModel.Sessions = await Repository.Session.GetItemsAsync();
+            MainViewModel.Sessions = await Repository.Session.GetAllItemsAsync();
             RaisePropertyChanged(() => MainViewModel.Sessions);
             var holdsession = MainViewModel.SelectedSession;
             var holdperson = MainViewModel.SelectedPerson;
