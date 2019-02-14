@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using Beadle.Core.Models;
 using Beadle.Core.Services;
 using SQLite;
 using SQLiteNetExtensionsAsync.Extensions;
-
+        
 namespace Beadle.Core.Repository.LocalRepository
 {
     public class LocalDataService<T> : IDataService<T> where T : class, new()
@@ -78,9 +79,14 @@ namespace Beadle.Core.Repository.LocalRepository
         }
 
         //GetItem via Id
-        public async Task<T> GetItemAsync(Expression<Func<T, bool>> item)
+        public async Task<T> GetItemAsync(Expression<Func<T,bool>> item)
         {
-            return await database.GetAsync<T>(item);
+
+            //return await database.Table<T>().Where(item);
+
+            return await database.GetWithChildrenAsync<T>(item);
+            //return await database.GetAllWithChildrenAsync<T>();
+
         }
 
     }

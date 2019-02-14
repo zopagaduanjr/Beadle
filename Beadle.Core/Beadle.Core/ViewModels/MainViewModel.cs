@@ -43,6 +43,7 @@ namespace Beadle.Core.ViewModels
             ShowSessionInfoCommand = new Command(async () => await ShowSessionInfoProcAsync(), () => true);
             ShowDbPopulationCommand = new Command(async () => await ShowDbPopulationProcAsync(), () => true);
             GoBackCommand = new Command(async () => await GoBackProcAsync(), () => true);
+            NextSelectedSessionCommand = new Command(async () => await NextSelectedSessionProcAsync(), () => true);
 
 
             //codebehind transfer here
@@ -86,6 +87,7 @@ namespace Beadle.Core.ViewModels
         public ICommand ShowAddSessionWindowCommand { get; set; }
         public ICommand ShowSessionInfoCommand { get; set; }
         public ICommand ShowDbPopulationCommand { get; set; }
+        public ICommand NextSelectedSessionCommand { get; set; }
         public Session SelectedSession
         {
             get => _selectedSession;
@@ -200,6 +202,8 @@ namespace Beadle.Core.ViewModels
                         SelectedPerson = item;
                 }
             }
+
+            Population = Sessions.Count;
             RaisePropertyChanged(() => SelectedSession);
             RaisePropertyChanged(() => SelectedPerson);
         }
@@ -323,6 +327,38 @@ namespace Beadle.Core.ViewModels
 
         }
 
+        public async Task NextSelectedSessionProcAsync()
+        {
+            //get its position in session list
+            //var currentSelection = SelectedSession;
+            //var place = 0;
+            //var position = 0;
+            //foreach (var session in Sessions)
+            //{
+            //    if (currentSelection == session)
+            //        position = place;
+            //    else
+            //    {
+            //        place++;
+            //    }
+
+            //}
+
+            //position++;
+            SelectedSession = await Repository.Session.GetItemAsync(c => c.Id == 6);
+            //if (Sessions[position] != null)
+            //{
+            //    var person = Sessions[position];
+            //    var personid = person.Id;
+            //    SelectedSession = await Repository.Session.GetItemAsync(c => c.Id == personid );
+            //    var b = SelectedSession;
+            //    await Task.Run(async () => await Init());
+            //    RaisePropertyChanged(() => SelectedSession);
+
+            //}
+
+        }
+
         //canclicks
         public bool SelectedSessionIsTrue
         {
@@ -351,7 +387,7 @@ namespace Beadle.Core.ViewModels
                 RaisePropertyChanged(() => ShowNoobPage);
             }
         }
-
+        
 
         //dirtyworks
         public string FirstNameGenerator()
