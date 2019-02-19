@@ -77,7 +77,7 @@
                     <!--<Button Text="Add Random Student" Command="{Binding AddRandomSessionCommand}" HorizontalOptions="Center" Grid.Column="0" CornerRadius="10" />-->
                 <StackLayout Orientation="Horizontal">
                     <Frame  BackgroundColor="#f5f5f5"  HorizontalOptions="EndAndExpand" VerticalOptions="Center"  HasShadow="False" Padding="0,0,20,0">
-                        <Label Text="&#xf009;"  
+                        <Label Text="&#xf0a8;"  
                                FontSize="Large"
                                TextColor="#636e72"
                                VerticalOptions="Center" 
@@ -95,7 +95,7 @@
                         </Frame.GestureRecognizers>
                     </Frame>
                     <Frame  BackgroundColor="#f5f5f5"  HorizontalOptions="EndAndExpand" VerticalOptions="Center"  HasShadow="False" Padding="0,0,20,0">
-                        <Label Text="&#xf0c9;"  
+                        <Label Text="&#xf0a9;"  
                                FontSize="Large"
                                TextColor="#636e72"
                                VerticalOptions="Center" 
@@ -112,7 +112,6 @@
                             <TapGestureRecognizer Command="{Binding ShowAddSessionWindowCommand, Mode=TwoWay}"/>
                         </Frame.GestureRecognizers>
                     </Frame>
-
                     <Frame CornerRadius="10" BackgroundColor="#636e72" HorizontalOptions="EndAndExpand" VerticalOptions="Center" Margin="0,10,0,10" 
                            HeightRequest="50" WidthRequest="200"  HasShadow="True" Padding="0">
                         <StackLayout Orientation="Horizontal">

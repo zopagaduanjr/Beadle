@@ -237,7 +237,7 @@ namespace Beadle.Core.ViewModels
             session.Time = TimeGenerator();
             session.Persons = new List<Person>();
             await Repository.Session.SaveItemAsync(session);
-            await Task.Run(() => Init());
+            await Task.Run(Init);
             RaisePropertyChanged(() => SelectedSession);
             await Task.Delay(1000);
         }
@@ -329,33 +329,14 @@ namespace Beadle.Core.ViewModels
 
         public async Task NextSelectedSessionProcAsync()
         {
-            //get its position in session list
-            //var currentSelection = SelectedSession;
-            //var place = 0;
-            //var position = 0;
-            //foreach (var session in Sessions)
-            //{
-            //    if (currentSelection == session)
-            //        position = place;
-            //    else
-            //    {
-            //        place++;
-            //    }
-
-            //}
-
-            //position++;
-            SelectedSession = await Repository.Session.GetItemAsync(c => c.Id == 6);
-            //if (Sessions[position] != null)
-            //{
-            //    var person = Sessions[position];
-            //    var personid = person.Id;
-            //    SelectedSession = await Repository.Session.GetItemAsync(c => c.Id == personid );
-            //    var b = SelectedSession;
-            //    await Task.Run(async () => await Init());
-            //    RaisePropertyChanged(() => SelectedSession);
-
-            //}
+            var b  = await Repository.Session.GetItemAsync(c => c.Id == 5);
+            foreach (var session in Sessions)
+            {
+                if (b.Id == session.Id)
+                    SelectedSession = session;
+            }
+            RaisePropertyChanged(() => SelectedSession);
+            await Task.Run(Init);
 
         }
 

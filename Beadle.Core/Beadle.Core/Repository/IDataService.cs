@@ -25,7 +25,7 @@ namespace Beadle.Core.Repository
 
         Task<T> UpdateItemAsync(T item);
 
-        Task<T> GetItemAsync(Expression<Func<T, bool>> item);
+        Task<T> GetItemAsync(Func<T, bool> item);
         //Get
 
         //Get Specific Contact data  
