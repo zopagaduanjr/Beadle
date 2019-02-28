@@ -83,7 +83,6 @@ namespace Beadle.Core.Repository.LocalRepository
         {
 
             var list = await database.Table<T>().ToListAsync();
-            var toreturn = list.FirstOrDefault(item);
             return list.FirstOrDefault(item);
             //return await database.GetWithChildrenAsync<T>(item);
             //return await database.GetAllWithChildrenAsync<T>();
