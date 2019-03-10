@@ -31,12 +31,13 @@
                 </Label>
                 <Label Text="Swipe To Start" Grid.Row="2" Grid.Column="1" FontSize="25" TextColor="#2e3131" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
             </Grid>
-            <Grid IsVisible="{Binding SelectedSessionIsTrue, Mode=TwoWay}">
+            <Grid IsVisible="{Binding SelectedSessionIsTrue, Mode=TwoWay}" BackgroundColor="#ecf0f1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.7*"/>
                     <RowDefinition Height="1"/>
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="1"/>
+                    <RowDefinition Height="0.7*"/>
                     <RowDefinition Height="0.7*"/>
                 </Grid.RowDefinitions>
                 <StackLayout Grid.Row="0"  BindingContext="{Binding SelectedSession}">
@@ -85,7 +86,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Frame CornerRadius="10" BackgroundColor="#4bcffa" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  Grid.Column="0"
+                    <Frame CornerRadius="10" BackgroundColor="#4bcffa" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  Grid.Column="1"
                        HeightRequest="50" WidthRequest="200"  HasShadow="True" Padding="0">
                         <StackLayout Orientation="Horizontal">
                             <Label Text="&#xf4fd;"  
@@ -109,15 +110,19 @@
                             <TapGestureRecognizer Command="{Binding AddLateCommand, Mode=TwoWay}"/>
                         </Frame.GestureRecognizers>
                     </Frame>
-                    <Frame CornerRadius="10" BackgroundColor="#4bcffa" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  Grid.Column="1"
-                       HeightRequest="50" WidthRequest="200"  HasShadow="True" Padding="0">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="&#xf21b;"  
-                               FontSize="Large"
-                               TextColor="White"
+                </Grid>
+                <Grid Grid.Row="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Horizontal" Grid.Column="0">
+                        <Frame  BackgroundColor="#ecf0f1"  HorizontalOptions="EndAndExpand" VerticalOptions="Center"  HasShadow="False" Padding="0,0,20,0">
+                            <Label Text="&#xf35b;"  
+                               FontSize="36"
+                               TextColor="#636e72"
                                VerticalOptions="Center" 
-                               Margin="5,0,0,0"
-                               HorizontalOptions="EndAndExpand" >
+                               HorizontalOptions="Center" >
                                 <Label.FontFamily>
                                     <OnPlatform 
                                     x:TypeArguments="x:String"
@@ -125,14 +130,57 @@
                                     iOS="Font Awesome 5 Free" />
                                 </Label.FontFamily>
                             </Label>
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding PrevSelectedPersonCommand, Mode=TwoWay}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Frame  BackgroundColor="#ecf0f1"  HorizontalOptions="StartAndExpand" VerticalOptions="Center"  HasShadow="False" Padding="0,0,20,0">
+                            <Label Text="&#xf358;"  
+                               FontSize="36"
+                               TextColor="#636e72"
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center" >
+                                <Label.FontFamily>
+                                    <OnPlatform 
+                                    x:TypeArguments="x:String"
+                                    Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" 
+                                    iOS="Font Awesome 5 Free" />
+                                </Label.FontFamily>
+                            </Label>
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NextSelectedPersonCommand, Mode=TwoWay}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+
+                    </StackLayout>
+                    <Frame CornerRadius="10" BackgroundColor="#4bcffa" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  Grid.Column="1"
+                           HeightRequest="50" WidthRequest="200"  HasShadow="True" Padding="0">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="&#xf21b;"  
+                                   FontSize="Large"
+                                   TextColor="White"
+                                   VerticalOptions="Center" 
+                                   Margin="5,0,0,0"
+                                   HorizontalOptions="EndAndExpand" >
+                                <Label.FontFamily>
+                                    <OnPlatform 
+                                        x:TypeArguments="x:String"
+                                        Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" 
+                                        iOS="Font Awesome 5 Free" />
+                                </Label.FontFamily>
+                            </Label>
                             <Label Text="Absent" FontSize="Large"  TextColor="White"  HorizontalOptions="StartAndExpand"
-                               VerticalOptions="Center" />
+                                   VerticalOptions="Center" />
                         </StackLayout>
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding AddAbsenceCommand, Mode=TwoWay}"/>
                         </Frame.GestureRecognizers>
                     </Frame>
+
                 </Grid>
+
             </Grid>
         </Grid>
     </ContentPage.Content>
