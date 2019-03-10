@@ -29,10 +29,10 @@ namespace Beadle.Core.ViewModels
 
             //initializers
             Task.Run(() => Init());
+
             SelectedSession = null;
             SelectedPerson = null;
             ShowNoobPage = true;
-
             //Command Initializers
             AddRandomPersonCommand = new Command(async () => await AddRandomPersonProcAsync(), () => true);
             AddRandomSessionCommand = new Command(async () => await AddRandomSessionProcAsync(), () => true);
@@ -44,6 +44,7 @@ namespace Beadle.Core.ViewModels
             ShowDbPopulationCommand = new Command(async () => await ShowDbPopulationProcAsync(), () => true);
             GoBackCommand = new Command(async () => await GoBackProcAsync(), () => true);
             NextSelectedSessionCommand = new Command(async () => await NextSelectedSessionProcAsync(), () => true);
+            PrevSelectedSessionCommand = new Command(async () => await PrevSelectedSessionProcAsync(), () => true);
 
 
             //codebehind transfer here
@@ -88,6 +89,7 @@ namespace Beadle.Core.ViewModels
         public ICommand ShowSessionInfoCommand { get; set; }
         public ICommand ShowDbPopulationCommand { get; set; }
         public ICommand NextSelectedSessionCommand { get; set; }
+        public ICommand PrevSelectedSessionCommand { get; set; }
         public Session SelectedSession
         {
             get => _selectedSession;
@@ -172,7 +174,6 @@ namespace Beadle.Core.ViewModels
                 RaisePropertyChanged(() => SessionInfoViewModel);
             }
         }
-
 
         //methods
         public async Task Init()
@@ -329,14 +330,78 @@ namespace Beadle.Core.ViewModels
 
         public async Task NextSelectedSessionProcAsync()
         {
-            var b  = await Repository.Session.GetItemAsync(c => c.Id == 5);
+            var maxstep = Sessions.Count;
+            var step = 0;
+            var current = 0;
+
             foreach (var session in Sessions)
             {
-                if (b.Id == session.Id)
-                    SelectedSession = session;
+
+                if (session == SelectedSession)
+                {
+                    current = step + 1;
+                    
+                }
+                else
+                {
+                    step++;
+                }
             }
-            RaisePropertyChanged(() => SelectedSession);
-            await Task.Run(Init);
+
+            if (current < maxstep)
+            {
+                SelectedSession = Sessions[current];
+                await Task.Run(() => Init());
+
+            }
+
+
+            //var b = await Repository.Session.GetItemAsync(c => c.Id == 5);
+            //foreach (var session in Sessions)
+            //{
+            //    if (b.Id == session.Id)
+            //        SelectedSession = session;
+            //}
+            //RaisePropertyChanged(() => SelectedSession);
+            //await Task.Run(Init);
+
+        }
+        public async Task PrevSelectedSessionProcAsync()
+        {
+            var maxstep = Sessions.Count;
+            var step = 0;
+            var current = 0;
+
+            foreach (var session in Sessions)
+            {
+
+                if (session == SelectedSession)
+                {
+                    current = step - 1;
+
+                }
+                else
+                {
+                    step++;
+                }
+            }
+
+            if (current >= 0)
+            {
+                SelectedSession = Sessions[current];
+                await Task.Run(() => Init());
+
+            }
+
+
+            //var b = await Repository.Session.GetItemAsync(c => c.Id == 5);
+            //foreach (var session in Sessions)
+            //{
+            //    if (b.Id == session.Id)
+            //        SelectedSession = session;
+            //}
+            //RaisePropertyChanged(() => SelectedSession);
+            //await Task.Run(Init);
 
         }
 
