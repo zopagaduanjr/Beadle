@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beadle.Core.Android", "Bead
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beadle.Core.iOS", "Beadle.Core\Beadle.Core.iOS\Beadle.Core.iOS.csproj", "{088A947E-E164-4C23-ADCC-FDB3186C57B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beadle.Core", "Beadle.Core\Beadle.Core\Beadle.Core.csproj", "{4F45C085-CDAD-418D-8C64-5657F893D082}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beadle.Core", "Beadle.Core\Beadle.Core\Beadle.Core.csproj", "{4F45C085-CDAD-418D-8C64-5657F893D082}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

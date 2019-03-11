@@ -26,7 +26,6 @@ namespace Beadle.Core.ViewModels
             //IOC getters
             NavigationService = navigationService;
             Repository = repository;
-
             //initializers
             Task.Run(() => Init());
 
@@ -69,6 +68,7 @@ namespace Beadle.Core.ViewModels
         private SessionInfoViewModel _sessionInfoViewModel;
         private int _population;
         private bool _showNoobPage;
+        private string _search;
 
         //properties
         public ObservableCollection<Student> Classmates
@@ -152,6 +152,26 @@ namespace Beadle.Core.ViewModels
 
             }
         }
+
+        public string Search
+        {
+            get => _search;
+            set
+            {
+                _search = value;
+                foreach (var person in SelectedSession.Persons)
+                {
+                    if (value.ToLowerInvariant() == person.LastName.ToLowerInvariant())
+                    {
+                        SelectedPerson = person;
+                        Task.Run(() => Init());
+                    }
+                }
+                RaisePropertyChanged(() => Search);
+
+            }
+        }
+
         public AddPersonViewModel AddPersonViewModel
         {
             get => _addPersonViewModel;
@@ -179,6 +199,7 @@ namespace Beadle.Core.ViewModels
                 RaisePropertyChanged(() => SessionInfoViewModel);
             }
         }
+
 
         //methods
         public async Task Init()
@@ -367,17 +388,6 @@ namespace Beadle.Core.ViewModels
 
             }
 
-
-
-
-            //var b = await Repository.Session.GetItemAsync(c => c.Id == 5);
-            //foreach (var session in Sessions)
-            //{
-            //    if (b.Id == session.Id)
-            //        SelectedSession = session;
-            //}
-            //RaisePropertyChanged(() => SelectedSession);
-            //await Task.Run(Init);
 
         }
         public async Task PrevSelectedSessionProcAsync()

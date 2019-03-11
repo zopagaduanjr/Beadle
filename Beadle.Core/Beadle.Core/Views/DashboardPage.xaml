@@ -86,6 +86,29 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                    <Frame  BackgroundColor="#ecf0f1" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  
+                            Grid.Column="0" BorderColor="#ecf0f1" 
+                           HeightRequest="50" WidthRequest="200"  HasShadow="False" Padding="0">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="&#xf002;"  
+                                   FontSize="Large"
+                                   TextColor="#636e72"
+                                   VerticalOptions="CenterAndExpand" 
+                                   Margin="5,0,0,0"
+                                   HorizontalOptions="EndAndExpand" >
+                                <Label.FontFamily>
+                                    <OnPlatform 
+                                        x:TypeArguments="x:String"
+                                        Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" 
+                                        iOS="Font Awesome 5 Free" />
+                                </Label.FontFamily>
+                            </Label>
+                            <Entry Text="{Binding Search, Mode=TwoWay}"  FontSize="Large"  TextColor="#636e72" WidthRequest="75"
+                                   HorizontalOptions="StartAndExpand" 
+                                   VerticalOptions="Center" />
+                        </StackLayout>
+                    </Frame>
+
                     <Frame CornerRadius="10" BackgroundColor="#4bcffa" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  Grid.Column="1"
                        HeightRequest="50" WidthRequest="200"  HasShadow="True" Padding="0">
                         <StackLayout Orientation="Horizontal">

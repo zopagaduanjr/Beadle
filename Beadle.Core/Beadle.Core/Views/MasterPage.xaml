@@ -5,7 +5,6 @@
              xmlns:pages="clr-namespace:Beadle.Core.Views"
              xmlns:behaviors="clr-namespace:Beadle.Core.Behaviors;assembly=Beadle.Core"
              xmlns:converters="clr-namespace:Beadle.Core.Converters;assembly=Beadle.Core">
-
     <MasterDetailPage.Master>
         <ContentPage Title="Menu" BackgroundColor="#f5f5f5" >
             <StackLayout>
@@ -44,9 +43,9 @@
                         </Frame.GestureRecognizers>
                     </Frame>
                 </StackLayout>
-                <ListView x:Name="SessionList"
-                    VerticalOptions="FillAndExpand" SeparatorVisibility="None"  SelectedItem="{Binding SelectedSession, Mode=TwoWay}"  
-                          ItemsSource="{Binding Sessions, Mode=TwoWay}" RowHeight="60" >
+                <ListView SelectedItem="{Binding SelectedSession, Mode=TwoWay}" RowHeight="60"  SeparatorVisibility="None"
+                              ItemsSource="{Binding Sessions, Mode=TwoWay}"  
+                    VerticalOptions="FillAndExpand" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
