@@ -14,6 +14,7 @@ Beadle App is designed for Class Beadles to easily record the attendance of thei
 | ![v1:MainScreen](v1mainscreen.png) | ![v1:MasterDetailSlider](v1masterdetailslider.png) | ![v1:2ndScreen](v12ndscreen.png) |
 
 ### Actual Gameplay
+| Part 1 | Part 2 |
 | ------------ | ------------- |
 | ![v1:ActualVideoPart1](v1part1.gif) | ![v1:ActualVideoPart2](v1part2.gif) |
 
