@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:Beadle.Core.Converters;assembly=Beadle.Core"
+             xmlns:behaviors="clr-namespace:Beadle.Core.Behaviors;assembly=Beadle.Core"
              x:Class="Beadle.Core.Views.DashboardPage">
     <ContentPage.Content>
         <Grid>
@@ -79,6 +81,10 @@
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
+                    <ListView.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="ItemSelected" Command="{Binding PersonListDisplayActionCommand}" Converter="{converters:SelectedItemEventArgsToSelectedItemConverter}" />
+                    </ListView.Behaviors>
+
                 </ListView>
                 <BoxView HeightRequest="1" Color="#b2bec3" Grid.Row="3" IsVisible="{Binding SelectedSessionIsTrue}"/>
                 <Grid Grid.Row="4" IsVisible="{Binding SelectedSessionIsTrue}">
@@ -139,45 +145,6 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <StackLayout Orientation="Horizontal" Grid.Column="0">
-                        <Frame  BackgroundColor="#ecf0f1"  HorizontalOptions="EndAndExpand" VerticalOptions="Center"  HasShadow="False" Padding="0,0,20,0">
-                            <Label Text="&#xf35b;"  
-                               FontSize="36"
-                               TextColor="#636e72"
-                               VerticalOptions="Center" 
-                               HorizontalOptions="Center" >
-                                <Label.FontFamily>
-                                    <OnPlatform 
-                                    x:TypeArguments="x:String"
-                                    Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" 
-                                    iOS="Font Awesome 5 Free" />
-                                </Label.FontFamily>
-                            </Label>
-
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding PrevSelectedPersonCommand, Mode=TwoWay}"/>
-                            </Frame.GestureRecognizers>
-                        </Frame>
-                        <Frame  BackgroundColor="#ecf0f1"  HorizontalOptions="StartAndExpand" VerticalOptions="Center"  HasShadow="False" Padding="0,0,20,0">
-                            <Label Text="&#xf358;"  
-                               FontSize="36"
-                               TextColor="#636e72"
-                               VerticalOptions="Center" 
-                               HorizontalOptions="Center" >
-                                <Label.FontFamily>
-                                    <OnPlatform 
-                                    x:TypeArguments="x:String"
-                                    Android="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" 
-                                    iOS="Font Awesome 5 Free" />
-                                </Label.FontFamily>
-                            </Label>
-
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding NextSelectedPersonCommand, Mode=TwoWay}"/>
-                            </Frame.GestureRecognizers>
-                        </Frame>
-
-                    </StackLayout>
                     <Frame CornerRadius="10" BackgroundColor="#4bcffa" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  Grid.Column="1"
                            HeightRequest="50" WidthRequest="200"  HasShadow="True" Padding="0">
                         <StackLayout Orientation="Horizontal">

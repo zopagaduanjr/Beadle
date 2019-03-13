@@ -46,6 +46,7 @@ namespace Beadle.Core.ViewModels
             PrevSelectedSessionCommand = new Command(async () => await PrevSelectedSessionProcAsync(), () => true);
             NextSelectedPersonCommand = new Command(async () => await NextSelectedPersonProcAsync(), () => true);
             PrevSelectedPersonCommand = new Command(async () => await PrevSelectedPersonProcAsync(), () => true);
+            PersonListDisplayActionCommand = new Command(async () => await PersonListDisplayActionProc(), () => true);
 
 
 
@@ -95,6 +96,7 @@ namespace Beadle.Core.ViewModels
         public ICommand NextSelectedPersonCommand { get; set; }
         public ICommand PrevSelectedSessionCommand { get; set; }
         public ICommand PrevSelectedPersonCommand { get; set; }
+        public ICommand PersonListDisplayActionCommand { get; set; }
         public Session SelectedSession
         {
             get => _selectedSession;
@@ -528,6 +530,20 @@ namespace Beadle.Core.ViewModels
             //RaisePropertyChanged(() => SelectedSession);
             //await Task.Run(Init);
 
+        }
+
+        public async Task PersonListDisplayActionProc()
+        {
+            var boy = await Application.Current.MainPage.DisplayActionSheet("Beadle Option", "cancel",null, "Late","Absent");
+            switch (boy)
+            {
+                case "Late":
+                    await AddLateProcAsync();
+                    break;
+                case "Absent":
+                    await AddAbsenceProcAsync();
+                    break;
+            }
         }
 
         //canclicks
