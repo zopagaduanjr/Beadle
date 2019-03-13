@@ -6,14 +6,11 @@
 
 Beadle App is designed for Class Beadles to easily record the attendance of their class.
 
-## Version 1 (Presented @ Feb. 12, 2019, 11:33am)
-![v1:MainScreen](v1mainscreen.png)
-![v1:MasterDetailSlider](v1masterdetailslider.png)
-![v1:2ndScreen](v12ndscreen.png)
+## Version 1 (Presented @ Feb. 12, 2019)
 
-###Mockup
+### Mockup
 | Main Screen      | Master Detail Slider     | 2nd Screen     |
-|------------|-------------|-------------|
+| ------------ | ------------- | ------------- |
 | ![v1:MainScreen](v1mainscreen.png) | ![v1:MasterDetailSlider](v1masterdetailslider.png) | ![v1:2ndScreen](v12ndscreen.png) |
 
 ![v1:ActualVideoPart1](v1part1.gif)
