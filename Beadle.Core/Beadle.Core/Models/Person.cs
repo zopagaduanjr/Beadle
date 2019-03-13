@@ -24,7 +24,10 @@ namespace Beadle.Core.Models
         public string Age { get; set; }
         public string MobileNumber { get; set; }
 
+
         [ForeignKey(typeof(Session))]
         public int SessionId { get; set; }
+
+
     }
 }

@@ -12,6 +12,8 @@ namespace Beadle.Core.Repository
         IDataService<Student> Student { get; }
         IDataService<Session> Session { get; }
         IDataService<Person> Person { get; }
+        IDataService<Record> Record { get; }
+        IDataService<Ids> Ids { get; }
 
     }
 }

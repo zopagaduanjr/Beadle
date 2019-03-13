@@ -12,5 +12,7 @@ namespace Beadle.Core.Repository.LocalRepository
         public IDataService<Student> Student { get; } = new LocalDataService<Student>();
         public IDataService<Session> Session { get; } = new LocalDataService<Session>();
         public IDataService<Person> Person { get; } = new LocalDataService<Person>();
+        public IDataService<Record> Record { get; } = new LocalDataService<Record>();
+        public IDataService<Ids> Ids { get; } = new LocalDataService<Ids>();
     }
 }

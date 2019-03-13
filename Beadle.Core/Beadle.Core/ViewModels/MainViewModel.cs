@@ -28,7 +28,8 @@ namespace Beadle.Core.ViewModels
             Repository = repository;
             //initializers
             Task.Run(() => Init());
-
+            DateTime = DateTime.Now;
+            DateTimeString = DateTime.ToString();
             SelectedSession = null;
             SelectedPerson = null;
             ShowNoobPage = true;
@@ -46,7 +47,10 @@ namespace Beadle.Core.ViewModels
             PrevSelectedSessionCommand = new Command(async () => await PrevSelectedSessionProcAsync(), () => true);
             NextSelectedPersonCommand = new Command(async () => await NextSelectedPersonProcAsync(), () => true);
             PrevSelectedPersonCommand = new Command(async () => await PrevSelectedPersonProcAsync(), () => true);
-            PersonListDisplayActionCommand = new Command(async () => await PersonListDisplayActionProc(), () => true);
+            PersonListDisplayActionCommand = new Command(async () => await PersonListDisplayActionProcAsync(), () => true);
+            TesterCommand = new Command(async () => await TesterProcAsync(), () => true);
+            ReportSyncerCommand = new Command(async () => await ReportSyncerProcAsync(), () => true);
+            AddOneWeekCommand = new Command( () =>  AddOneWeekProc(), () => true);
 
 
 
@@ -70,6 +74,8 @@ namespace Beadle.Core.ViewModels
         private int _population;
         private bool _showNoobPage;
         private string _search;
+        private DateTime _dateTime;
+        private string _dateTimeString;
 
         //properties
         public ObservableCollection<Student> Classmates
@@ -97,6 +103,9 @@ namespace Beadle.Core.ViewModels
         public ICommand PrevSelectedSessionCommand { get; set; }
         public ICommand PrevSelectedPersonCommand { get; set; }
         public ICommand PersonListDisplayActionCommand { get; set; }
+        public ICommand TesterCommand { get; set; }
+        public ICommand AddOneWeekCommand { get; set; }
+        public ICommand ReportSyncerCommand { get; set; }
         public Session SelectedSession
         {
             get => _selectedSession;
@@ -155,6 +164,27 @@ namespace Beadle.Core.ViewModels
             }
         }
 
+        public DateTime DateTime
+        {
+            get => _dateTime;
+            set
+            {
+                _dateTime = value;
+                RaisePropertyChanged(() => DateTime);
+            }
+        }
+
+        public string DateTimeString
+        {
+            get => _dateTimeString;
+            set
+            {
+                _dateTimeString = value;
+                RaisePropertyChanged(() => DateTimeString);
+
+            }
+        }
+
         public string Search
         {
             get => _search;
@@ -204,8 +234,33 @@ namespace Beadle.Core.ViewModels
 
 
         //methods
+        public async Task ReportSyncerProcAsync()
+        {
+            var checkthis = SelectedSession.Records;
+            if (checkthis.Any())
+            {
+                var startdate = checkthis.LastOrDefault().DateTime;
+                if ((DateTime - startdate).TotalDays >= 7)
+                {
+                    var newrecord = new Record();
+                    newrecord.DateTime = DateTime;
+                    checkthis.Add(newrecord);
+                    await Repository.Record.SaveItemAsync(newrecord);
+                    List<Ids> newids = new List<Ids>();
+                    var latestrecord = SelectedSession.Records.LastOrDefault();
+                    latestrecord.Ids = newids;
+                    await Repository.Record.UpdateWithChildrenAsync(newrecord);
+
+                    await Repository.Session.UpdateWithChildrenAsync(SelectedSession);
+
+                }
+
+                await Repository.Session.UpdateWithChildrenAsync(SelectedSession);
+            }
+        }
         public async Task Init()
         {
+
             //updaters
             Sessions = await Repository.Session.GetAllItemsAsync();
             RaisePropertyChanged(() => Sessions);
@@ -228,10 +283,11 @@ namespace Beadle.Core.ViewModels
                 foreach (var item in a)
                 {
                     if (item.Id == holdperson.Id)
-                        SelectedPerson = item;
+                        SelectedPerson = null;
                 }
             }
 
+            SelectedPerson = null;
             Population = Sessions.Count;
             RaisePropertyChanged(() => SelectedSession);
             RaisePropertyChanged(() => SelectedPerson);
@@ -265,7 +321,9 @@ namespace Beadle.Core.ViewModels
             session.Day = DayGenerator();
             session.Time = TimeGenerator();
             session.Persons = new List<Person>();
+            session.Records = new List<Record>();
             await Repository.Session.SaveItemAsync(session);
+            var b = "stringholder";
             await Task.Run(Init);
             RaisePropertyChanged(() => SelectedSession);
             await Task.Delay(1000);
@@ -284,6 +342,16 @@ namespace Beadle.Core.ViewModels
         }
         public async Task AddLateProcAsync()
         {
+            //make sures the program uses the latest beadle sleep/report
+            await Task.Run(() => ReportSyncerProcAsync());
+            var startdate = SelectedSession.Records.LastOrDefault();
+            var newids = new Ids();
+            newids.TimeIn = DateTime.Now.ToShortTimeString();
+            newids.Remarks = "Late";
+            startdate.Ids.Add(newids);
+            await Repository.Ids.SaveItemAsync(newids);
+            await Repository.Record.UpdateWithChildrenAsync(startdate);
+
             SelectedPerson.Late++;
             await Repository.Person.UpdateItemAsync(SelectedPerson);
             await Task.Run(() => Init());
@@ -532,18 +600,36 @@ namespace Beadle.Core.ViewModels
 
         }
 
-        public async Task PersonListDisplayActionProc()
-        {
-            var boy = await Application.Current.MainPage.DisplayActionSheet("Beadle Option", "cancel",null, "Late","Absent");
+        public async Task PersonListDisplayActionProcAsync()
+        {            
+
+            var boy = await Application.Current.MainPage.DisplayActionSheet("Beadle Option", "cancel","null","Late","Absent");
             switch (boy)
             {
                 case "Late":
                     await AddLateProcAsync();
                     break;
+
                 case "Absent":
                     await AddAbsenceProcAsync();
                     break;
+
             }
+        }
+
+
+        public void AddOneWeekProc()
+        {
+            DateTime = DateTime.AddDays(7);
+            DateTimeString = DateTime.ToString();
+            RaisePropertyChanged(() => DateTimeString);
+
+        }
+        public async Task TesterProcAsync()
+        {
+            var b = SelectedSession.Records;
+            var c = b.LastOrDefault();
+            var d = c.Ids.Count;
         }
 
         //canclicks

@@ -13,8 +13,14 @@ namespace Beadle.Core.Models
         public string Name { get; set; }
         public string Day { get; set; }
         public string Time { get; set; }
+        public string ClassCode { get; set; }
+        public string Professor { get; set; }
 
         [OneToMany]
         public List<Person> Persons { get; set; }
+
+        [OneToMany]
+        public List<Record> Records { get; set; }
+
     }
 }
