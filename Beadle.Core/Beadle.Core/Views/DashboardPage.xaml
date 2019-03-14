@@ -175,7 +175,7 @@
                                         iOS="Font Awesome 5 Free" />
                                 </Label.FontFamily>
                             </Label>
-                            <Label Text="Absent" FontSize="Large"  TextColor="White"  HorizontalOptions="StartAndExpand"
+                            <Label Text="Tester" FontSize="Large"  TextColor="White"  HorizontalOptions="StartAndExpand"
                                    VerticalOptions="Center" />
                         </StackLayout>
                         <Frame.GestureRecognizers>

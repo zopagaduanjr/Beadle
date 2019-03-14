@@ -18,6 +18,7 @@ namespace Beadle.Core.Models
         [ForeignKey(typeof(Session))]
         public int SessionId { get; set; }
 
+
         [OneToMany]
         public List<Ids> Ids { get; set; }
 

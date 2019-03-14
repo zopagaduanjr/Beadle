@@ -14,6 +14,7 @@ namespace Beadle.Core.Models
         public string TimeIn { get; set; }
         public string Remarks { get; set; }
 
+
         [ForeignKey(typeof(Record))]
         public int RecordId { get; set; }
 
