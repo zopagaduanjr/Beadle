@@ -355,17 +355,30 @@ namespace Beadle.Core.ViewModels
         {
             //make sures the program uses the latest beadle sleep/report
             await Task.Run(() => ReportSyncerProcAsync());
-            var startdate = SelectedSession.Records.LastOrDefault();
+            //var latestRecordId = SelectedSession.Records.LastOrDefault().Id;
+            //var getindb = await Repository.Record.GetItemAsync(c => c.Id == latestRecordId);
             var newids = new Ids();
             newids.TimeIn = DateTime.Now.ToShortTimeString();
             newids.Remarks = "Late";
-            startdate.Ids.Add(newids);
             await Repository.Ids.SaveItemAsync(newids);
-            await Repository.Record.UpdateWithChildrenAsync(startdate);
+            if (SelectedSession.Records.LastOrDefault().Ids != null)
+            {
+                SelectedSession.Records.LastOrDefault().Ids.Add(newids);
+                await Repository.Record.UpdateWithChildrenAsync(SelectedSession.Records.LastOrDefault());
+                SelectedPerson.Late++;
+                await Repository.Person.UpdateItemAsync(SelectedPerson);
+                await Task.Run(() => Init());
+            }
+            else
+            {
+                SelectedSession.Records.LastOrDefault().Ids = new List<Ids>();
+                SelectedSession.Records.LastOrDefault().Ids.Add(newids);
+                await Repository.Record.UpdateWithChildrenAsync(SelectedSession.Records.LastOrDefault());
+                SelectedPerson.Late++;
+                await Repository.Person.UpdateItemAsync(SelectedPerson);
+                await Task.Run(() => Init());
 
-            SelectedPerson.Late++;
-            await Repository.Person.UpdateItemAsync(SelectedPerson);
-            await Task.Run(() => Init());
+            }
         }
         public async Task AddAbsenceProcAsync()
         {
@@ -661,14 +674,12 @@ namespace Beadle.Core.ViewModels
 
 
             var firstsession = await Repository.Session.GetAllItemsAsync();
-            var firstdsss = firstsession.FirstOrDefault();
+            var firstdsss = firstsession.FirstOrDefault();           
             var comparethis = firstdsss.Records.LastOrDefault();
-
-            var firstrecord = await Repository.Record.GetAllItemsAsync();
-            var firstrecordsdafasdf = firstrecord.LastOrDefault();
-
-            var firstid = await Repository.Ids.GetAllItemsAsync();
-            var idinside = firstid.LastOrDefault();
+            var id = comparethis.Id;
+            var realrecord = await Repository.Record.GetItemAsync(x => x.Id == id);
+            var latestlate = comparethis.Ids.FirstOrDefault();
+            
 
             ////add new id to SelectedSession.LatestRecord.Ids lists
             //SelectedSession.Records.LastOrDefault().Ids.Add(newid);
