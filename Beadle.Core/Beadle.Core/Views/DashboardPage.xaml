@@ -75,7 +75,7 @@
                                         <RowDefinition Height="2*"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <Label Text = "{Binding FullName}"  HorizontalTextAlignment="Start" TextColor="Black" Margin="5,0,0,0" VerticalOptions="End"
+                                    <Label Text = "{Binding FullName, Mode=TwoWay}"  HorizontalTextAlignment="Start" TextColor="Black" Margin="5,0,0,0" VerticalOptions="End"
                                            FontSize="Large" Grid.Row="0" HorizontalOptions="FillAndExpand"/>
                                     <Grid HorizontalOptions="FillAndExpand" Grid.Row="1" VerticalOptions="StartAndExpand" Margin="5,0,0,0">
                                         <Grid.ColumnDefinitions>
@@ -86,10 +86,10 @@
                                             <ColumnDefinition Width="5*"/>
                                         </Grid.ColumnDefinitions>
                                         <Label Text="Late: "  Grid.Column="0" FontSize="Small" HorizontalTextAlignment="Start" TextColor="#747d8c" />
-                                        <Label Text="{Binding Late} "  Grid.Column="1" FontSize="Small" HorizontalTextAlignment="Start" TextColor="#747d8c" />
+                                        <Label Text="{Binding Late, Mode=TwoWay} "  Grid.Column="1" FontSize="Small" HorizontalTextAlignment="Start" TextColor="#747d8c" />
                                         <BoxView  Grid.Column="2" Color="#b2bec3" />
                                         <Label Text="Absences: "  Grid.Column="3" FontSize="Small" HorizontalTextAlignment="Start" TextColor="#747d8c" />
-                                        <Label Text = "{Binding Absence}" Grid.Column="4" FontSize="Small" HorizontalTextAlignment="Start" TextColor="#747d8c"/>
+                                        <Label Text = "{Binding Absence, Mode=TwoWay}" Grid.Column="4" FontSize="Small" HorizontalTextAlignment="Start" TextColor="#747d8c"/>
                                     </Grid>
                                 </Grid>
                             </ViewCell>

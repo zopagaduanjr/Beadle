@@ -81,15 +81,22 @@ namespace Beadle.Core.Repository.LocalRepository
         }
 
         //GetItem via Id
-        public async Task<T> GetItemAsync(Func<T,bool> item)
+        public async Task<T> GetItemAsync(Func<T, bool> item)
         {
 
+
             var list = await database.Table<T>().ToListAsync();
-            return list.FirstOrDefault(item);
+            return  list.FirstOrDefault(item);
             //return await database.GetWithChildrenAsync<T>(item);
             //return await database.GetAllWithChildrenAsync<T>();
 
         }
 
+        public async Task<T> GetItemFromIdAsync(int Id)
+        {
+            return await database.GetWithChildrenAsync<T>(Id);
+            
+
+        }
     }
 }

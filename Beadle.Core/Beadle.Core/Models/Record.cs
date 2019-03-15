@@ -12,8 +12,12 @@ namespace Beadle.Core.Models
         public int Id { get; set; }
 
         public string Name { get; set; }
-        public int PersonId { get; set; }
+        public string BeadleName { get; set; }
+        public string SubjectCode { get; set; }
+        public string ClassCode { get; set; }
+        public string Professor { get; set; }
         public DateTime DateTime { get; set; }
+        public int WeekNumber { get; set; }
 
         [OneToMany]
         public List<Item> Items { get; set; }

@@ -17,6 +17,13 @@ namespace Beadle.Core.Views
             BindingContext = App.Locator.Main;
             NavigationPage.SetHasNavigationBar(this, false);
             Detail = new NavigationPage((Page)Activator.CreateInstance(typeof(DashboardPage)));
+
+        }
+
+        private void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            this.IsPresented = false;
+           
         }
     }
 }
