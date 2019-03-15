@@ -15,12 +15,14 @@ namespace Beadle.Core.Models
         public int PersonId { get; set; }
         public DateTime DateTime { get; set; }
 
+        [OneToMany]
+        public List<Item> Items { get; set; }
+
+
+
+
         [ForeignKey(typeof(Session))]
         public int SessionId { get; set; }
-
-
-        [OneToMany]
-        public List<Ids> Ids { get; set; }
 
 
     }

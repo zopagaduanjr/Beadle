@@ -13,7 +13,7 @@ namespace Beadle.Core.Repository
         IDataService<Session> Session { get; }
         IDataService<Person> Person { get; }
         IDataService<Record> Record { get; }
-        IDataService<Ids> Ids { get; }
+        IDataService<Item> Item { get; }
 
     }
 }

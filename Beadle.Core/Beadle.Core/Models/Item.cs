@@ -6,17 +6,17 @@ using SQLiteNetExtensions.Attributes;
 
 namespace Beadle.Core.Models
 {
-    public class Ids
+    public class Item
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string TimeIn { get; set; }
+        public int PersonId { get; set; }
         public string Remarks { get; set; }
+        public DateTime TimeIn { get; set; }
 
 
         [ForeignKey(typeof(Record))]
         public int RecordId { get; set; }
-
     }
 }

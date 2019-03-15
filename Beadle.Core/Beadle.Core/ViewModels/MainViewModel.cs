@@ -49,7 +49,7 @@ namespace Beadle.Core.ViewModels
             PrevSelectedPersonCommand = new Command(async () => await PrevSelectedPersonProcAsync(), () => true);
             PersonListDisplayActionCommand = new Command(async () => await PersonListDisplayActionProcAsync(), () => true);
             TesterCommand = new Command(async () => await TesterProcAsync(), () => true);
-            ReportSyncerCommand = new Command(async () => await ReportSyncerProcAsync(), () => true);
+            ReportSyncerCommand = new Command(async () => await idchecker(), () => true);
             AddOneWeekCommand = new Command( () =>  AddOneWeekProc(), () => true);
 
 
@@ -234,41 +234,10 @@ namespace Beadle.Core.ViewModels
 
 
         //methods
-        public async Task ReportSyncerProcAsync()
-        {
-            var checkthis = SelectedSession.Records;
-            if (checkthis.Any())
-            {
-                var startdate = checkthis.LastOrDefault().DateTime;
-                if ((DateTime - startdate).TotalDays >= 7)
-                {
-                    var newrecord = new Record();
-                    newrecord.DateTime = DateTime.Now;
-                    checkthis.Add(newrecord);
-                    await Repository.Record.SaveItemAsync(newrecord);
-                    List<Ids> newids = new List<Ids>();
-                    var latestrecord = SelectedSession.Records.LastOrDefault();
-                    latestrecord.Ids = newids;
-                    await Repository.Record.UpdateWithChildrenAsync(newrecord);
-
-                    await Repository.Session.UpdateWithChildrenAsync(SelectedSession);
-
-                }
-
-                await Repository.Session.UpdateWithChildrenAsync(SelectedSession);
-            }
-            else
-            {
-                var newrecord = new Record();
-                newrecord.DateTime = DateTime.Now;
-                newrecord.Name = "week1";
-                newrecord.Ids = new List<Ids>();
-                await Repository.Record.SaveItemAsync(newrecord);
-                SelectedSession.Records.Add(newrecord);
-                await Repository.Session.UpdateWithChildrenAsync(SelectedSession);
-
-            }
-        }
+        //public async Task ReportSyncerProcAsync()
+        //{
+            
+        //}
         public async Task Init()
         {
 
@@ -331,8 +300,8 @@ namespace Beadle.Core.ViewModels
             session.Name = SessionGenerator();
             session.Day = DayGenerator();
             session.Time = TimeGenerator();
-            session.Persons = new List<Person>();
-            session.Records = new List<Record>();
+            //session.Persons = new List<Person>();
+            //session.Records = new List<Record>();
             await Repository.Session.SaveItemAsync(session);
             var b = "stringholder";
             await Task.Run(Init);
@@ -353,32 +322,9 @@ namespace Beadle.Core.ViewModels
         }
         public async Task AddLateProcAsync()
         {
-            //make sures the program uses the latest beadle sleep/report
-            await Task.Run(() => ReportSyncerProcAsync());
-            //var latestRecordId = SelectedSession.Records.LastOrDefault().Id;
-            //var getindb = await Repository.Record.GetItemAsync(c => c.Id == latestRecordId);
-            var newids = new Ids();
-            newids.TimeIn = DateTime.Now.ToShortTimeString();
-            newids.Remarks = "Late";
-            await Repository.Ids.SaveItemAsync(newids);
-            if (SelectedSession.Records.LastOrDefault().Ids != null)
-            {
-                SelectedSession.Records.LastOrDefault().Ids.Add(newids);
-                await Repository.Record.UpdateWithChildrenAsync(SelectedSession.Records.LastOrDefault());
                 SelectedPerson.Late++;
                 await Repository.Person.UpdateItemAsync(SelectedPerson);
                 await Task.Run(() => Init());
-            }
-            else
-            {
-                SelectedSession.Records.LastOrDefault().Ids = new List<Ids>();
-                SelectedSession.Records.LastOrDefault().Ids.Add(newids);
-                await Repository.Record.UpdateWithChildrenAsync(SelectedSession.Records.LastOrDefault());
-                SelectedPerson.Late++;
-                await Repository.Person.UpdateItemAsync(SelectedPerson);
-                await Task.Run(() => Init());
-
-            }
         }
         public async Task AddAbsenceProcAsync()
         {
@@ -651,42 +597,20 @@ namespace Beadle.Core.ViewModels
         }
         public async Task TesterProcAsync()
         {
-            //add new record, working
-            //var newrecord = new Record();
-            //newrecord.DateTime = DateTime.Now;
-            //newrecord.Name = "gg10:52";
-            //newrecord.Ids = new List<Ids>();
-            //await Repository.Record.SaveItemAsync(newrecord);
-            //SelectedSession.Records.Add(newrecord);
-            //await Repository.Session.UpdateWithChildrenAsync(SelectedSession);
-
-
-            ////add new id to database
-            //var selectedrecord = SelectedSession.Records.LastOrDefault();
-            //var newid = new Ids();
-            //newid.Remarks = "Late4";
-            //await Repository.Ids.SaveItemAsync(newid);
-            //selectedrecord.Ids.Add(newid);
-            //await Repository.Ids.UpdateWithChildrenAsync(selectedrecord.Ids.LastOrDefault());
-            //await Repository.Record.UpdateWithChildrenAsync(selectedrecord);
-            //await Repository.Session.UpdateWithChildrenAsync(SelectedSession);
+            //var item1 = new Item();
+            //item1.Remarks = "Working";
+            //await Repository.Item.SaveItemAsync(item1);
 
 
 
-            var firstsession = await Repository.Session.GetAllItemsAsync();
-            var firstdsss = firstsession.FirstOrDefault();           
-            var comparethis = firstdsss.Records.LastOrDefault();
-            var id = comparethis.Id;
-            var realrecord = await Repository.Record.GetItemAsync(x => x.Id == id);
-            var latestlate = comparethis.Ids.FirstOrDefault();
-            
+            var week1 = new Record();
+            week1.DateTime = DateTime.Now;
+            week1.Name = "week1";
+            week1.Items = new List<Item>();   
+            await Repository.Record.SaveItemAsync(week1);
+            //week1.Items.Add(item1);
+            //await Repository.Record.UpdateWithChildrenAsync(week1);
 
-            ////add new id to SelectedSession.LatestRecord.Ids lists
-            //SelectedSession.Records.LastOrDefault().Ids.Add(newid);
-            //await Repository.Record.UpdateWithChildrenAsync(selectedRecord);
-            //await Repository.Session.UpdateWithChildrenAsync(SelectedSession);
-
-            //var chekkkerpoint = checkpoint.Ids.FirstOrDefault();
 
 
 
@@ -694,12 +618,8 @@ namespace Beadle.Core.ViewModels
 
         public async Task idchecker()
         {
-            var idtable = await Repository.Ids.GetAllItemsAsync();
-            var week2checker = await Repository.Record.GetItemAsync(c => c.Id == 7);
-            var ids = week2checker.Ids;
-            var name = week2checker.Name;
-            var idsount = ids.Count;
-            var count = idtable.Count;
+            var Recordlist = await Repository.Record.GetAllItemsAsync();
+            var week1 = Recordlist.FirstOrDefault();
         }
 
 
