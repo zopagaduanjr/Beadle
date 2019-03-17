@@ -12,6 +12,7 @@ namespace Beadle.Core.Models
         public int Id { get; set; }
 
         public int PersonId { get; set; }
+        public string PersonName { get; set; }
         public string Remarks { get; set; }
         public DateTime TimeIn { get; set; }
 

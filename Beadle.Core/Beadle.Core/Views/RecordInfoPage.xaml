@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:Beadle.Core.Behaviors;assembly=Beadle.Core"
+             xmlns:converters="clr-namespace:Beadle.Core.Converters;assembly=Beadle.Core"
+             x:Class="Beadle.Core.Views.RecordInfoPage">
+    <ContentPage.Content>
+        <Grid>
+           <Grid.RowDefinitions>
+               <RowDefinition Height="0.5*"/>
+               <RowDefinition Height="5*"/>
+               <RowDefinition Height="*"/>
+           </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None"   Margin="5,0,0,0" SelectedItem="{Binding SelectedRecord, Mode=TwoWay}"
+                          ItemsSource="{Binding Records, Mode=TwoWay}" RowHeight="30" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Label Text = "{Binding Name, Mode=TwoWay}"  HorizontalTextAlignment="Start" TextColor="Black" Margin="5,0,0,0" VerticalOptions="End"
+                                       FontSize="Large"  HorizontalOptions="FillAndExpand"/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="ItemSelected" Command="{Binding ItemRefresherCommand}" Converter="{converters:SelectedItemEventArgsToSelectedItemConverter}" />
+                    </ListView.Behaviors>
+
+                </ListView>
+                <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None"   Margin="5,0,0,0" Grid.Column="1" IsVisible="{Binding IsVisible, Mode=TwoWay}"
+                          ItemsSource="{Binding SelectedRecord.Items, Mode=TwoWay}" RowHeight="30" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Label Text = "{Binding PersonName, Mode=TwoWay}"  HorizontalTextAlignment="Start" TextColor="Black" Margin="5,0,0,0" VerticalOptions="End"
+                                       FontSize="Large"  HorizontalOptions="FillAndExpand"/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="ItemSelected" Command="{Binding ItemRefresherCommand}" Converter="{converters:SelectedItemEventArgsToSelectedItemConverter}" />
+                    </ListView.Behaviors>
+
+                </ListView>
+
+            </Grid>
+            <Label Text="{Binding SelectedItem.Remarks, Mode=TwoWay}"></Label>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

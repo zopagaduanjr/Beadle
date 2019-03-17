@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,6 +25,11 @@ namespace Beadle.Core.Views
         {
             this.IsPresented = false;
            
+        }
+
+        private void SKCanvasView_OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

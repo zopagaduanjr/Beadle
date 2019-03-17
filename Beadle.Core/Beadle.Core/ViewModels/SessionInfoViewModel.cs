@@ -28,8 +28,6 @@ namespace Beadle.Core.ViewModels
             //SelectedPerson = null;
             //commands
             ShowDeletePopUpCommand = new Command(async () => await ShowDeletePopUpAsync(), () => true);
-
-
         }
 
         //private fields

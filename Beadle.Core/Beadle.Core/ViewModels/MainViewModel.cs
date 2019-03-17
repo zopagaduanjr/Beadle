@@ -41,6 +41,7 @@ namespace Beadle.Core.ViewModels
             ShowAddPersonWindowCommand = new Command(async () => await ShowAddPersonWindowProcAsync(), () => true);
             ShowAddSessionWindowCommand = new Command(async () => await ShowAddSessionWindowProcAsync(), () => true);
             ShowSessionInfoCommand = new Command(async () => await ShowSessionInfoProcAsync(), () => true);
+            ShowRecordInfoCommand = new Command(async () => await ShowRecordInfoProcAsync(), () => true);
             ShowDbPopulationCommand = new Command(async () => await ShowDbPopulationProcAsync(), () => true);
             GoBackCommand = new Command(async () => await GoBackProcAsync(), () => true);
             NextSelectedSessionCommand = new Command(async () => await NextSelectedSessionProcAsync(), () => true);
@@ -76,6 +77,8 @@ namespace Beadle.Core.ViewModels
         private string _search;
         private DateTime _dateTime;
         private string _dateTimeString;
+        private RecordInfoViewModel _recordInfoViewModel;
+        private List<Record> _records;
 
         //properties
         public ObservableCollection<Student> Classmates
@@ -97,6 +100,7 @@ namespace Beadle.Core.ViewModels
         public ICommand ShowAddPersonWindowCommand { get; set; }
         public ICommand ShowAddSessionWindowCommand { get; set; }
         public ICommand ShowSessionInfoCommand { get; set; }
+        public ICommand ShowRecordInfoCommand { get; set; }
         public ICommand ShowDbPopulationCommand { get; set; }
         public ICommand NextSelectedSessionCommand { get; set; }
         public ICommand NextSelectedPersonCommand { get; set; }
@@ -138,6 +142,15 @@ namespace Beadle.Core.ViewModels
                 RaisePropertyChanged(() => Sessions);
             }
         }
+        public List<Record> Records
+        {
+            get => _records;
+            set
+            {
+                _records = value;
+                RaisePropertyChanged(() => Records);
+            }
+        }
         public Person SelectedPerson
         {
             get => _selectedPerson;
@@ -163,7 +176,6 @@ namespace Beadle.Core.ViewModels
 
             }
         }
-
         public DateTime DateTime
         {
             get => _dateTime;
@@ -173,7 +185,6 @@ namespace Beadle.Core.ViewModels
                 RaisePropertyChanged(() => DateTime);
             }
         }
-
         public string DateTimeString
         {
             get => _dateTimeString;
@@ -184,7 +195,6 @@ namespace Beadle.Core.ViewModels
 
             }
         }
-
         public string Search
         {
             get => _search;
@@ -203,7 +213,6 @@ namespace Beadle.Core.ViewModels
 
             }
         }
-
         public AddPersonViewModel AddPersonViewModel
         {
             get => _addPersonViewModel;
@@ -229,6 +238,16 @@ namespace Beadle.Core.ViewModels
             {
                 _sessionInfoViewModel = value;
                 RaisePropertyChanged(() => SessionInfoViewModel);
+            }
+        }
+        public RecordInfoViewModel RecordInfoViewModel
+        {
+            get => _recordInfoViewModel;
+            set
+            {
+                _recordInfoViewModel = value;
+                RaisePropertyChanged(() => RecordInfoViewModel);
+
             }
         }
 
@@ -301,6 +320,23 @@ namespace Beadle.Core.ViewModels
             RaisePropertyChanged(() => SelectedPerson);
         }
 
+        public async Task RecordUpdater()
+        {
+            var recordidlist = new List<int>();
+            Records = new List<Record>();
+            foreach (var record in SelectedSession.Records)
+            {
+                recordidlist.Add(record.Id);
+            }
+
+            for (int i = 0; i < recordidlist.Count; i++)
+            {
+                var recorddb = await Repository.Record.GetItemFromIdAsync(recordidlist[i]);
+                Records.Add(recorddb);
+            }
+            RaisePropertyChanged(() => Records);
+
+        }
         public async Task DeleteRefresher()
         {
             Sessions = await Repository.Session.GetAllItemsAsync();
@@ -331,7 +367,6 @@ namespace Beadle.Core.ViewModels
             //session.Persons = new List<Person>();
             //session.Records = new List<Record>();
             await Repository.Session.SaveItemAsync(session);
-            var b = "stringholder";
             await Task.Run(Init);
             RaisePropertyChanged(() => SelectedSession);
             await Task.Delay(1000);
@@ -354,6 +389,7 @@ namespace Beadle.Core.ViewModels
             var item1 = new Item();
             item1.Remarks = "Late";
             item1.PersonId = SelectedPerson.Id;
+            item1.PersonName = SelectedPerson.FirstName;
             item1.TimeIn = DateTime;
             //pushes item to item table
             await Repository.Item.SaveItemAsync(item1);
@@ -409,6 +445,41 @@ namespace Beadle.Core.ViewModels
                 SessionInfoViewModel.SelectedPerson = SelectedSession.Persons.FirstOrDefault();
             }
             await NavigationService.NavigateAsync(nameof(SessionInfoPage), true);
+
+        }
+
+        public async Task ShowRecordInfoProcAsync()
+        {
+            await Task.Run(RecordUpdater);
+
+            if (RecordInfoViewModel != null)
+            {
+
+                //SessionInfoViewModel.IsSelectedPersonTrue = false;
+                //var recordidlist = new List<int>();
+                //var records = new List<Record>();
+                //foreach (var record in SelectedSession.Records)
+                //{
+                //    recordidlist.Add(record.Id);
+                //}
+
+                //for (int i = 0; i < recordidlist.Count; i++)
+                //{
+                //    var recorddb = await Repository.Record.GetItemFromIdAsync(recordidlist[i]);
+                //    records.Add(recorddb);
+                //}
+                //RecordInfoViewModel.Records = records;
+                RecordInfoViewModel.Records = Records;
+                RecordInfoViewModel.IsVisible = false;
+
+                RecordInfoViewModel.SelectedRecord = null;
+
+                RaisePropertyChanged(() => RecordInfoViewModel);
+                RaisePropertyChanged(() => RecordInfoViewModel.SelectedRecord);
+
+            }
+
+            await NavigationService.NavigateAsync(nameof(RecordInfoPage), true);
 
         }
         public async Task ShowDbPopulationProcAsync()
@@ -624,6 +695,7 @@ namespace Beadle.Core.ViewModels
                     var item1 = new Item();
                     item1.Remarks = "Late";
                     item1.PersonId = SelectedPerson.Id;
+                    item1.PersonName = SelectedPerson.FullName;
                     item1.TimeIn = DateTime;
                     //pushes item to item table
                     await Repository.Item.SaveItemAsync(item1);
