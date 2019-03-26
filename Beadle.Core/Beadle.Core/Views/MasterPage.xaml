@@ -4,7 +4,6 @@
              x:Class="Beadle.Core.Views.MasterPage"
              xmlns:pages="clr-namespace:Beadle.Core.Views"
              xmlns:behaviors="clr-namespace:Beadle.Core.Behaviors;assembly=Beadle.Core"
-             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              xmlns:converters="clr-namespace:Beadle.Core.Converters;assembly=Beadle.Core">
     <MasterDetailPage.Master>
         <ContentPage Title="Menu" BackgroundColor="#f5f5f5" >
@@ -102,7 +101,6 @@
                             </Label>
                             <Label Text="Add Random Session" FontSize="Large"  TextColor="White"  HorizontalOptions="CenterAndExpand"
                                    VerticalOptions="Center" />
-
                         </StackLayout>
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding AddRandomSessionCommand}"/>

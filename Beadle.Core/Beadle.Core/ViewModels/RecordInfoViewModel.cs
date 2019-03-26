@@ -49,7 +49,6 @@ namespace Beadle.Core.ViewModels
                 {
                     IsVisible = true;
                     RaisePropertyChanged(nameof(IsVisible));
-
                 }
             }
         }

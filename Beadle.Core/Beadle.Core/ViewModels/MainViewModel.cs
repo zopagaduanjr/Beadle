@@ -153,7 +153,11 @@ namespace Beadle.Core.ViewModels
         }
         public Person SelectedPerson
         {
-            get => _selectedPerson;
+            get
+            {
+
+                return _selectedPerson;
+            }
             set
             {
                 _selectedPerson = value;
@@ -166,6 +170,7 @@ namespace Beadle.Core.ViewModels
 
             }
         }
+
         public int Population
         {
             get => _population;
@@ -287,7 +292,6 @@ namespace Beadle.Core.ViewModels
         }
         public async Task Init()
         {
-
             //updaters
             Sessions = await Repository.Session.GetAllItemsAsync();
             RaisePropertyChanged(() => Sessions);
@@ -360,6 +364,8 @@ namespace Beadle.Core.ViewModels
 
         public async Task AddRandomSessionProcAsync()
         {
+            SelectedPerson = null;
+            RaisePropertyChanged(() => SelectedPerson);
             var session = new Session();
             session.Name = SessionGenerator();
             session.Day = DayGenerator();
@@ -454,29 +460,21 @@ namespace Beadle.Core.ViewModels
 
             if (RecordInfoViewModel != null)
             {
+                    RecordInfoViewModel.Records = Records;
+                    RaisePropertyChanged(() => RecordInfoViewModel.Records);
+                    RecordInfoViewModel.SelectedRecord = RecordInfoViewModel.Records.FirstOrDefault();
+                    RaisePropertyChanged(() => RecordInfoViewModel.SelectedRecord);
+                    RecordInfoViewModel.IsVisible = false;
+                    RaisePropertyChanged(() => RecordInfoViewModel.IsVisible);
+                    RaisePropertyChanged(() => RecordInfoViewModel.SelectedRecord.Items);
+                    RecordInfoViewModel.SelectedItem = null;
+                    RaisePropertyChanged(() => RecordInfoViewModel.SelectedItem);
 
-                //SessionInfoViewModel.IsSelectedPersonTrue = false;
-                //var recordidlist = new List<int>();
-                //var records = new List<Record>();
-                //foreach (var record in SelectedSession.Records)
-                //{
-                //    recordidlist.Add(record.Id);
-                //}
+                //RecordInfoViewModel.SelectedRecord = RecordInfoViewModel.Records.FirstOrDefault();
+                //RaisePropertyChanged(() => RecordInfoViewModel.SelectedRecord);
 
-                //for (int i = 0; i < recordidlist.Count; i++)
-                //{
-                //    var recorddb = await Repository.Record.GetItemFromIdAsync(recordidlist[i]);
-                //    records.Add(recorddb);
-                //}
-                //RecordInfoViewModel.Records = records;
-                RecordInfoViewModel.Records = Records;
-                RecordInfoViewModel.IsVisible = false;
-
-                RecordInfoViewModel.SelectedRecord = null;
-
-                RaisePropertyChanged(() => RecordInfoViewModel);
-                RaisePropertyChanged(() => RecordInfoViewModel.SelectedRecord);
-
+                //RecordInfoViewModel.Items = null;
+                //    RaisePropertyChanged(() => RecordInfoViewModel.Items);
             }
 
             await NavigationService.NavigateAsync(nameof(RecordInfoPage), true);
@@ -685,55 +683,110 @@ namespace Beadle.Core.ViewModels
         }
 
         public  async Task PersonListDisplayActionProcAsync()
-        {            
+        {
+            var actionSheet = await Application.Current.MainPage.DisplayActionSheet("Beadle Actions", "Cancel", null, "Late", "Absent");
 
-            var boy =  await Application.Current.MainPage.DisplayActionSheet("Beadle Option", "cancel",null,"Late","Absent");
-            switch (boy)
+            switch (actionSheet)
             {
                 case "Late":
-                    //creates a late item
-                    var item1 = new Item();
-                    item1.Remarks = "Late";
-                    item1.PersonId = SelectedPerson.Id;
-                    item1.PersonName = SelectedPerson.FullName;
-                    item1.TimeIn = DateTime;
-                    //pushes item to item table
-                    await Repository.Item.SaveItemAsync(item1);
+                    await Task.Run(() => AddLateProcAsync());
+                    await Task.Run(() => RecordUpdater());
 
-                    //gets latest record of selected person
-                    await Task.Run(() => LatestReportCheckerAsync());
-                    var recordid = SelectedSession.Records.LastOrDefault().Id;
-                    var latestrecord = await Repository.Record.GetItemFromIdAsync(recordid);
-                    latestrecord.Items.Add(item1);
-                    await Repository.Record.UpdateWithChildrenAsync(latestrecord);
-                    SelectedPerson.Late++;
-                    await Repository.Person.UpdateItemAsync(SelectedPerson);
-                    await Repository.Session.UpdateWithChildrenAsync(SelectedSession);
-
-                    Sessions = await Repository.Session.GetAllItemsAsync();
-                    var holdsession = SelectedSession;
-                    var holdperson = SelectedPerson;
-                    //highlighters
-                    if (holdsession != null)
-                    {
-
-                        foreach (var session in Sessions)
-                        {
-                            if (session.Id == holdsession.Id)
-                                SelectedSession = session;
-                        }
-                    }
-                    RaisePropertyChanged(() => Sessions);
                     break;
+                            ////creates a late item
+                            //var item1 = new Item();
+                            //item1.Remarks = "Late";
+                            //item1.PersonId = SelectedPerson.Id;
+                            //item1.PersonName = SelectedPerson.FullName;
+                            //item1.TimeIn = DateTime;
+                            ////pushes item to item table
+                            //await Repository.Item.SaveItemAsync(item1);
 
+                            ////gets latest record of selected person
+                            //await Task.Run(() => LatestReportCheckerAsync());
+                            //var recordid = SelectedSession.Records.LastOrDefault().Id;
+                            //var latestrecord = await Repository.Record.GetItemFromIdAsync(recordid);
+                            //latestrecord.Items.Add(item1);
+                            //await Repository.Record.UpdateWithChildrenAsync(latestrecord);
+                            //SelectedPerson.Late++;
+                            //await Repository.Person.UpdateItemAsync(SelectedPerson);
+                            //await Repository.Session.UpdateWithChildrenAsync(SelectedSession);
+
+                            //Sessions = await Repository.Session.GetAllItemsAsync();
+                            //var holdsession = SelectedSession;
+                            //SelectedPerson = null;
+                            ////highlighters
+                            //if (holdsession != null)
+                            //{
+
+                            //    foreach (var session in Sessions)
+                            //    {
+                            //        if (session.Id == holdsession.Id)
+                            //            SelectedSession = session;
+                            //    }
+                            //}
+                            //RaisePropertyChanged(() => Sessions);
+                            //RaisePropertyChanged(() => SelectedPerson);
+                            //goto case "Cancel";
                 case "Absent":
-                    await AddAbsenceProcAsync();
                     break;
-                case "cancel":
-
+                // Do Something when 'Button2' Button is pressed
+                case "Cancel":
                     break;
-
             }
+
+
+            //var boy =  await Application.Current.MainPage.DisplayActionSheet("Beadle Option", "cancel",null,"Late","Absent");
+            //switch (boy)
+            //{
+            //    case "Late":
+            //        //creates a late item
+            //        var item1 = new Item();
+            //        item1.Remarks = "Late";
+            //        item1.PersonId = SelectedPerson.Id;
+            //        item1.PersonName = SelectedPerson.FullName;
+            //        item1.TimeIn = DateTime;
+            //        //pushes item to item table
+            //        await Repository.Item.SaveItemAsync(item1);
+
+            //        //gets latest record of selected person
+            //        await Task.Run(() => LatestReportCheckerAsync());
+            //        var recordid = SelectedSession.Records.LastOrDefault().Id;
+            //        var latestrecord = await Repository.Record.GetItemFromIdAsync(recordid);
+            //        latestrecord.Items.Add(item1);
+            //        await Repository.Record.UpdateWithChildrenAsync(latestrecord);
+            //        SelectedPerson.Late++;
+            //        await Repository.Person.UpdateItemAsync(SelectedPerson);
+            //        await Repository.Session.UpdateWithChildrenAsync(SelectedSession);
+
+            //        Sessions = await Repository.Session.GetAllItemsAsync();
+            //        var holdsession = SelectedSession;
+            //        var holdperson = SelectedPerson;
+            //        //highlighters
+            //        if (holdsession != null)
+            //        {
+
+            //            foreach (var session in Sessions)
+            //            {
+            //                if (session.Id == holdsession.Id)
+            //                    SelectedSession = session;
+            //            }
+            //        }
+            //        RaisePropertyChanged(() => Sessions);
+            //        break;
+
+            //    case "Absent":
+            //        await AddAbsenceProcAsync();
+            //        break;
+            //    case "cancel":
+
+            //        break;
+
+            //}
+
+            //await Task.Run(() => Init());
+
+
         }
 
 
