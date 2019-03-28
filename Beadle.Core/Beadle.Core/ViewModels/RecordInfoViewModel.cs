@@ -24,7 +24,7 @@ namespace Beadle.Core.ViewModels
             Repository = repository;
             NavigationService = navigationService;
             IsVisible = false;
-            ItemRefresherCommand = new Command(async () => await ItemRefresherProcAsync(), () => true);
+            //ItemRefresherCommand = new Command(async () => await ItemRefresherProcAsync(), () => true);
 
         }
         private readonly INavigationService NavigationService;
@@ -35,7 +35,7 @@ namespace Beadle.Core.ViewModels
         private Item _selectedItem;
         private bool _isVisible;
 
-        public ICommand ItemRefresherCommand { get; private set; }
+        //public ICommand ItemRefresherCommand { get; private set; }
 
 
         public Record SelectedRecord

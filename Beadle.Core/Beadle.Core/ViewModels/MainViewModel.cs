@@ -348,19 +348,6 @@ namespace Beadle.Core.ViewModels
             SelectedSession = null;
             SelectedPerson = null;
         }
-        //public async Task DeleteStudentProcAsync()
-        //{
-        //    await App.Database.DeleteItemAsync(SelectedStudent);
-        //    //autorefresh list
-        //    var list = await App.Database.GetItemsAsync();
-        //    Classmates = new ObservableCollection<Student>(list);
-        //    //Classmates = new ObservableCollection<Student>(await _beadleService.GetStudent());
-        //    //var list = await App.Database.GetItemsAsync();
-        //    //Classmates = new ObservableCollection<Student>(list);
-        //    RaisePropertyChanged(() => Classmates);
-        //    RaisePropertyChanged(() => SelectedStudent);
-        //    Task.Run(() => Init());
-        //}
 
         public async Task AddRandomSessionProcAsync()
         {
@@ -457,24 +444,19 @@ namespace Beadle.Core.ViewModels
         public async Task ShowRecordInfoProcAsync()
         {
             await Task.Run(RecordUpdater);
+            RaisePropertyChanged(() => RecordInfoViewModel);
 
             if (RecordInfoViewModel != null)
             {
                     RecordInfoViewModel.Records = Records;
+                    //RecordInfoViewModel.MainViewModel = this;
+                    //RaisePropertyChanged(nameof(RecordInfoViewModel.MainViewModel));
                     RaisePropertyChanged(() => RecordInfoViewModel.Records);
-                    RecordInfoViewModel.SelectedRecord = RecordInfoViewModel.Records.FirstOrDefault();
+                    RecordInfoViewModel.SelectedRecord = null;
                     RaisePropertyChanged(() => RecordInfoViewModel.SelectedRecord);
-                    RecordInfoViewModel.IsVisible = false;
-                    RaisePropertyChanged(() => RecordInfoViewModel.IsVisible);
-                    RaisePropertyChanged(() => RecordInfoViewModel.SelectedRecord.Items);
                     RecordInfoViewModel.SelectedItem = null;
                     RaisePropertyChanged(() => RecordInfoViewModel.SelectedItem);
-
-                //RecordInfoViewModel.SelectedRecord = RecordInfoViewModel.Records.FirstOrDefault();
-                //RaisePropertyChanged(() => RecordInfoViewModel.SelectedRecord);
-
-                //RecordInfoViewModel.Items = null;
-                //    RaisePropertyChanged(() => RecordInfoViewModel.Items);
+                    RaisePropertyChanged(() => RecordInfoViewModel);
             }
 
             await NavigationService.NavigateAsync(nameof(RecordInfoPage), true);

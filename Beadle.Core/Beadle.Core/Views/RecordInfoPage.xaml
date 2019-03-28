@@ -16,36 +16,31 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None"   Margin="5,0,0,0" SelectedItem="{Binding SelectedRecord, Mode=TwoWay}"
-                          ItemsSource="{Binding Records, Mode=TwoWay}" RowHeight="30" >
+                <ListView VerticalOptions="FillAndExpand" CachingStrategy="RecycleElement"
+                          SeparatorVisibility="None"   Margin="5,0,0,0" SelectedItem="{Binding SelectedRecord, Mode=TwoWay, UpdateSourceEventName=ItemSelected}"
+                          ItemsSource="{Binding MainViewModel.Records, Mode=TwoWay}" RowHeight="30" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Label Text = "{Binding Name, Mode=TwoWay}"  HorizontalTextAlignment="Start" TextColor="Black" Margin="5,0,0,0" VerticalOptions="End"
+                                <Label Text = "{Binding Name}"  HorizontalTextAlignment="Start" TextColor="Black" Margin="5,0,0,0" VerticalOptions="End"
                                        FontSize="Large"  HorizontalOptions="FillAndExpand"/>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                    <ListView.Behaviors>
-                        <behaviors:EventToCommandBehavior EventName="ItemSelected" Command="{Binding ItemRefresherCommand}" Converter="{converters:SelectedItemEventArgsToSelectedItemConverter}" />
-                    </ListView.Behaviors>
                 </ListView>
-                <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None"   Margin="5,0,0,0" Grid.Column="1" 
-                          IsVisible="{Binding IsVisible, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None"   Margin="5,0,0,0" Grid.Column="1"  CachingStrategy="RecycleElement"
+                          IsVisible="{Binding IsVisible, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceEventName=ItemSelected}"
                           ItemsSource="{Binding SelectedRecord.Items, Mode=TwoWay}" RowHeight="30" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Label Text = "{Binding PersonName, Mode=TwoWay}"  HorizontalTextAlignment="Start" TextColor="Black" Margin="5,0,0,0" VerticalOptions="End"
+                                <Label Text = "{Binding PersonName}"  HorizontalTextAlignment="Start" TextColor="Black" Margin="5,0,0,0" VerticalOptions="End"
                                        FontSize="Large"  HorizontalOptions="FillAndExpand"/>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                    <ListView.Behaviors>
-                        <behaviors:EventToCommandBehavior EventName="ItemSelected"
-                                                          Command="{Binding ItemRefresherCommand, Mode=TwoWay}" Converter="{converters:SelectedItemEventArgsToSelectedItemConverter}" />
-                    </ListView.Behaviors>
                 </ListView>
+
             </Grid>
             <Label Text="{Binding SelectedItem.Remarks, Mode=TwoWay}"></Label>
         </Grid>
