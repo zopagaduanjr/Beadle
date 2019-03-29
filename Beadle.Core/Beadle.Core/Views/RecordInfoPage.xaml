@@ -7,26 +7,37 @@
     <ContentPage.Content>
         <Grid>
            <Grid.RowDefinitions>
-               <RowDefinition Height="0.5*"/>
+               <RowDefinition Height="0.3*"/>
                <RowDefinition Height="1"/>
-               <RowDefinition Height="5*"/>
+               <RowDefinition Height="2*"/>
                <RowDefinition Height="1"/>
-                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="2*"/>
            </Grid.RowDefinitions>
+            <!--Row 0-->
+            <Grid Grid.Row="0" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <BoxView WidthRequest="1" Color="#b2bec3"  Grid.Column="1" />
+                <BoxView WidthRequest="1" Color="#b2bec3"  Grid.Column="3" />
+
+            </Grid>
             <BoxView WidthRequest="1" Color="#b2bec3"  Grid.Row="1" />
             <!--Row 2-->
             <Grid Grid.Row="1" Grid.RowSpan="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1"/>
-                    <ColumnDefinition Width="1.1*"/>
+                    <ColumnDefinition Width="1.5*"/>
                     <ColumnDefinition Width="1"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
                 <!--Week List-->
-                <StackLayout Grid.Column="0">
-                    <Label Text="Week:" Font="Large"/>
-                    <ListView VerticalOptions="FillAndExpand" CachingStrategy="RecycleElement"
+                    <ListView VerticalOptions="FillAndExpand" CachingStrategy="RecycleElement" Grid.Column="0"
                               SeparatorVisibility="None"   Margin="5,0,0,0" SelectedItem="{Binding SelectedRecord, Mode=OneWayToSource, UpdateSourceEventName=ItemSelected}"
                               ItemsSource="{Binding MainViewModel.Records, Mode=TwoWay}" RowHeight="30" >
                         <ListView.ItemTemplate>
@@ -44,7 +55,6 @@
                         </ListView.Behaviors>
 
                     </ListView>
-                </StackLayout>
                 <BoxView WidthRequest="1" Color="#b2bec3"  Grid.Column="1"  />
                 <!--Day List-->               
                 <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None"   Margin="5,0,0,0" Grid.Column="2"  CachingStrategy="RecycleElement"
@@ -60,9 +70,10 @@
                     </ListView.ItemTemplate>
                 </ListView>
                 <BoxView WidthRequest="1" Color="#b2bec3"  Grid.Column="3" />
-                <!--Detail List-->
-                <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None"   Margin="5,0,0,0" Grid.Column="4"  CachingStrategy="RecycleElement"
-                          ItemsSource="{Binding SelectedDay.Items, Mode=TwoWay}" RowHeight="30" >
+                <!--Person List-->
+                <ListView VerticalOptions="FillAndExpand" SeparatorVisibility="None"   Margin="5,0,0,0" Grid.Column="4"  CachingStrategy="RecycleElement" 
+                          ItemsSource="{Binding SelectedDay.Items, Mode=TwoWay}" RowHeight="30" 
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceEventName=ItemSelected}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -74,6 +85,15 @@
                 </ListView>
             </Grid>
             <BoxView WidthRequest="1" Color="#b2bec3"  Grid.Row="3" />
+            <!--Super Detail-->
+            <StackLayout Grid.Row="4">
+                <Label Text="{Binding SelectedItem.Id, Mode=TwoWay}"/>
+                <Label Text="{Binding SelectedItem.PersonId, Mode=TwoWay}"/>
+                <Label Text="{Binding SelectedItem.PersonName, Mode=TwoWay}"/>
+                <Label Text="{Binding SelectedItem.Remarks, Mode=TwoWay}"/>
+                <Label Text="{Binding SelectedItem.TimeIn, Mode=TwoWay}"/>
+
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

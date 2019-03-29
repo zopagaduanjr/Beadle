@@ -96,6 +96,26 @@ namespace Beadle.Core.ViewModels
                         }
                     }
                 }
+                var records = MainViewModel.SelectedSession.Records;
+                var recordinTable = await Repository.Record.GetAllItemsAsync();
+                foreach (var record in records)
+                {
+                    var recordid = record.Id;
+                    var recordsaz = await Repository.Record.GetItemFromIdAsync(recordid);
+                    foreach (var recordItem in recordsaz.Items)
+                    {
+                        await Repository.Item.DeleteItemAsync(recordItem);
+                    }
+                    foreach (var record1 in recordinTable)
+                    {
+                        if (record.Id == record1.Id)
+                        {
+                            await Repository.Record.DeleteItemAsync(record1);
+                        }
+                    }
+                }
+
+
                 await Repository.Session.DeleteItemAsync(MainViewModel.SelectedSession);
                 MainViewModel.SelectedSession = null;
 
