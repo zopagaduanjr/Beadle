@@ -452,6 +452,9 @@ namespace Beadle.Core.ViewModels
                 AddSessionViewModel.Name = null;
                 AddSessionViewModel.Day = null;
                 AddSessionViewModel.Time = null;
+                AddSessionViewModel.SubjectCode = null;
+                AddSessionViewModel.ClassCode = null;
+                AddSessionViewModel.Professor = null;
             }
             await NavigationService.NavigateAsync(nameof(AddSessionPage), true);
         }
