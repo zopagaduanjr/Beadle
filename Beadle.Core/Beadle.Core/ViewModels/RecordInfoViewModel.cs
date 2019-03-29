@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,13 +19,14 @@ namespace Beadle.Core.ViewModels
 
         public RecordInfoViewModel(IRepository repository, MainViewModel mainViewModel, INavigationService navigationService)
         {
+            Days = new ObservableCollection<Day>();
             mainViewModel.RecordInfoViewModel = this;
             MainViewModel = mainViewModel;
             Records = MainViewModel.Records;
             Repository = repository;
             NavigationService = navigationService;
             IsVisible = false;
-            //ItemRefresherCommand = new Command(async () => await ItemRefresherProcAsync(), () => true);
+            ItemRefresherCommand = new Command(async () => await ItemRefresherProcAsync(), () => true);
 
         }
         private readonly INavigationService NavigationService;
@@ -34,8 +36,10 @@ namespace Beadle.Core.ViewModels
         private List<Item> _items;
         private Item _selectedItem;
         private bool _isVisible;
+        private ObservableCollection<Day> _days;
+        private Day _selectedDay;
 
-        //public ICommand ItemRefresherCommand { get; private set; }
+        public ICommand ItemRefresherCommand { get; private set; }
 
 
         public Record SelectedRecord
@@ -83,6 +87,17 @@ namespace Beadle.Core.ViewModels
             }
         }
 
+        public ObservableCollection<Day> Days
+        {
+            get => _days;
+            set
+            {
+                _days = value;
+                RaisePropertyChanged(nameof(Days));
+
+            }
+        }
+
         public MainViewModel MainViewModel
         {
             get => _mainViewModel;
@@ -103,15 +118,51 @@ namespace Beadle.Core.ViewModels
             }
         }
 
+        public Day SelectedDay
+        {
+            get => _selectedDay;
+            set
+            {
+                _selectedDay = value;
+                RaisePropertyChanged(() => SelectedDay);
+
+            }
+        }
 
         //methods
         public async Task ItemRefresherProcAsync()
         {
+            Days = new ObservableCollection<Day>();
+            SelectedDay = null;
             if (SelectedRecord != null)
             {
+                RaisePropertyChanged(nameof(Days));
                 var recorddb = await Repository.Record.GetItemFromIdAsync(SelectedRecord.Id);
                 Items = recorddb.Items;
                 RaisePropertyChanged(nameof(Items));
+                foreach (var item in Items)
+                {
+                    bool isdayexisting = false;
+                    var dayname = item.TimeIn.DayOfWeek.ToString();
+                    foreach (var day in Days)
+                    {
+                        if (day.Name == dayname)
+                        {
+                            isdayexisting = true;
+                            day.Items.Add(item);
+                        }
+                    }
+
+                    if (isdayexisting == false)
+                    {
+                        var lest = new ObservableCollection<Item>();
+                        lest.Add(item);
+                        Days.Add(new Day(dayname, lest));
+                        
+                    }
+                }
+
+
 
             }
         }

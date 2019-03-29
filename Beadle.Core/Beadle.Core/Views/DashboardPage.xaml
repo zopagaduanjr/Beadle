@@ -133,7 +133,7 @@
     </ContentPage.Content>
     <ContentPage.ToolbarItems>
         <ToolbarItem  Order="Primary" Priority="1" Icon="randomuser.png" Command="{Binding AddRandomPersonCommand}" IsEnabled="{Binding SelectedSessionIsTrue}"  />
-        <ToolbarItem  Order="Primary" Priority="1" Icon="search.png" Command="{Binding PersonListDisplayActionCommand}"  />
+        <ToolbarItem  Order="Primary" Priority="1" Icon="search.png" Command="{Binding AddOneDayCommand}"  />
         <ToolbarItem  Order="Primary" Priority="1" Icon="addstudent.png" Command="{Binding ShowAddPersonWindowCommand}" IsEnabled="{Binding SelectedSessionIsTrue}"  />
         <ToolbarItem  Order="Primary" Priority="1" Icon="stopwatch.png" Command="{Binding AddOneWeekCommand}"  />
         <ToolbarItem  Order="Secondary" Priority="1" Text="Class Info"   Command="{Binding ShowSessionInfoCommand}" IsEnabled="{Binding SelectedSessionIsTrue}" />

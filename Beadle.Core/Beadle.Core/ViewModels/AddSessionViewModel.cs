@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -18,12 +19,21 @@ namespace Beadle.Core.ViewModels
         //constructor
         public AddSessionViewModel(IRepository repository, MainViewModel mainViewModel, INavigationService navigationService)
         {
+
             SelectedFieldsIsTrue = false;
             mainViewModel.AddSessionViewModel = this;
             AddSessionCommand = new Command(async () => await AddSessionProcAsync(), () => SelectedFieldsIsTrue);
             MainViewModel = mainViewModel;
             Repository = repository;
             NavigationService = navigationService;
+            DayList = new ObservableCollection<string>();
+            DayList.Add("Monday");
+            DayList.Add("Tuesday");
+            DayList.Add("Wednesday");
+            DayList.Add("Thursday");
+            DayList.Add("Friday");
+            DayList.Add("Saturday");
+            DayList.Add("Sunday");
         }
 
         //private fields
@@ -34,6 +44,9 @@ namespace Beadle.Core.ViewModels
         private string _name;
         private string _day;
         private string _time;
+        private ObservableCollection<string> _dayList;
+
+        private string _selectedDay;
 
         //properties
         public ICommand AddSessionCommand { get; private set; }
@@ -74,6 +87,34 @@ namespace Beadle.Core.ViewModels
             {
                 _time = value;
                 RaisePropertyChanged(nameof(Time));
+            }
+        }
+
+        public ObservableCollection<string> DayList
+        {
+            get => _dayList;
+            set
+            {
+                _dayList = value;
+                RaisePropertyChanged(() => DayList);
+            }
+        }
+
+        public string SelectedDay
+        {
+            get => _selectedDay;
+            set
+            {
+                _selectedDay = value;
+                if (Day != null)
+                {
+                    Day += ", " + value;
+                }
+                else
+                {
+                    Day = value;
+                }
+                RaisePropertyChanged(() => Day);
             }
         }
 
@@ -130,6 +171,7 @@ namespace Beadle.Core.ViewModels
             await Task.Run(() => Init());
             RaisePropertyChanged(() => MainViewModel.SelectedSession);
         }
+
         //canclick
         public bool SelectedFieldsIsTrue
         {

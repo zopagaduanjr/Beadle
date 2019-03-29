@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:Beadle.Core.Behaviors;assembly=Beadle.Core"
+             xmlns:converters="clr-namespace:Beadle.Core.Converters;assembly=Beadle.Core"
              x:Class="Beadle.Core.Views.AddSessionPage">
     <ContentPage.Content>
         <StackLayout VerticalOptions="StartAndExpand">
-            <TableView HeightRequest="350">
+            <TableView HeightRequest="550">
                 <TableRoot>
                     <TableSection  Title="Add Session">
                         <EntryCell Label="Session Name" Placeholder="ECE 410" Text="{Binding Path=Name, Mode=TwoWay}" HorizontalTextAlignment="Start"  />
