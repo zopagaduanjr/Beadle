@@ -26,14 +26,6 @@ namespace Beadle.Core.ViewModels
             MainViewModel = mainViewModel;
             Repository = repository;
             NavigationService = navigationService;
-            DayList = new ObservableCollection<string>();
-            DayList.Add("Monday");
-            DayList.Add("Tuesday");
-            DayList.Add("Wednesday");
-            DayList.Add("Thursday");
-            DayList.Add("Friday");
-            DayList.Add("Saturday");
-            DayList.Add("Sunday");
         }
 
         //private fields
@@ -44,9 +36,10 @@ namespace Beadle.Core.ViewModels
         private string _name;
         private string _day;
         private string _time;
-        private ObservableCollection<string> _dayList;
 
-        private string _selectedDay;
+        private string _subjectCode;
+        private string _classCode;
+        private string _professor;
 
         //properties
         public ICommand AddSessionCommand { get; private set; }
@@ -90,31 +83,34 @@ namespace Beadle.Core.ViewModels
             }
         }
 
-        public ObservableCollection<string> DayList
+        public string SubjectCode
         {
-            get => _dayList;
+            get => _subjectCode;
             set
             {
-                _dayList = value;
-                RaisePropertyChanged(() => DayList);
+                _subjectCode = value;
+                RaisePropertyChanged(() => SubjectCode);
+
             }
         }
-
-        public string SelectedDay
+        public string ClassCode
         {
-            get => _selectedDay;
+            get => _classCode;
             set
             {
-                _selectedDay = value;
-                if (Day != null)
-                {
-                    Day += ", " + value;
-                }
-                else
-                {
-                    Day = value;
-                }
-                RaisePropertyChanged(() => Day);
+                _classCode = value;
+                RaisePropertyChanged(() => ClassCode);
+
+            }
+        }
+        public string Professor
+        {
+            get => _professor;
+            set
+            {
+                _professor = value;
+                RaisePropertyChanged(() => Professor);
+
             }
         }
 
@@ -156,6 +152,9 @@ namespace Beadle.Core.ViewModels
             var session = new Session();
             Regex rgx = new Regex("[^a-zA-Z]");
             session.Name = Name;
+            session.SubjectCode = SubjectCode;
+            session.ClassCode = ClassCode;
+            session.Professor = Professor;
             //only adding Session Name, tbd sched
             if (Day == null || Time == null)
             {

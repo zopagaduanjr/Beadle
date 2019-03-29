@@ -28,7 +28,8 @@ namespace Beadle.Core.ViewModels
             Repository = repository;
             //initializers
             Task.Run(() => Init());
-            DateTime = DateTime.Now;
+            //DateTime = new DateTime(2018,11,6,8,30,00);
+            DateTime = DateTime.Now;           
             var day = DateTime.DayOfWeek.ToString();
             DateTimeString = DateTime.ToString() + " - " + day;
 
@@ -54,8 +55,7 @@ namespace Beadle.Core.ViewModels
             TimeDisplayActionCommand = new Command(async () => await TimeDisplayActionProcAsync(), () => true);
             //TesterCommand = new Command(async () => await TesterProcAsync(), () => true);
             ReportSyncerCommand = new Command(async () => await idchecker(), () => true);
-            //AddOneWeekCommand = new Command( () =>  AddOneWeekProc(), () => true);
-            //AddOneDayCommand = new Command( () => AddOneDayProc(), () => true);
+            SearchPersonCommand = new Command(async () => await SearchProcAsync(), () => true);
 
 
 
@@ -113,9 +113,9 @@ namespace Beadle.Core.ViewModels
         public ICommand PersonListDisplayActionCommand { get; set; }
         public ICommand TimeDisplayActionCommand { get; set; }
         public ICommand TesterCommand { get; set; }
-        public ICommand AddOneWeekCommand { get; set; }
-        public ICommand AddOneDayCommand { get; set; }
         public ICommand ReportSyncerCommand { get; set; }
+        public ICommand SearchPersonCommand { get; set; }
+        
         public Session SelectedSession
         {
             get => _selectedSession;
@@ -287,7 +287,7 @@ namespace Beadle.Core.ViewModels
             else
             {
                 var newrecord = new Record();
-                newrecord.DateTime = DateTime.Now;
+                newrecord.DateTime = DateTime;
                 newrecord.WeekNumber = 1;
                 newrecord.Name = "Week " + newrecord.WeekNumber;
                 await Repository.Record.SaveItemAsync(newrecord);
@@ -332,6 +332,7 @@ namespace Beadle.Core.ViewModels
 
         public async Task RecordUpdater()
         {
+
             var recordidlist = new List<int>();
             Records = new List<Record>();
             foreach (var record in SelectedSession.Records)
@@ -363,6 +364,9 @@ namespace Beadle.Core.ViewModels
             session.Name = SessionGenerator();
             session.Day = DayGenerator();
             session.Time = TimeGenerator();
+            session.Professor = FirstNameGenerator();
+            session.SubjectCode = "DBTK 111";
+            session.ClassCode = "141";
             //session.Persons = new List<Person>();
             //session.Records = new List<Record>();
             await Repository.Session.SaveItemAsync(session);
@@ -465,6 +469,7 @@ namespace Beadle.Core.ViewModels
 
         public async Task ShowRecordInfoProcAsync()
         {
+            await Task.Run(LatestReportCheckerAsync);
             await Task.Run(RecordUpdater);
             RaisePropertyChanged(() => RecordInfoViewModel);
 
@@ -709,10 +714,13 @@ namespace Beadle.Core.ViewModels
 
         }
 
+        public async Task SearchProcAsync()
+        {
+
+        }
         public  async Task PersonListDisplayActionProcAsync()
         {
             var actionSheet = await Application.Current.MainPage.DisplayActionSheet("Beadle Actions", "Cancel", null, "Late", "Absent");
-
             switch (actionSheet)
             {
                 case "Late":
@@ -727,8 +735,6 @@ namespace Beadle.Core.ViewModels
                     break;
                 // Do Something when 'Button2' Button is pressed
             }
-
-
         }
         public async Task TimeDisplayActionProcAsync()
         {
@@ -766,7 +772,7 @@ namespace Beadle.Core.ViewModels
         //voids
         public void AddOneWeekProc()
         {
-            DateTime = DateTime.AddDays(7.1);
+            DateTime = DateTime.AddDays(7.01);
             RaisePropertyChanged(() => DateTime);
             var day = DateTime.DayOfWeek.ToString();
             DateTimeString = DateTime.ToString() + " - " + day;
@@ -814,7 +820,7 @@ namespace Beadle.Core.ViewModels
                 RaisePropertyChanged(() => ShowNoobPage);
             }
         }
-        
+
 
         //dirtyworks
         public string FirstNameGenerator()

@@ -14,6 +14,9 @@
                     <TableSection Title="Schedule">
                         <EntryCell Label="Session Day" Placeholder="Tuesday" Text="{Binding Path=Day, Mode=TwoWay}" HorizontalTextAlignment="Start"  />
                         <EntryCell Label="Session Time" Placeholder="1:00 - 2:30" Text="{Binding Path=Time, Mode=TwoWay}" HorizontalTextAlignment="Start"  />
+                        <EntryCell Label="Subject Code" Placeholder="5 - 441" Text="{Binding Path=SubjectCode, Mode=TwoWay}" HorizontalTextAlignment="Start"  />
+                        <EntryCell Label="Class Code" Placeholder="CPE 441" Text="{Binding Path=ClassCode, Mode=TwoWay}" HorizontalTextAlignment="Start"  />
+                        <EntryCell Label="Professor" Placeholder="Sir John Doe" Text="{Binding Path=Professor, Mode=TwoWay}" HorizontalTextAlignment="Start"  />
                     </TableSection>
                 </TableRoot>
             </TableView>

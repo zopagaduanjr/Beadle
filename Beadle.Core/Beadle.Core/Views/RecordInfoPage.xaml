@@ -22,8 +22,20 @@
                     <ColumnDefinition Width="1"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+                <StackLayout Orientation="Horizontal"  Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Padding="3,0,0,0">
+                    <Label Text="Subject: "  TextColor="#718093" FontSize="16" />
+                    <Label Text="{Binding MainViewModel.SelectedSession.SubjectCode}"  TextColor="#40514e" FontSize="16" />
+                </StackLayout>
                 <BoxView WidthRequest="1" Color="#b2bec3"  Grid.Column="1" />
+                <StackLayout Orientation="Horizontal"  Grid.Column="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Padding="3,0,0,0">
+                    <Label Text="Class Code: "  TextColor="#718093" FontSize="16" />
+                    <Label Text="{Binding MainViewModel.SelectedSession.ClassCode}"  TextColor="#40514e" FontSize="16" />
+                </StackLayout>
                 <BoxView WidthRequest="1" Color="#b2bec3"  Grid.Column="3" />
+                <StackLayout Orientation="Horizontal"  Grid.Column="4" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Padding="3,0,0,0">
+                    <Label Text="Professor: "  TextColor="#718093" FontSize="16" />
+                    <Label Text="{Binding MainViewModel.SelectedSession.Professor}"  TextColor="#40514e" FontSize="16" />
+                </StackLayout>
 
             </Grid>
             <BoxView WidthRequest="1" Color="#b2bec3"  Grid.Row="1" />
@@ -87,11 +99,31 @@
             <BoxView WidthRequest="1" Color="#b2bec3"  Grid.Row="3" />
             <!--Super Detail-->
             <StackLayout Grid.Row="4">
-                <Label Text="{Binding SelectedItem.Id, Mode=TwoWay}"/>
-                <Label Text="{Binding SelectedItem.PersonId, Mode=TwoWay}"/>
-                <Label Text="{Binding SelectedItem.PersonName, Mode=TwoWay}"/>
-                <Label Text="{Binding SelectedItem.Remarks, Mode=TwoWay}"/>
-                <Label Text="{Binding SelectedItem.TimeIn, Mode=TwoWay}"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Person Name: "  TextColor="#718093" FontSize="20" />
+                    <Label Text="{Binding SelectedItem.PersonName}"  TextColor="#40514e" FontSize="20" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Remarks: "  TextColor="#718093" FontSize="20" />
+                    <Label Text="{Binding SelectedItem.Remarks}"  TextColor="#40514e" FontSize="20" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Timestamp: "  TextColor="#718093" FontSize="20" />
+                    <Label Text="{Binding SelectedItem.TimeIn}"  TextColor="#40514e" FontSize="20" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Item Id: "  TextColor="#718093" FontSize="20" />
+                    <Label Text="{Binding SelectedItem.Id}"  TextColor="#40514e" FontSize="20" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Person Id: "  TextColor="#718093" FontSize="20" />
+                    <Label Text="{Binding SelectedItem.PersonId}"  TextColor="#40514e" FontSize="20" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Record Id: "  TextColor="#718093" FontSize="20" />
+                    <Label Text="{Binding SelectedItem.RecordId}"  TextColor="#40514e" FontSize="20" />
+                </StackLayout>
+
 
             </StackLayout>
         </Grid>
