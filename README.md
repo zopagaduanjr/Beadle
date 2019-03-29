@@ -18,3 +18,10 @@ Beadle App is designed for Class Beadles to easily record the attendance of thei
 | ------------ | ------------- |
 | ![v1:ActualVideoPart1](media/v1part1.gif) | ![v1:ActualVideoPart2](media/v1part2.gif) |
 
+
+## Version 2 (Presented @ March 30, 2019)
+
+### Mockup
+| Beadle Slip     | Record Screen     |
+| ------------ | ------------- |
+| ![v2:BeadleSlip](media/v2beadleslip.png) | ![v2:RecordPage](media/v2recordpage.png) |
