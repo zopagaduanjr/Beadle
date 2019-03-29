@@ -25,3 +25,9 @@ Beadle App is designed for Class Beadles to easily record the attendance of thei
 | Beadle Slip     | Record Screen     |
 | ------------ | ------------- |
 | ![v2:BeadleSlip](media/v2beadleslip.png) | ![v2:RecordPage](media/v2recordpage.png) |
+
+
+### Actual Gameplay
+| Subject 1 | Subject 2 |
+| ------------ | ------------- |
+| ![v2:Subject1](media/v2ecelec.gif) | ![v2:Subject2](media/v2ooplec.gif) |
