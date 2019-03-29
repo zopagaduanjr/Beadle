@@ -11,10 +11,10 @@ Beadle App is designed for Class Beadles to easily record the attendance of thei
 ### Mockup
 | Main Screen      | Master Detail Slider     | 2nd Screen     |
 | ------------ | ------------- | ------------- |
-| ![v1:MainScreen](v1mainscreen.png) | ![v1:MasterDetailSlider](v1masterdetailslider.png) | ![v1:2ndScreen](v12ndscreen.png) |
+| ![v1:MainScreen](media/v1mainscreen.png) | ![v1:MasterDetailSlider](media/v1masterdetailslider.png) | ![v1:2ndScreen](media/v12ndscreen.png) |
 
 ### Actual Gameplay
 | Part 1 | Part 2 |
 | ------------ | ------------- |
-| ![v1:ActualVideoPart1](v1part1.gif) | ![v1:ActualVideoPart2](v1part2.gif) |
+| ![v1:ActualVideoPart1](media/v1part1.gif) | ![v1:ActualVideoPart2](media/v1part2.gif) |
 
